@@ -1,16 +1,17 @@
-FallObj = cc.Class.extend
+FallObjsLayer = cc.Layer.extend
 
   ctor : -> @_super()
-  
+
   # return object speed [px/msec]
-  _calcSpeed : (bpm, fallDistance) ->
-    measureTime = 240000 / bpm
-    fallDistance / measureTime
+  _calcSpeed : (bpm, fallDist) ->
+    measureTime = 240 / bpm
+    fallDist / measureTime
 
   #
   # append BPM, speed, destination y coordinate list to falling object
   #
-  _appendFallParams : (obj, bpms, time, fallDistance)->
+  _appendFallParams : (obj, bpms, time, fallDist)->
+    size = cc.director.getWinSize()
     previousBpm = 0
     obj.dstY = []
     obj.index = 0
@@ -27,16 +28,16 @@ FallObj = cc.Class.extend
     if bpms[0].timing > time then previousBpm = bpms[0].val
     else previousBpm = v.val for v in bpms when v.timing <= time
 
-    obj.dstY[obj.bpm.timing.length] = fallDistance
+    obj.dstY[obj.bpm.timing.length] = size.height - fallDist
     obj.bpm.timing.push obj.timing
 
     # calculate destination of Y coordinate
     for v, i in obj.bpm.timing by -1 when i < obj.bpm.timing.length - 1
-      diffDistance = (obj.bpm.timing[i+1] - v) * @_calcSpeed(obj.bpm.val[i], fallDistance)
-      obj.dstY[i] = obj.dstY[i+1] - diffDistance
+      diffDist = (obj.bpm.timing[i+1] - v) * @_calcSpeed(obj.bpm.val[i], fallDist)
+      obj.dstY[i] = obj.dstY[i+1] + diffDist
     obj.bpm.val.splice 0, 0, previousBpm
 
-    for v in obj.bpm.val then obj.speed.push @_calcSpeed v, fallDistance
+    obj.speed.push @_calcSpeed v, fallDist for v in obj.bpm.val
     return
 
-module.exports = FallObj
+module.exports = FallObjsLayer

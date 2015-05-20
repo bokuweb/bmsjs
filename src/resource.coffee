@@ -1,5 +1,6 @@
 res =
   buttonImage : "res/button.png"
+  nodeImage   : "res/node.png"
 
 resources = []
 

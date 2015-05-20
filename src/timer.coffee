@@ -1,6 +1,5 @@
 Timer = cc.Class.extend
   ctor : ->
-    @_super()
     @_startTime = 0
     @_pauseTime = 0
 
