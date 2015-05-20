@@ -1,7 +1,7 @@
 FallObjsLayer = require './fallObjsLayer'
-Node          = require './node'
+Node          = require './measureNode'
 
-NodesLayer = FallObjsLayer.extend
+MeasureNodesLayer = FallObjsLayer.extend
 
   ctor : (@_timer)->
     @_super()
@@ -60,4 +60,4 @@ NodesLayer = FallObjsLayer.extend
       return ~~(obj.bpm.timing[i] - (v / @_calcSpeed(obj.bpm.val[i], fallDist)))
     return 0
 
-module.exports = NodesLayer
+module.exports = MeasureNodesLayer

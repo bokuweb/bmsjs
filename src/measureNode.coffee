@@ -1,4 +1,4 @@
-Node = cc.Sprite.extend
+MeasureNode = cc.Sprite.extend
 
   ctor : (texture, @_timer)->
     @_super texture
@@ -18,4 +18,4 @@ Node = cc.Sprite.extend
     @y = @dstY[@index] + diffDist
     if @y < @dstY[@index] then @removeFromParent on
 
-module.exports = Node
+module.exports = MeasureNode

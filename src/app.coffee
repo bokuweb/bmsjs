@@ -1,7 +1,11 @@
-NodesLayer = require './nodesLayer'
-Timer      = require './timer'
-res        = require './resource'
-  .res
+MeasureNodesLayer = require('./measureNodesLayer')
+Timer             = require('./timer')
+res               = require('./resource').res
+
+skin =
+  nodeImage :
+    src : res.nodeImage
+  fallDist : 300
 
 AppLayer = cc.Layer.extend
 
@@ -13,11 +17,6 @@ AppLayer = cc.Layer.extend
 
   init : ->
     @_addKey()
-
-    skin =
-      nodeImage :
-        src : res.nodeImage
-      fallDist : 300
 
     nodes = [
       {timing : 2}
