@@ -24,7 +24,7 @@ MeasureNodesLayer = FallObjsLayer.extend
 
     for v, i in nodes
       node = new Node skin.nodeImage.src, @_timer
-      node.timing = v.timing
+      node.timing = v.timing / 1000
       @_appendFallParams node, bpms, time, skin.fallDist
       @_genTime.push time
       time = @_getGenTime node, skin.fallDist

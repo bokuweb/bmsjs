@@ -20,20 +20,7 @@ AppLayer = cc.Layer.extend
 
   init : ->
     @_addKey()
-
-    nodes = [
-      {timing : 2}
-      {timing : 4}
-      {timing : 6}
-    ]
-
-    bpms = [
-      {val : 120, timing : 0}
-    ]
-
-
     @addChild @_measureNodesLayer
-    @_measureNodesLayer.init skin, bpms, nodes
 
     $.ajax
       url: 'http://localhost:8000/bms/va.bms'
@@ -42,10 +29,13 @@ AppLayer = cc.Layer.extend
         @_bms = parser.parse bms
         cc.log @_bms
 
+        @_measureNodesLayer.init skin, @_bms.bpms, @_bms.data
+        @start()
+
 
   start : ->
-    @_timer.start()
     @_measureNodesLayer.start()
+    @_timer.start()
 
   _addKey : ->
     for i in [0...8]
