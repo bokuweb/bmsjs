@@ -76,11 +76,31 @@ NotesLayer = FallObjsLayer.extend
   start : (autoplay = false)->
     @scheduleUpdate()
 
+  onTouch : (key, time)->
+    for note in @children when note.key is key
+      diffTime = note.timing - time
+      unless note.clear
+        if -@_config.reactionTime < diffTime < @_config.reactionTime
+          note.clear = true
+          note.diffTime = diffTime
+          #@_notifier.trigger 'hit', note.wav
+          return
+        else
+          #@_notifier.trigger 'judge', 'epoor'
+          return
+    return
   #
   # add note to game scene
   # @attention - _add called by window
   #
   update : ->
+    ###
+    t = []
+    for i in [0...8]
+      t[i] = []
+    t[v.key].push v.timing for v in @children
+    cc.log t
+    ###
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
     for note in @_notes[@_index]

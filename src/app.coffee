@@ -55,7 +55,7 @@ AppLayer = cc.Layer.extend
     @init()
 
   init : ->
-    #@_addKey()
+    @_addKey()
     @_measureNodesLayer = new MeasureNodesLayer @_timer
     @addChild @_measureNodesLayer
 
@@ -67,8 +67,10 @@ AppLayer = cc.Layer.extend
         cc.log @_bms
         genTime = @_measureNodesLayer.init skin.fallObj, @_bms.bpms, @_bms.data
         cc.log genTime
+
+        # TODO : move t oarg
         config =
-          reaction   : 200
+          reactionTime : 200
           removeTime : 200
           judge :
             pgreat : 10
@@ -87,6 +89,11 @@ AppLayer = cc.Layer.extend
     @_timer.start()
 
   _addKey : ->
+    toucheventListener = cc.EventListener.create
+      event: cc.EventListener.TOUCH_ONE_BY_ONE
+      swallowTouches: true
+      onTouchBegan: @_onTouch.bind @
+
     for i in [0...8]
       key = new cc.Sprite res.buttonImage
       if i is 7
@@ -100,7 +107,20 @@ AppLayer = cc.Layer.extend
           y  : i % 2 * 64 + 32
           id : i
       @addChild key
+      cc.eventManager.addListener toucheventListener.clone(), key
     return
+
+  _onTouch : (touch, event)->
+    time = @_timer.get()
+    target = event.getCurrentTarget()
+    locationInNode = target.convertToNodeSpace touch.getLocation()
+    s = target.getContentSize()
+    rect = cc.rect 0, 0, s.width, s.height
+    if cc.rectContainsPoint rect, locationInNode
+      cc.log "id = #{target.id} time = #{time}"
+      @_notesLayer.onTouch target.id, time
+      return true
+    return false
 
 AppScene = cc.Scene.extend
   onEnter:->
