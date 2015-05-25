@@ -6,7 +6,6 @@ cc.game.onStart = ->
   if not cc.sys.isNative and document.getElementById "cocosLoading"
     document.body.removeChild(document.getElementById "cocosLoading")
 
-
   cc.view.enableRetina off
   cc.view.adjustViewPort on
   cc.director.setContentScaleFactor 2

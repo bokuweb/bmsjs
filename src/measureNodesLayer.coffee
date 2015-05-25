@@ -24,7 +24,7 @@ MeasureNodesLayer = FallObjsLayer.extend
 
     for v, i in nodes
       node = new Node skin.nodeImage.src, @_timer
-      node.timing = v.timing / 1000
+      node.timing = v.timing
       @_appendFallParams node, bpms, time, skin.fallDist
       @_genTime.push time
       time = @_getGenTime node, skin.fallDist
@@ -56,7 +56,8 @@ MeasureNodesLayer = FallObjsLayer.extend
   # to generate next node
   #
   _getGenTime : (obj, fallDist)->
-    for v, i in obj.dstY when v > 0
+    size = cc.director.getWinSize()
+    for v, i in obj.dstY when v < size.height
       return ~~(obj.bpm.timing[i] - (v / @_calcSpeed(obj.bpm.val[i], fallDist)))
     return 0
 

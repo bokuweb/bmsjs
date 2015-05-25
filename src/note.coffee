@@ -1,6 +1,6 @@
 Note = cc.Sprite.extend
 
-  ctor : (texture, @_timer)->
+  ctor : (texture, @_timer, @_removeTime)->
     @_super texture
 
   start : -> @scheduleUpdate()
@@ -13,8 +13,8 @@ Note = cc.Sprite.extend
 
     diffTime = @bpm.timing[@index] - time
     diffDist = diffTime * @speed[@index]
-    @y = @dstY[@index] - diffDist
-    @y = @dstY[@index] if @y > @dstY[@index]
+    @y = @dstY[@index] + diffDist
+    if @y < @dstY[@index] then @removeFromParent on
 
     if @clear and not @hasJudged
       @hasJudged = true
@@ -22,7 +22,7 @@ Note = cc.Sprite.extend
       #@_notifier.trigger judgement
       return
 
-    if time > @timing + @_config.removeTime
+    if time > @timing +  @_removeTime
       @removeFromParent on
       #@_notifier.trigger 'poor' unless note.clear
       return

@@ -2,9 +2,6 @@ MeasureNode = cc.Sprite.extend
 
   ctor : (texture, @_timer)->
     @_super texture
-    @_index    = 0
-    @_nodes    = []
-    @_genTime  = []
 
   start : -> @scheduleUpdate()
 

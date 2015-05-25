@@ -7,7 +7,7 @@ Timer = cc.Class.extend
 
   get : ->
     if @_startTime
-      ((new Date() - @_startTime) + @_pauseTime) / 1000
+      ((new Date() - @_startTime) + @_pauseTime)
     else 0
 
   pause : -> @_pauseTime = (new Date() - @_startTime)

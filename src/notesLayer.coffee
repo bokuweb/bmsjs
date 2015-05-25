@@ -1,8 +1,9 @@
 FallObjsLayer = require './fallObjsLayer'
+Note          = require './note'
 
 NotesLayer = FallObjsLayer.extend
-
   ctor : (@_skin, @_timer, @_config)->
+    @_super()
     @_notes = []
     @_genTime = []
 
@@ -24,19 +25,18 @@ NotesLayer = FallObjsLayer.extend
     black = @_skin.fallObj.noteBlackImage
     fallDist = @_skin.fallObj.fallDist
     bpms = bms.bpms
-    notes = bms.notes
     @_notes[measure] ?= []
 
-    return unless notes[measure]?
-    for key, i in notes[measure].key
+    return unless bms.data[measure]?
+    for key, i in bms.data[measure].note.key
       for timing, j in key.timing
         switch i
           when 0, 2, 4, 6
-            note = @_sys.createSprite white.width, white.height, white.src
+            note = new Note white.src, @_timer, @_config.removeTime
           when 1, 3, 5
-            note = @_sys.createSprite black.width, black.height, black.src
+            note = new Note black.src, @_timer, @_config.removeTime
           when 7
-            note = @_sys.createSprite turntable.width, turntable.height, turntable.src
+            note = new Note turntable.src, @_timer, @_config.removeTime
           else throw new Error "error unlnown note"
 
         note.x = @_calcNoteXCoordinate i
@@ -74,85 +74,18 @@ NotesLayer = FallObjsLayer.extend
   # @param  isAuto - 
   #
   start : (autoplay = false)->
-    @_schedulerId = @_sys.setScheduler @_add
-    @_isAuto = autoplay
-
-  stop : -> @_sys.clearScheduler @_schedulerId
-
-  #
-  # add event listener
-  #
-  addListener: (name, listner)->
-    @_notifier.on name, listner
-
-
-  remove : ->
-    @stop()
-    @_keyDownEffect.remove()
-    @_sys.removeChild @_sys.getCurrentScene(), @_group
+    @scheduleUpdate()
 
   #
   # add note to game scene
   # @attention - _add called by window
   #
-  _add : =>
+  update : ->
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
     for note in @_notes[@_index]
-      @_sys.addChild @_group, note
-      @_sys.setScheduler @_update.bind(@, note), note
+      @addChild note
+      note.start()
     @_index++
 
-  #
-  # update note by FPS
-  #
-  _update : (note)->
-    time = @_timer.get()
-    while time > note.bpm.timing[note.index]
-      if note.index < note.bpm.timing.length - 1 then note.index++
-      else break
-
-    diffTime = note.bpm.timing[note.index] - time
-    diffDist = diffTime * note.speed[note.index]
-    note.y = note.dstY[note.index] - diffDist - note.height
-    note.y = note.dstY[note.index] - note.height if note.y > note.dstY[note.index] - note.height
-
-    if note.clear and not note.hasJudged
-      note.hasJudged = true
-      judgement = @_judge.exec note.diffTime
-      @_notifier.trigger judgement
-      return
-
-    # FIXME : fix remove timing
-    if time > note.timing + @_config.removeTime
-      @_sys.removeChild @_group, note
-      @_notifier.trigger 'poor' unless note.clear
-      return
-
-    # Auto Play
-    if @_isAuto
-      if time >= note.timing and not note.clear
-        @_keyDownEffect.show note.key
-        note.clear = true
-        note.hasJudged = true
-        @_notifier.trigger 'pgreat'
-        @_notifier.trigger 'hit', note.wav
-
-  #
-  # keydown listener
-  #
-  onKeydown : (name, time, id)->
-    @_keyDownEffect.show id
-    for note in @_group.childNodes when note.key is id
-      diffTime = note.timing - time
-      unless note.clear
-        if -@_config.reaction < diffTime < @_config.reaction
-          note.clear = true
-          note.diffTime = diffTime
-          @_notifier.trigger 'hit', note.wav
-          return
-        else
-          @_notifier.trigger 'epoor'
-          return
-
-module.exports = Notes
+module.exports = NotesLayer

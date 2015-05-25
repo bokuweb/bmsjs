@@ -4,7 +4,7 @@ FallObjsLayer = cc.Layer.extend
 
   # return object speed [px/msec]
   _calcSpeed : (bpm, fallDist) ->
-    measureTime = 240 / bpm
+    measureTime = 240000 / bpm
     fallDist / measureTime
 
   #
