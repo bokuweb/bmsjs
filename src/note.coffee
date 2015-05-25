@@ -26,7 +26,6 @@ Note = cc.Sprite.extend
       @removeFromParent on
       #@_notifier.trigger 'poor' unless note.clear
       return
-
     # Auto Play
     ### 
     if @_isAuto

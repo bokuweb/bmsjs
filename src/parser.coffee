@@ -1,4 +1,5 @@
-parser = cc.Class.extend
+Parser = cc.Class.extend
+
   ctor: ->
     @bms =
       player : null
@@ -255,4 +256,4 @@ parser = cc.Class.extend
     @bms.data.reduce ( (t, d) -> t +
       d.note.key.reduce ((nt, k) -> nt + k.id.length), 0), 0
 
-module.exports = parser
+module.exports = Parser

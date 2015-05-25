@@ -1,18 +1,21 @@
-MeasureNodesLayer = require('./measureNodesLayer')
-Timer             = require('./timer')
-res               = require('./resource').res
+$                 = require 'jquery'
+MeasureNodesLayer = require './measureNodesLayer'
+Timer             = require './timer'
+Parser            = require './parser'
+res               = require './resource'
+  .res
 
 skin =
   nodeImage :
     src : res.nodeImage
-  fallDist : 300
+  fallDist :  300
 
 AppLayer = cc.Layer.extend
 
   ctor : ->
     @_super()
     @_timer = new Timer()
-    @_nodesLayer = new NodesLayer @_timer
+    @_measureNodesLayer = new MeasureNodesLayer @_timer
     @init()
 
   init : ->
@@ -28,10 +31,21 @@ AppLayer = cc.Layer.extend
       {val : 120, timing : 0}
     ]
 
-    @addChild @_nodesLayer
-    @_nodesLayer.init skin, bpms, nodes
+
+    @addChild @_measureNodesLayer
+    @_measureNodesLayer.init skin, bpms, nodes
+
+    $.ajax
+      url: 'http://localhost:8000/bms/va.bms'
+      success: (bms) =>
+        parser = new Parser()
+        @_bms = parser.parse bms
+        cc.log @_bms
+
+
+  start : ->
     @_timer.start()
-    @_nodesLayer.start()
+    @_measureNodesLayer.start()
 
   _addKey : ->
     for i in [0...8]
