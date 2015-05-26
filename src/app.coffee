@@ -3,6 +3,7 @@ MeasureNodesLayer = require './measureNodesLayer'
 NotesLayer        = require './notesLayer'
 Timer             = require './timer'
 Parser            = require './parser'
+Audio             = require './audio'
 res               = require './resource'
   .res
 
@@ -65,8 +66,9 @@ AppLayer = cc.Layer.extend
         parser = new Parser()
         @_bms = parser.parse bms
         cc.log @_bms
-        genTime = @_measureNodesLayer.init skin.fallObj, @_bms.bpms, @_bms.data
-        cc.log genTime
+        genTime = @_measureNodesLayer.init skin.fallObj, @_bms
+        @_audio = new Audio @_timer, @_bms.bgms
+        @_audio.init @_bms.wav, 'bms/'
 
         # TODO : move t oarg
         config =
@@ -80,13 +82,21 @@ AppLayer = cc.Layer.extend
             poor   : 200
         @_notesLayer = new NotesLayer skin, @_timer, config
         @_notesLayer.init @_bms, genTime
+        @_notesLayer.addListener 'hit', @_onHit.bind this
+        @_notesLayer.addListener 'judge', @_onJudge.bind this
         @addChild @_notesLayer
         @start()
 
   start : ->
     @_measureNodesLayer.start()
-    @_notesLayer.start()
+    @_notesLayer.start on
     @_timer.start()
+
+  _onHit : (name, wavId)->
+    @_audio.play wavId
+
+  _onJudge : (name, judgement)->
+    cc.log judgement
 
   _addKey : ->
     toucheventListener = cc.EventListener.create
@@ -109,7 +119,7 @@ AppLayer = cc.Layer.extend
       @addChild key
       cc.eventManager.addListener toucheventListener.clone(), key
     return
-
+    
   _onTouch : (touch, event)->
     time = @_timer.get()
     target = event.getCurrentTarget()

@@ -1,9 +1,11 @@
+EventObserver = require './eventObserver'
 FallObjsLayer = require './fallObjsLayer'
 Note          = require './note'
 
 NotesLayer = FallObjsLayer.extend
   ctor : (@_skin, @_timer, @_config)->
     @_super()
+    @_notifier = new EventObserver()
     @_notes = []
     @_genTime = []
 
@@ -15,6 +17,9 @@ NotesLayer = FallObjsLayer.extend
     @_notes.length = 0
     @_generate bms, measure, time for time, measure in @_genTime
     xArr = for i in [0...@_skin.fallObj.keyNum] then @_calcNoteXCoordinate i
+
+  addListener: (name, listner)->
+    @_notifier.on name, listner
 
   #
   # generate and pool note
@@ -45,7 +50,7 @@ NotesLayer = FallObjsLayer.extend
         note.wav = key.id[j]
         note.key = i
         note.clear = false
-        note.hasJudged = false
+        #note.hasJudged = false
         @_appendFallParams note, bpms, time, fallDist
         @_notes[measure].push note
     return
@@ -75,6 +80,7 @@ NotesLayer = FallObjsLayer.extend
   #
   start : (autoplay = false)->
     @scheduleUpdate()
+    @_isAuto = autoplay
 
   onTouch : (key, time)->
     for note in @children when note.key is key
@@ -83,7 +89,7 @@ NotesLayer = FallObjsLayer.extend
         if -@_config.reactionTime < diffTime < @_config.reactionTime
           note.clear = true
           note.diffTime = diffTime
-          #@_notifier.trigger 'hit', note.wav
+          @_notifier.trigger 'hit', note.wav
           return
         else
           #@_notifier.trigger 'judge', 'epoor'
@@ -94,18 +100,22 @@ NotesLayer = FallObjsLayer.extend
   # @attention - _add called by window
   #
   update : ->
-    ###
-    t = []
-    for i in [0...8]
-      t[i] = []
-    t[v.key].push v.timing for v in @children
-    cc.log t
-    ###
+    if @_isAuto
+      for note in @children
+        if @_timer.get() >= note.timing and not note.clear
+          #@_keyDownEffect.show note.key
+          note.clear = true
+          #note.hasJudged = true
+          @_notifier.trigger 'judge', 'pgreat'
+          @_notifier.trigger 'hit', note.wav
+
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
     for note in @_notes[@_index]
       @addChild note
       note.start()
     @_index++
+
+
 
 module.exports = NotesLayer

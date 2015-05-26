@@ -17,15 +17,15 @@ MeasureNodesLayer = FallObjsLayer.extend
   # @param  nodes - node parameter
   # @return node generation time Array
   #
-  init : (skin, bpms, nodes)->
+  init : (skin, bms)->
     time = 0
     @_nodes.length = 0
     @_genTime.length = 0
 
-    for v, i in nodes
+    for v, i in bms.data
       node = new Node skin.nodeImage.src, @_timer
       node.timing = v.timing
-      @_appendFallParams node, bpms, time, skin.fallDist
+      @_appendFallParams node, bms.bpms, time, skin.fallDist
       @_genTime.push time
       time = @_getGenTime node, skin.fallDist
       @_nodes.push node
