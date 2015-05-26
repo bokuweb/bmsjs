@@ -9,7 +9,7 @@ res               = require './resource'
 
 skin =
   fallObj :
-    fallDist : 300
+    fallDist : 400
     keyNum : 8
     offset : 35
     margin : 2

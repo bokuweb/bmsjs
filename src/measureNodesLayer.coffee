@@ -24,6 +24,7 @@ MeasureNodesLayer = FallObjsLayer.extend
 
     for v, i in bms.data
       node = new Node skin.nodeImage.src, @_timer
+      node.x = skin.offset
       node.timing = v.timing
       @_appendFallParams node, bms.bpms, time, skin.fallDist
       @_genTime.push time

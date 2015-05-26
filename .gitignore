@@ -7,3 +7,4 @@ js/
 bower_components/
 bms/
 #package.json#
+test/test-all.js
