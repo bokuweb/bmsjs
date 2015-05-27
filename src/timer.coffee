@@ -10,7 +10,7 @@ Timer = cc.Class.extend
       ((new Date() - @_startTime) + @_pauseTime)
     else 0
 
-  pause : -> @_pauseTime = (new Date() - @_startTime)
+  pause : -> @_pauseTime = ((new Date() - @_startTime) + @_pauseTime)
 
   stop : ->
     @_startTime = 0
