@@ -1,9 +1,10 @@
-Audio = cc.Class.extend
+Audio = cc.Layer.extend
   _wav : []
   _index : 0
   _scheduleId : null
 
   ctor : (@_timer, @_bgms)->
+    @_super()
     @_audioEngine = cc.audioEngine
 
   init : (res, prefix)->
@@ -11,10 +12,10 @@ Audio = cc.Class.extend
     @_wav[k] = prefix + v for k, v of res
 
   play : (id)->
-    cc.log @_wav[id]
     @_audioEngine.playEffect @_wav[id], false
 
-  startBgm : -> @scheduleUpdate()
+  startBgm : ->
+    @scheduleUpdate()
 
   stopBgm : ->
 
@@ -26,7 +27,7 @@ Audio = cc.Class.extend
   update : ->
     time = @_timer.get()
     while time >= @_bgms[@_index]?.timing
-      @play @_bgms[@_index].val
+      @play @_bgms[@_index].id
       @_index++
 
 module.exports = Audio

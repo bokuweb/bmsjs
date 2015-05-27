@@ -28,7 +28,7 @@ NoteTest = cc.Class.extend
               .to.be.equal 1
 
             setTimeout =>
-              #capture "capture/notes/notes" + capNum++
+              capture "capture/notes/notes" + capNum++
             , 2000
 
             setTimeout =>

@@ -61,7 +61,7 @@ AppLayer = cc.Layer.extend
     @addChild @_measureNodesLayer
 
     $.ajax
-      url: 'http://localhost:8000/bms/va.bms'
+      url: 'http://localhost:8000/bms/dq5 battle light7.bms'
       success: (bms) =>
         parser = new Parser()
         @_bms = parser.parse bms
@@ -85,18 +85,19 @@ AppLayer = cc.Layer.extend
         @_notesLayer.addListener 'hit', @_onHit.bind this
         @_notesLayer.addListener 'judge', @_onJudge.bind this
         @addChild @_notesLayer
+        @addChild @_audio
         @start()
 
   start : ->
     @_measureNodesLayer.start()
     @_notesLayer.start on
+    @_audio.startBgm()
     @_timer.start()
 
   _onHit : (name, wavId)->
     @_audio.play wavId
 
   _onJudge : (name, judgement)->
-    cc.log judgement
 
   _addKey : ->
     toucheventListener = cc.EventListener.create
