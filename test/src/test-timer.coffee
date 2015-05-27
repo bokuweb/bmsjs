@@ -1,40 +1,26 @@
 TimerTest = cc.Class.extend
-
   start : ->
     describe 'timer class test', ->
       Timer  = require '../../src/timer'
       expect = chai.expect
-      timer  = null
 
-      it 'should timer.get() return 0 before start', (done)->
-        MyScene = cc.Scene.extend
-          onEnter : ->
-            @_super()
-            size = cc.director.getWinSize()
-            label = cc.LabelTTF.create("abcd", "Arial", 40)
-            label.setPosition(size.width / 2, size.height / 2)
-            @addChild label, 1
-            @scheduleOnce @test, 1
+      it 'should timer.get() return 0 before start', ->
+        time = @_timer.get()
+        expect time
+          .to.be.equal 0
 
-          test : ->
-            console.log "test"
-            done()
-
-        cc.director.runScene new MyScene()
+      it 'set timer 1000msec, should get() return about 1000msec', (done)->
+        @_timer.start()
+        test = =>
+          console.log "test"
+          time = @_timer.get()
+          expect time
+            .to.be.within 900, 1100
+          done()
+        setTimeout test, 1000
 
       before ->
-        timer = new Timer()
-
-      after ->
-        MyScene = cc.Scene.extend
-          onEnter : ->
-            @_super()
-            size = cc.director.getWinSize()
-            label = cc.LabelTTF.create("abcdef", "Arial", 40)
-            label.setPosition(size.width / 2, size.height / 2)
-            @addChild label, 1
-
-        cc.director.runScene new MyScene()
+        @_timer = new Timer()
 
 module.exports = TimerTest
 
