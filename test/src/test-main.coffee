@@ -1,4 +1,4 @@
-TestEntryScene = require './test-entryScene'
+TimerTest = require './test-timer'
 
 window.onload = ->
   cc.game.onStart = ->
@@ -6,7 +6,9 @@ window.onload = ->
     cc.director.setContentScaleFactor 2
     #cc.view.setDesignResolutionSize 320, 480, cc.ResolutionPolicy.SHOW_ALL
 
-    require './test-timer'
+    timerTest = new TimerTest()
+
+    timerTest.start()
 
     if window.mochaPhantomJS
       mochaPhantomJS.run()

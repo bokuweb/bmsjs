@@ -1,36 +1,41 @@
-describe 'timer class test', ->
-  Timer  = require '../../src/timer'
-  expect = chai.expect
-  timer  = null
+TimerTest = cc.Class.extend
 
-  it 'should timer.get() return 0 before start', (done)->
-    MyScene = cc.Scene.extend
-      onEnter : ->
-        @_super()
-        size = cc.director.getWinSize()
-        label = cc.LabelTTF.create("abcd", "Arial", 40)
-        label.setPosition(size.width / 2, size.height / 2)
-        @addChild label, 1
-        @scheduleOnce @test, 1
+  start : ->
+    describe 'timer class test', ->
+      Timer  = require '../../src/timer'
+      expect = chai.expect
+      timer  = null
 
-      test : ->
-        console.log "test"
-        done()
+      it 'should timer.get() return 0 before start', (done)->
+        MyScene = cc.Scene.extend
+          onEnter : ->
+            @_super()
+            size = cc.director.getWinSize()
+            label = cc.LabelTTF.create("abcd", "Arial", 40)
+            label.setPosition(size.width / 2, size.height / 2)
+            @addChild label, 1
+            @scheduleOnce @test, 1
 
-    cc.director.runScene new MyScene()
+          test : ->
+            console.log "test"
+            done()
 
-  before ->
-    timer = new Timer()
+        cc.director.runScene new MyScene()
 
-  after ->
-    MyScene = cc.Scene.extend
-      onEnter : ->
-        @_super()
-        size = cc.director.getWinSize()
-        label = cc.LabelTTF.create("abcdef", "Arial", 40)
-        label.setPosition(size.width / 2, size.height / 2)
-        @addChild label, 1
+      before ->
+        timer = new Timer()
 
-    cc.director.runScene new MyScene()
+      after ->
+        MyScene = cc.Scene.extend
+          onEnter : ->
+            @_super()
+            size = cc.director.getWinSize()
+            label = cc.LabelTTF.create("abcdef", "Arial", 40)
+            label.setPosition(size.width / 2, size.height / 2)
+            @addChild label, 1
+
+        cc.director.runScene new MyScene()
+
+module.exports = TimerTest
 
 
