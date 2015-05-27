@@ -1,4 +1,5 @@
 TimerTest = require './test-timer'
+NoteTest  = require './test-note'
 
 window.onload = ->
   cc.game.onStart = ->
@@ -7,7 +8,9 @@ window.onload = ->
     #cc.view.setDesignResolutionSize 320, 480, cc.ResolutionPolicy.SHOW_ALL
 
     timerTest = new TimerTest()
+    noteTest  = new NoteTest()
 
+    noteTest.start()
     timerTest.start()
 
     if window.mochaPhantomJS

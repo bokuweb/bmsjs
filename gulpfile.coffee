@@ -3,6 +3,7 @@ watchify       = require 'gulp-watchify'
 plumber        = require 'gulp-plumber'
 rename         = require 'gulp-rename'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
+webserver      = require 'gulp-webserver'
 
 gulp.task 'watchify', watchify (watchify)->
   # watch src
@@ -32,12 +33,17 @@ gulp.task 'test', [], ->
   gulp
     .src './test/runner.html'
     .pipe mochaPhantomJS
-      #reporter: './node_modules/gulp-mocha-phantomjs/node_modules/mocha-phantomjs/node_modules/mocha/lib/reporters/nyan.js'
       phantomjs:
         viewportSize:
           width: 800
           height: 600
         dump:'test.xml'
+
+gulp.task 'webserver', ->
+  gulp.src ''
+    .pipe webserver
+      directoryListing: true
+      open: true
 
 gulp.task 'watch', ['watchify']
 

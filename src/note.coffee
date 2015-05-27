@@ -18,22 +18,48 @@ Note = cc.Sprite.extend
 
     if @clear and not @hasJudged
       @hasJudged = true
-      #judgement = @_judge.exec note.diffTime
-      #@_notifier.trigger judgement
       return
 
     if time > @timing +  @_removeTime
       @removeFromParent on
-      #@_notifier.trigger 'poor' unless note.clear
       return
-    # Auto Play
-    ### 
-    if @_isAuto
-      if time >= note.timing and not note.clear
-        @_keyDownEffect.show note.key
-        note.clear = true
-        note.hasJudged = true
-        @_notifier.trigger 'pgreat'
-        @_notifier.trigger 'hit', note.wav
-    ###
+  #
+  # append BPM, speed, destination y coordinate list to falling object
+  #
+  appendFallParams : (bpms, time, fallDist)->
+    size = cc.director.getWinSize()
+    previousBpm = 0
+    @dstY = []
+    @index = 0
+    @speed = []
+    @bpm =
+      timing : []
+      val : []
+
+    for v, i in bpms when time < v.timing < @timing
+      @bpm.timing.push v.timing
+      @bpm.val.push v.val
+
+    # calculate bpm before object will be created
+    if bpms[0].timing > time then previousBpm = bpms[0].val
+    else previousBpm = v.val for v in bpms when v.timing <= time
+
+    @dstY[@bpm.timing.length] = size.height - fallDist
+    @bpm.timing.push @timing
+
+    # calculate destination of Y coordinate
+    for v, i in @bpm.timing by -1 when i < @bpm.timing.length - 1
+      diffDist = (@bpm.timing[i+1] - v) * @_calcSpeed(@bpm.val[i], fallDist)
+      @dstY[i] = @dstY[i+1] + diffDist
+    @bpm.val.splice 0, 0, previousBpm
+
+    @speed.push @_calcSpeed v, fallDist for v in @bpm.val
+    return
+
+  # return object speed [px/msec]
+  _calcSpeed : (bpm, fallDist) ->
+    measureTime = 240000 / bpm
+    fallDist / measureTime
+
+
 module.exports = Note
