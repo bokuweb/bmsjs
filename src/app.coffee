@@ -17,7 +17,7 @@ skin =
       src : res.nodeImage
       width : 194
       height : 1
-      x : 0
+      x : 160
       y : -10
       z : 1
     noteTurntableImage :
@@ -48,19 +48,15 @@ skin =
 
 AppLayer = cc.Layer.extend
 
-  ctor : (@_bms)->
+  ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
-    @init()
-
-  init : ->
     @_addKey()
     @_measureNodesLayer = new MeasureNodesLayer @_timer
     @addChild @_measureNodesLayer
-
     genTime = @_measureNodesLayer.init skin.fallObj, @_bms
     @_audio = new Audio @_timer, @_bms.bgms
-    @_audio.init @_bms.wav, 'bms/'
+    @_audio.init @_bms.wav, prefix
 
     config =
       reactionTime : 200
@@ -78,7 +74,6 @@ AppLayer = cc.Layer.extend
     @_notesLayer.addListener 'judge', @_onJudge.bind this
     @addChild @_notesLayer
     @addChild @_audio
-    @start()
 
   start : ->
     @_measureNodesLayer.start()
@@ -127,9 +122,10 @@ AppLayer = cc.Layer.extend
 
 AppScene = cc.Scene.extend
 
-  ctor : (bms)->
+  ctor : (bms, prefix)->
     @_super()
-    layer = new AppLayer bms
+    layer = new AppLayer bms, prefix
     @addChild layer
+    layer.start()
 
 module.exports = AppScene

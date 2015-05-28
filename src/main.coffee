@@ -28,7 +28,7 @@ cc.game.onStart = ->
       resList.push 'bms/' + v for k, v of bms.wav
 
       cc.LoaderScene.preload resList, ->
-        cc.director.runScene new AppScene bms
+        cc.director.runScene new AppScene bms, 'bms/'
       , this
 
 
