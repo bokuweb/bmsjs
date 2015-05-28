@@ -25,7 +25,7 @@ cc.game.onStart = ->
 
   xhr = cc.loader.getXMLHttpRequest()
   xhr.timeout = 5000
-  xhr.open 'GET', 'http://localhost:8000/bms/va.bms', true
+  xhr.open 'GET', './bms/va.bms', true
   xhr.send()
 
   xhr.onreadystatechange = ->
