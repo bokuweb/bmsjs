@@ -33,8 +33,7 @@ gulp.task 'build:test', watchify (watchify)->
     .pipe gulp.dest 'test'
 
 gulp.task 'test', ['build:test'], ->
-  gulp
-    .src './test/runner.html'
+  gulp.src './test/runner.html'
     .pipe mochaPhantomJS
       phantomjs:
         viewportSize:
@@ -50,5 +49,7 @@ gulp.task 'webserver', ->
 
 gulp.task 'build', ['build:app', 'build:test']
 
-gulp.task 'watch', ['enable-watch-mode', 'build:app', 'build:test']
+gulp.task 'watch:app', ['enable-watch-mode', 'build:app']
+
+gulp.task 'watch:test', ['enable-watch-mode', 'build:test']
 

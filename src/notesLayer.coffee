@@ -1,8 +1,8 @@
 EventObserver = require './eventObserver'
-FallObjsLayer = require './fallObjsLayer'
 Note          = require './note'
 
-NotesLayer = FallObjsLayer.extend
+NotesLayer = cc.Layer.extend
+
   ctor : (@_skin, @_timer, @_config)->
     @_super()
     @_notifier = new EventObserver()
@@ -46,12 +46,12 @@ NotesLayer = FallObjsLayer.extend
 
         note.x = @_calcNoteXCoordinate i
         note.y = -note.height
+        note.setAnchorPoint cc.p(0.5,0)
         note.timing = timing
         note.wav = key.id[j]
         note.key = i
         note.clear = false
-        #note.hasJudged = false
-        @_appendFallParams note, bpms, time, fallDist
+        note.appendFallParams bpms, time, fallDist
         @_notes[measure].push note
     return
 

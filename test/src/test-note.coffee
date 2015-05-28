@@ -9,8 +9,8 @@ NoteTest = cc.Class.extend
         .capture
       expect  = chai.expect
       capNum = 0
-      
-      it 'should timer.get() return 0 before start', (done)->
+
+      it 'note create and update test', (done)->
         TestScene = cc.Scene.extend
           onEnter : ->
             @_super()

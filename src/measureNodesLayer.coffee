@@ -1,7 +1,6 @@
-FallObjsLayer = require './fallObjsLayer'
-Node          = require './measureNode'
+Node = require './measureNode'
 
-MeasureNodesLayer = FallObjsLayer.extend
+MeasureNodesLayer = cc.Layer.extend
 
   ctor : (@_timer)->
     @_super()
@@ -26,7 +25,7 @@ MeasureNodesLayer = FallObjsLayer.extend
       node = new Node skin.nodeImage.src, @_timer
       node.x = skin.offset
       node.timing = v.timing
-      @_appendFallParams node, bms.bpms, time, skin.fallDist
+      node.appendFallParams bms.bpms, time, skin.fallDist
       @_genTime.push time
       time = @_getGenTime node, skin.fallDist
       @_nodes.push node
@@ -47,11 +46,6 @@ MeasureNodesLayer = FallObjsLayer.extend
     @_nodes[@_index].start()
     @_index++
 
-  _calcSpeed : (bpm, fallDistance) ->
-    @_super bpm, fallDistance
-
-  _appendFallParams : (obj, bpms, time, fallDistance)->
-    @_super obj, bpms, time, fallDistance
   #
   # get time when node y coordinate will be 0px
   # to generate next node
@@ -59,7 +53,7 @@ MeasureNodesLayer = FallObjsLayer.extend
   _getGenTime : (obj, fallDist)->
     size = cc.director.getWinSize()
     for v, i in obj.dstY when v < size.height
-      return ~~(obj.bpm.timing[i] - (v / @_calcSpeed(obj.bpm.val[i], fallDist)))
+      return ~~(obj.bpm.timing[i] - (v / obj.calcSpeed(obj.bpm.val[i], fallDist)))
     return 0
 
 module.exports = MeasureNodesLayer
