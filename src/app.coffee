@@ -9,7 +9,7 @@ res               = require './resource'
 # TODO : move
 skin =
   fallObj :
-    fallDist : 400
+    fallDist : 320
     keyNum : 8
     offset : 35
     margin : 2
@@ -53,10 +53,12 @@ AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
-    @_addKey()
+    #@_addKey()
     @_measureNodesLayer = new MeasureNodesLayer @_timer
     @addChild @_measureNodesLayer
     genTime = @_measureNodesLayer.init skin.fallObj, @_bms
+    genTime.sort (a, b) -> a - b
+    cc.log genTime
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
     @_keyboard = new KeyboardService @_timer
@@ -100,7 +102,6 @@ AppLayer = cc.Layer.extend
     @_timer.start()
 
   _onKeydown : (key, time, id)->
-    console.log id
     @_notesLayer.onTouch id, time
 
   _onHit : (name, wavId)->
