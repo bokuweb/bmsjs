@@ -2,22 +2,21 @@ Parser = cc.Class.extend
 
   ctor: ->
     @bms =
-      player : null
-      genre : null
-      title : null
-      artist : null
-      bpm : null
-      playLevel : null
-      rank : null
-      total : null
-      sategFile : null
-      keyNum : null
+      player     : null
+      genre      : null
+      title      : null
+      artist     : null
+      bpm        : null
+      playLevel  : null
+      rank       : null
+      total      : null
+      sategFile  : null
+      keyNum     : null
       difficulty : null
-      wav : {}
-      bmp : {}
-      data : []
-      totalNote : 0
-
+      wav        : {}
+      bmp        : {}
+      data       : []
+      totalNote  : 0
       # OPTIMIZE:
       bgms       : []
       animations : []
