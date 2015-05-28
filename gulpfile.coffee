@@ -5,23 +5,26 @@ rename         = require 'gulp-rename'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
 webserver      = require 'gulp-webserver'
 
-gulp.task 'watchify', watchify (watchify)->
-  # watch src
+watching = off
+
+gulp.task 'enable-watch-mode', -> watching = on
+
+gulp.task 'build:app', watchify (watchify)->
   gulp.src 'src/main.coffee'
     .pipe plumber()
     .pipe watchify
-      watch     : on
+      watch     : watching
       extensions: ['.coffee', '.js']
       transform : ['coffeeify']
     .pipe rename
       extname: ".js"
     .pipe gulp.dest ''
 
-  # watch test src
+gulp.task 'build:test', watchify (watchify)->
   gulp.src 'test/src/test-main.coffee'
     .pipe plumber()
     .pipe watchify
-      watch     : on
+      watch     : watching
       extensions: ['.coffee', '.js']
       transform : ['coffeeify']
     .pipe rename
@@ -29,7 +32,7 @@ gulp.task 'watchify', watchify (watchify)->
       extname: ".js"
     .pipe gulp.dest 'test'
 
-gulp.task 'test', [], ->
+gulp.task 'test', ['build:test'], ->
   gulp
     .src './test/runner.html'
     .pipe mochaPhantomJS
@@ -45,5 +48,7 @@ gulp.task 'webserver', ->
       directoryListing: true
       open: true
 
-gulp.task 'watch', ['watchify']
+gulp.task 'build', ['build:app', 'build:test']
+
+gulp.task 'watch', ['enable-watch-mode', 'build:app', 'build:test']
 

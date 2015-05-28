@@ -251,7 +251,7 @@ Parser = cc.Class.extend
           arr.push
             timing : t
             id : v[name].id[j]
-            
+
   _calcTotalNote = () ->
     @bms.data.reduce ( (t, d) -> t +
       d.note.key.reduce ((nt, k) -> nt + k.id.length), 0), 0
