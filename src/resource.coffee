@@ -1,14 +1,14 @@
-res =
+resObjs =
   buttonImage : "res/button.png"
   nodeImage   : "res/node.png"
   noteWhiteImage : "res/note-white.png"
   noteBlackImage : "res/note-black.png"
   noteTurntableImage : "res/note-turntable.png"
 
-resources = []
+resList = []
 
-resources.push v for k, v of res
+resList.push v for k, v of resObjs
 
 module.exports =
-  res : res
-  resources : resources
+  resObjs : resObjs
+  resList : resList

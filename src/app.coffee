@@ -1,11 +1,9 @@
-$                 = require 'jquery'
 MeasureNodesLayer = require './measureNodesLayer'
 NotesLayer        = require './notesLayer'
 Timer             = require './timer'
-Parser            = require './parser'
 Audio             = require './audio'
 res               = require './resource'
-  .res
+  .resObjs
 
 skin =
   fallObj :
@@ -50,7 +48,7 @@ skin =
 
 AppLayer = cc.Layer.extend
 
-  ctor : ->
+  ctor : (@_bms)->
     @_super()
     @_timer = new Timer()
     @init()
@@ -60,33 +58,27 @@ AppLayer = cc.Layer.extend
     @_measureNodesLayer = new MeasureNodesLayer @_timer
     @addChild @_measureNodesLayer
 
-    $.ajax
-      url: 'http://localhost:8000/bms/dq5 battle light7.bms'
-      success: (bms) =>
-        parser = new Parser()
-        @_bms = parser.parse bms
-        cc.log @_bms
-        genTime = @_measureNodesLayer.init skin.fallObj, @_bms
-        @_audio = new Audio @_timer, @_bms.bgms
-        @_audio.init @_bms.wav, 'bms/'
+    genTime = @_measureNodesLayer.init skin.fallObj, @_bms
+    @_audio = new Audio @_timer, @_bms.bgms
+    @_audio.init @_bms.wav, 'bms/'
 
-        # TODO : move t oarg
-        config =
-          reactionTime : 200
-          removeTime : 200
-          judge :
-            pgreat : 10
-            great  : 50
-            good   : 100
-            bad    : 150
-            poor   : 200
-        @_notesLayer = new NotesLayer skin, @_timer, config
-        @_notesLayer.init @_bms, genTime
-        @_notesLayer.addListener 'hit', @_onHit.bind this
-        @_notesLayer.addListener 'judge', @_onJudge.bind this
-        @addChild @_notesLayer
-        @addChild @_audio
-        @start()
+    config =
+      reactionTime : 200
+      removeTime : 200
+      judge :
+        pgreat : 10
+        great  : 50
+        good   : 100
+        bad    : 150
+        poor   : 200
+
+    @_notesLayer = new NotesLayer skin, @_timer, config
+    @_notesLayer.init @_bms, genTime
+    @_notesLayer.addListener 'hit', @_onHit.bind this
+    @_notesLayer.addListener 'judge', @_onJudge.bind this
+    @addChild @_notesLayer
+    @addChild @_audio
+    @start()
 
   start : ->
     @_measureNodesLayer.start()
@@ -120,7 +112,7 @@ AppLayer = cc.Layer.extend
       @addChild key
       cc.eventManager.addListener toucheventListener.clone(), key
     return
-    
+
   _onTouch : (touch, event)->
     time = @_timer.get()
     target = event.getCurrentTarget()
@@ -134,9 +126,10 @@ AppLayer = cc.Layer.extend
     return false
 
 AppScene = cc.Scene.extend
-  onEnter:->
+
+  ctor : (bms)->
     @_super()
-    layer = new AppLayer()
+    layer = new AppLayer bms
     @addChild layer
 
 module.exports = AppScene
