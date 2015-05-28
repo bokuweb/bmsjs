@@ -1,3 +1,4 @@
+# TODO : add arg path to bms etc.
 cc.game.onStart = ->
   AppScene = require './app'
   Parser   = require './parser'
@@ -10,9 +11,13 @@ cc.game.onStart = ->
   cc.view.enableRetina off
   cc.view.adjustViewPort on
   cc.director.setContentScaleFactor 2
-  height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
-  cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
-  cc.view.resizeWithBrowserSize on
+
+  # fix for PC browser
+  policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
+  #height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
+  #cc.view.setDesignResolutionSize 640, 480, cc.ResolutionPolicy.SHOW_ALL
+  cc.view.setDesignResolutionSize 640, 480, policy
+  cc.view.resizeWithBrowserSize off
 
   xhr = cc.loader.getXMLHttpRequest()
   xhr.timeout = 5000

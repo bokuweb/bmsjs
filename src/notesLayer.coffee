@@ -1,4 +1,5 @@
 EventObserver = require './eventObserver'
+Judge         = require './judge'
 Note          = require './note'
 
 NotesLayer = cc.Layer.extend
@@ -6,6 +7,7 @@ NotesLayer = cc.Layer.extend
   ctor : (@_skin, @_timer, @_config)->
     @_super()
     @_notifier = new EventObserver()
+    @_judge = new Judge()
     @_notes = []
     @_genTime = []
 
@@ -88,11 +90,13 @@ NotesLayer = cc.Layer.extend
       unless note.clear
         if -@_config.reactionTime < diffTime < @_config.reactionTime
           note.clear = true
-          note.diffTime = diffTime
+          #note.diffTime = diffTime
           @_notifier.trigger 'hit', note.wav
+          judgement = @_judge.exec diffTime
+          @_notifier.trigger 'judge', judgement
           return
         else
-          #@_notifier.trigger 'judge', 'epoor'
+          @_notifier.trigger 'judge', 'epoor'
           return
     return
   #

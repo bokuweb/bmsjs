@@ -53,3 +53,4 @@ gulp.task 'watch:app', ['enable-watch-mode', 'build:app']
 
 gulp.task 'watch:test', ['enable-watch-mode', 'build:test']
 
+gulp.task 'watch', ['enable-watch-mode', 'build:test', 'build:app']
