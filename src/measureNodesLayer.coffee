@@ -9,11 +9,10 @@ MeasureNodesLayer = cc.Layer.extend
     @_genTime  = []
 
   #
-  # create and pool nodes
+  # preallocate nodes
   #
-  # @param  res   - resouce data
-  # @param  bpms  - BPM change list
-  # @param  nodes - node parameter
+  # @param  skin  - fall object skin data
+  # @param  bms   - bms data
   # @return node generation time Array
   #
   init : (skin, bms)->
@@ -47,7 +46,7 @@ MeasureNodesLayer = cc.Layer.extend
     @_index++
 
   #
-  # get time when node y coordinate will be 0px
+  # get time when node y coordinate will be game.height
   # to generate next node
   #
   _getGenTime : (obj, fallDist)->

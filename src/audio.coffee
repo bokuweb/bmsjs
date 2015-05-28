@@ -1,18 +1,16 @@
 Audio = cc.Layer.extend
-  _wav : []
-  _index : 0
-  _scheduleId : null
 
   ctor : (@_timer, @_bgms)->
     @_super()
-    @_audioEngine = cc.audioEngine
+    @_wav = []
+    @_index = 0
+    @_audio = cc.audioEngine
 
   init : (res, prefix)->
-    @_index = 0
     @_wav[k] = prefix + v for k, v of res
 
   play : (id)->
-    @_audioEngine.playEffect @_wav[id], false
+    @_audio.playEffect @_wav[id], false
 
   startBgm : ->
     @scheduleUpdate()

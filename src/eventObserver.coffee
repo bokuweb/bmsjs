@@ -1,4 +1,5 @@
 EventObserver = cc.Class.extend
+
   ctor : ->
     @_listeners = []
 

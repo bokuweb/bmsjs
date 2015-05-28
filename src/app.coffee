@@ -1,10 +1,12 @@
 MeasureNodesLayer = require './measureNodesLayer'
+KeyboardService   = require './keyboardService'
 NotesLayer        = require './notesLayer'
 Timer             = require './timer'
 Audio             = require './audio'
 res               = require './resource'
   .resObjs
 
+# TODO : move
 skin =
   fallObj :
     fallDist : 400
@@ -19,13 +21,13 @@ skin =
       height : 1
       x : 160
       y : -10
-      z : 1
+      z : 0
     noteTurntableImage :
       type : "image"
       src : res.notetuntableImage
       width : 41
       height : 6
-      x : 0
+      x : null
       y : -10
       z : 1
     noteWhiteImage :
@@ -33,7 +35,7 @@ skin =
       src : res.noteWhiteImage
       width : 22
       height : 6
-      x : 0
+      x : null
       y : -10
       z : 1
     noteBlackImage :
@@ -41,7 +43,7 @@ skin =
       src : res.noteBlackImage
       width : 17
       height : 6
-      x : 0
+      x : null
       y : -10
       z : 1
 
@@ -57,6 +59,22 @@ AppLayer = cc.Layer.extend
     genTime = @_measureNodesLayer.init skin.fallObj, @_bms
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
+    @_keyboard = new KeyboardService @_timer
+
+    # FIXME : move to argument
+    keyConfig = [
+      'Z'.charCodeAt(0)
+      'S'.charCodeAt(0)
+      'X'.charCodeAt(0)
+      'D'.charCodeAt(0)
+      'C'.charCodeAt(0)
+      'F'.charCodeAt(0)
+      'V'.charCodeAt(0)
+      16]
+
+    @_keyboard.init()
+    @_keyboard.addListener v, @_onKeydown, id for v, id in keyConfig
+    @addChild @_keyboard
 
     config =
       reactionTime : 200
@@ -80,6 +98,10 @@ AppLayer = cc.Layer.extend
     @_notesLayer.start on
     @_audio.startBgm()
     @_timer.start()
+
+  _onKeydown : (key, time, id)->
+    console.log id
+    @_notesLayer.onTouch id, time
 
   _onHit : (name, wavId)->
     @_audio.play wavId
