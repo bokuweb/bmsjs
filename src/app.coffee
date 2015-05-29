@@ -19,7 +19,7 @@ skin =
       width  : 194
       height : 1
     noteTurntableImage :
-      src    : res.notetuntableImage
+      src    : res.noteTurntableImage
       width  : 41
       height : 6
     noteWhiteImage :
@@ -39,7 +39,7 @@ skin =
       delay  : 0.02
       z      : 5
     keyEffect :
-      y : 160
+      y : 280
       turntableKeydownImage :
         src : res.turntableKeydownImage
       whiteKeydownImage :

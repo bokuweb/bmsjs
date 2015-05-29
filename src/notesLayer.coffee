@@ -50,6 +50,7 @@ NotesLayer = cc.Layer.extend
           when 1, 3, 5
             note = new Note black.src, @_timer, @_config.removeTime
           when 7
+            console.log turntable.src
             note = new Note turntable.src, @_timer, @_config.removeTime
           else throw new Error "error unlnown note"
 
@@ -119,6 +120,7 @@ NotesLayer = cc.Layer.extend
     if @_isAuto
       for note in @children
         if @_timer.get() >= note.timing and not note.clear
+          #console.log "key = " + note.key
           @_keyEffectsLayer.show note.key, 0.5
           note.clear = true
           y = cc.director.getWinSize().height - @_skin.fallDist

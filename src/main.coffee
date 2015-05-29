@@ -19,7 +19,7 @@ cc.game.onStart = ->
     cc.view.resizeWithBrowserSize on
   else
     policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
-    cc.view.setDesignResolutionSize 640, 480, policy
+    cc.view.setDesignResolutionSize 800, 600, policy
     cc.view.resizeWithBrowserSize off
 
   xhr = cc.loader.getXMLHttpRequest()
