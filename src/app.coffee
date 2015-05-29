@@ -8,7 +8,7 @@ res               = require './resource'
 
 # TODO : move
 skin =
-  fallObj :
+  notes :
     fallDist : 320
     keyNum   : 8
     offsetX  : 35
@@ -30,14 +30,14 @@ skin =
       src    : res.noteBlackImage
       width  : 17
       height : 6
-  greatEffect :
-    src    : res.greatEffectImage
-    width  : 80
-    height : 80
-    row    : 4
-    colum  : 4
-    delay  : 0.02
-    z      : 5
+    greatEffect :
+      src    : res.greatEffectImage
+      width  : 80
+      height : 80
+      row    : 4
+      colum  : 4
+      delay  : 0.02
+      z      : 5
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -45,8 +45,8 @@ AppLayer = cc.Layer.extend
     @_timer = new Timer()
     #@_addKey()
     @_measureNodesLayer = new MeasureNodesLayer @_timer
-    @addChild @_measureNodesLayer, skin.fallObj.z
-    genTime = @_measureNodesLayer.init skin.fallObj, @_bms
+    @addChild @_measureNodesLayer, skin.notes.z
+    genTime = @_measureNodesLayer.init skin.notes, @_bms
     genTime.sort (a, b) -> a - b
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
@@ -78,11 +78,11 @@ AppLayer = cc.Layer.extend
         bad    : 150
         poor   : 200
 
-    @_notesLayer = new NotesLayer skin, @_timer, config
+    @_notesLayer = new NotesLayer skin.notes, @_timer, config
     @_notesLayer.init @_bms, genTime
     @_notesLayer.addListener 'hit', @_onHit.bind this
     @_notesLayer.addListener 'judge', @_onJudge.bind this
-    @addChild @_notesLayer
+    @addChild @_notesLayer, skin.notes.z
     @addChild @_audio
 
   start : ->

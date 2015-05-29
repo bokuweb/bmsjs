@@ -16,13 +16,13 @@ GreatEffectLayer = cc.Layer.extend
         delay  : @_res.delay
       effect = new GreatEffect @_res.src, params
       effect.y = -effect.y
-      @addChild effect
       @_effects.push effect
     return
 
   run : (x, y)->
     @_effects[@_index].x = x
     @_effects[@_index].y = y
+    @addChild @_effects[@_index]
     @_effects[@_index].run()
     @_index += 1
 

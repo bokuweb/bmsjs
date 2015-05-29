@@ -21,7 +21,7 @@ NotesLayer = cc.Layer.extend
     @_greatEffectsLayer.init bms.totalNote
     @addChild @_greatEffectsLayer, 10
     @_generate bms, measure, time for time, measure in @_genTime
-    xArr = for i in [0...@_skin.fallObj.keyNum] then @_calcNoteXCoordinate i
+    xArr = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
 
   addListener: (name, listner)->
     @_notifier.on name, listner
@@ -30,10 +30,10 @@ NotesLayer = cc.Layer.extend
   # generate and pool note
   #
   _generate : (bms, measure, time)->
-    turntable = @_skin.fallObj.noteTurntableImage
-    white = @_skin.fallObj.noteWhiteImage
-    black = @_skin.fallObj.noteBlackImage
-    fallDist = @_skin.fallObj.fallDist
+    turntable = @_skin.noteTurntableImage
+    white = @_skin.noteWhiteImage
+    black = @_skin.noteBlackImage
+    fallDist = @_skin.fallDist
     bpms = bms.bpms
     @_notes[measure] ?= []
 
@@ -64,11 +64,11 @@ NotesLayer = cc.Layer.extend
   # calculate
   #
   _calcNoteXCoordinate : (id)->
-    turntable = @_skin.fallObj.noteTurntableImage
-    white = @_skin.fallObj.noteWhiteImage
-    black = @_skin.fallObj.noteBlackImage
-    offset = @_skin.fallObj.offsetX
-    margin = (id + 1) * @_skin.fallObj.marginX
+    turntable = @_skin.noteTurntableImage
+    white = @_skin.noteWhiteImage
+    black = @_skin.noteBlackImage
+    offset = @_skin.offsetX
+    margin = (id + 1) * @_skin.marginX
     switch id
       when 0, 2, 4, 6
         ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin
@@ -98,7 +98,7 @@ NotesLayer = cc.Layer.extend
           @_notifier.trigger 'judge', judgement
           if judgement is 'pgreat' or 'great'
             size = cc.director.getWinSize()
-            y = size.height - @_skin.fallObj.fallDist
+            y = size.height - @_skin.fallDist
             @_greatEffectsLayer.run note.x, y
           return
         else
@@ -116,7 +116,7 @@ NotesLayer = cc.Layer.extend
         if @_timer.get() >= note.timing and not note.clear
           #@_keyDownEffect.show note.key
           note.clear = true
-          y = cc.director.getWinSize().height - @_skin.fallObj.fallDist
+          y = cc.director.getWinSize().height - @_skin.fallDist
           @_greatEffectsLayer.run note.x, y
           @_notifier.trigger 'judge', 'pgreat'
           @_notifier.trigger 'hit', note.wav
