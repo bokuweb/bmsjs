@@ -20,8 +20,17 @@ NotesLayer = cc.Layer.extend
   init : (bms, @_genTime)->
     @_index = 0
     @_notes.length = 0
+
+    console.log @_skin.bgImage.src
+    bg = new cc.Sprite @_skin.bgImage.src
+    bg.setAnchorPoint cc.p(0.5, 0)
+    bg.x = @_skin.bgImage.x
+    bg.y = @_skin.bgImage.y
+    @addChild bg, 0
+
     @_greatEffectsLayer.init bms.totalNote
     @addChild @_greatEffectsLayer, 10
+
     @_generate bms, measure, time for time, measure in @_genTime
     xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
     @_keyEffectsLayer.init xList
@@ -50,7 +59,6 @@ NotesLayer = cc.Layer.extend
           when 1, 3, 5
             note = new Note black.src, @_timer, @_config.removeTime
           when 7
-            console.log turntable.src
             note = new Note turntable.src, @_timer, @_config.removeTime
           else throw new Error "error unlnown note"
 
@@ -76,9 +84,9 @@ NotesLayer = cc.Layer.extend
     margin = (id + 1) * @_skin.marginX
     switch id
       when 0, 2, 4, 6
-        ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin
+        ~~(id / 2) * (black.width + white.width) + (turntable.width + white.width) / 2 + offset + margin
       when 1, 3, 5
-        ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin + white.width
+        ~~(id / 2) * (black.width + white.width) + (turntable.width + black.width) / 2 + offset + margin + white.width
       when 7
         offset
       else throw new Error "error unlnown note"

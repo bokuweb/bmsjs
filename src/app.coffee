@@ -8,11 +8,14 @@ res               = require './resource'
 
 # TODO : move
 skin =
+  body :
+    bgImage :
+      src : res.bgImage
   notes :
     fallDist : 320
     keyNum   : 8
-    offsetX  : 35
-    marginX  : 2
+    offsetX  : 134
+    marginX  : 1.9
     z        : 4
     nodeImage :
       src    : res.nodeImage
@@ -30,6 +33,10 @@ skin =
       src    : res.noteBlackImage
       width  : 17
       height : 6
+    bgImage :
+      src : res.noteBgImage
+      x   : 210
+      y   : 280
     greatEffect :
       src    : res.greatEffectImage
       width  : 80
@@ -47,11 +54,13 @@ skin =
       blackKeydownImage :
         src : res.blackKeydownImage
 
+
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
     #@_addKey()
+    @_addBackground()
     @_measureNodesLayer = new MeasureNodesLayer @_timer
     @addChild @_measureNodesLayer, skin.notes.z
     genTime = @_measureNodesLayer.init skin.notes, @_bms
@@ -106,6 +115,18 @@ AppLayer = cc.Layer.extend
     @_audio.play wavId
 
   _onJudge : (event, judge)->
+
+  _addBackground : ->
+    bg = new cc.Sprite res.bgImage
+    bg.x = cc.director.getWinSize().width / 2
+    bg.y = cc.director.getWinSize().height / 2
+    @addChild bg, 0
+
+    # test image
+    bg = new cc.Sprite "res/test.png"
+    bg.x = cc.director.getWinSize().width / 2
+    bg.y = cc.director.getWinSize().height - 240
+    @addChild bg, 1
 
   _addKey : ->
     toucheventListener = cc.EventListener.create
