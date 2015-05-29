@@ -1,5 +1,4 @@
 Parser = cc.Class.extend
-
   ctor: ->
     @bms =
       player     : null

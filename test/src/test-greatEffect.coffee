@@ -9,7 +9,7 @@ GreatEffectTest = cc.Class.extend
       expect  = chai.expect
       capNum = 0
 
-      it 'note create and update test', (done)->
+      it 'great effect create and update test', (done)->
         TestScene = cc.Scene.extend
           onEnter : ->
             @_super()

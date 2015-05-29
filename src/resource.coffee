@@ -4,7 +4,8 @@ resObjs =
   noteWhiteImage : "res/note-white.png"
   noteBlackImage : "res/note-black.png"
   noteTurntableImage : "res/note-turntable.png"
-
+  greatEffectImage : "res/great-effect.png"
+  
 resList = []
 
 resList.push v for k, v of resObjs

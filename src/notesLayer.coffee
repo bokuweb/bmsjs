@@ -1,13 +1,14 @@
-EventObserver = require './eventObserver'
-Judge         = require './judge'
-Note          = require './note'
+EventObserver     = require './eventObserver'
+Judge             = require './judge'
+Note              = require './note'
+GreatEffectsLayer = require './greatEffectsLayer'
 
 NotesLayer = cc.Layer.extend
-
   ctor : (@_skin, @_timer, @_config)->
     @_super()
     @_notifier = new EventObserver()
     @_judge = new Judge()
+    @_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
     @_notes = []
     @_genTime = []
 
@@ -17,6 +18,8 @@ NotesLayer = cc.Layer.extend
   init : (bms, @_genTime)->
     @_index = 0
     @_notes.length = 0
+    @_greatEffectsLayer.init bms.totalNote
+    @addChild @_greatEffectsLayer, 10
     @_generate bms, measure, time for time, measure in @_genTime
     xArr = for i in [0...@_skin.fallObj.keyNum] then @_calcNoteXCoordinate i
 
@@ -64,15 +67,15 @@ NotesLayer = cc.Layer.extend
     turntable = @_skin.fallObj.noteTurntableImage
     white = @_skin.fallObj.noteWhiteImage
     black = @_skin.fallObj.noteBlackImage
-    offset = @_skin.fallObj.offset
-    margin = (id + 1) * @_skin.fallObj.margin
+    offset = @_skin.fallObj.offsetX
+    margin = (id + 1) * @_skin.fallObj.marginX
     switch id
       when 0, 2, 4, 6
-        return ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin
+        ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin
       when 1, 3, 5
-        return ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin + white.width
+        ~~(id / 2) * (black.width + white.width) + turntable.width + offset + margin + white.width
       when 7
-        return offset
+        offset
       else throw new Error "error unlnown note"
 
   #
@@ -90,15 +93,19 @@ NotesLayer = cc.Layer.extend
       unless note.clear
         if -@_config.reactionTime < diffTime < @_config.reactionTime
           note.clear = true
-          #note.diffTime = diffTime
           @_notifier.trigger 'hit', note.wav
           judgement = @_judge.exec diffTime
           @_notifier.trigger 'judge', judgement
+          if judgement is 'pgreat' or 'great'
+            size = cc.director.getWinSize()
+            y = size.height - @_skin.fallObj.fallDist
+            @_greatEffectsLayer.run note.x, y
           return
         else
           @_notifier.trigger 'judge', 'epoor'
           return
     return
+
   #
   # add note to game scene
   # @attention - _add called by window
@@ -109,17 +116,16 @@ NotesLayer = cc.Layer.extend
         if @_timer.get() >= note.timing and not note.clear
           #@_keyDownEffect.show note.key
           note.clear = true
-          #note.hasJudged = true
+          y = cc.director.getWinSize().height - @_skin.fallObj.fallDist
+          @_greatEffectsLayer.run note.x, y
           @_notifier.trigger 'judge', 'pgreat'
           @_notifier.trigger 'hit', note.wav
 
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
     for note in @_notes[@_index]
-      @addChild note
+      @addChild note, 0
       note.start()
     @_index++
-
-
 
 module.exports = NotesLayer

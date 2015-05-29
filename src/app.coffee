@@ -10,55 +10,44 @@ res               = require './resource'
 skin =
   fallObj :
     fallDist : 320
-    keyNum : 8
-    offset : 35
-    margin : 2
-    zIndex : 4
+    keyNum   : 8
+    offsetX  : 35
+    marginX  : 2
+    z        : 4
     nodeImage :
-      type : "image"
-      src : res.nodeImage
-      width : 194
+      src    : res.nodeImage
+      width  : 194
       height : 1
-      x : 160
-      y : -10
-      z : 0
     noteTurntableImage :
-      type : "image"
-      src : res.notetuntableImage
-      width : 41
+      src    : res.notetuntableImage
+      width  : 41
       height : 6
-      x : null
-      y : -10
-      z : 1
     noteWhiteImage :
-      type : "image"
-      src : res.noteWhiteImage
-      width : 22
+      src    : res.noteWhiteImage
+      width  : 22
       height : 6
-      x : null
-      y : -10
-      z : 1
     noteBlackImage :
-      type : "image"
-      src : res.noteBlackImage
-      width : 17
+      src    : res.noteBlackImage
+      width  : 17
       height : 6
-      x : null
-      y : -10
-      z : 1
-
+  greatEffect :
+    src    : res.greatEffectImage
+    width  : 80
+    height : 80
+    row    : 4
+    colum  : 4
+    delay  : 0.02
+    z      : 5
 
 AppLayer = cc.Layer.extend
-
   ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
     #@_addKey()
     @_measureNodesLayer = new MeasureNodesLayer @_timer
-    @addChild @_measureNodesLayer
+    @addChild @_measureNodesLayer, skin.fallObj.z
     genTime = @_measureNodesLayer.init skin.fallObj, @_bms
     genTime.sort (a, b) -> a - b
-    cc.log genTime
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
     @_keyboard = new KeyboardService @_timer
@@ -72,7 +61,8 @@ AppLayer = cc.Layer.extend
       'C'.charCodeAt(0)
       'F'.charCodeAt(0)
       'V'.charCodeAt(0)
-      16]
+      16
+    ]
 
     @_keyboard.init()
     @_keyboard.addListener v, @_onKeydown, id for v, id in keyConfig
@@ -104,16 +94,16 @@ AppLayer = cc.Layer.extend
   _onKeydown : (key, time, id)->
     @_notesLayer.onTouch id, time
 
-  _onHit : (name, wavId)->
+  _onHit : (event, wavId)->
     @_audio.play wavId
 
-  _onJudge : (name, judgement)->
+  _onJudge : (event, judge)->
 
   _addKey : ->
     toucheventListener = cc.EventListener.create
       event: cc.EventListener.TOUCH_ONE_BY_ONE
       swallowTouches: true
-      onTouchBegan: @_onTouch.bind @
+      onTouchBegan: @_onTouch.bind this
 
     for i in [0...8]
       key = new cc.Sprite res.buttonImage

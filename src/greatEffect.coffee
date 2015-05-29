@@ -1,4 +1,4 @@
-greatEffect = cc.Sprite.extend
+GreatEffect = cc.Sprite.extend
 
   ctor : (src, params)->
     w = params.width
@@ -17,7 +17,6 @@ greatEffect = cc.Sprite.extend
       cc.CallFunc.create cb, this
     )
 
-  run : ->
-    @runAction @_action
+  run : -> @runAction @_action
 
-module.exports = greatEffect
+module.exports = GreatEffect
