@@ -23,8 +23,8 @@ keyEffectLayerTest = cc.Class.extend
               blackKeydownImage :
                 src : "../res/black-keydown.png"
 
-            keyEffectLayer = new KeyEffectLayer()
-            keyEffectLayer.init skin, xList
+            keyEffectLayer = new KeyEffectLayer skin
+            keyEffectLayer.init xList
             @addChild keyEffectLayer
             promise = null
             index = 0

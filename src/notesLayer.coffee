@@ -2,6 +2,7 @@ EventObserver     = require './eventObserver'
 Judge             = require './judge'
 Note              = require './note'
 GreatEffectsLayer = require './greatEffectsLayer'
+KeyEffectsLayer   = require './keyEffectsLayer'
 
 NotesLayer = cc.Layer.extend
   ctor : (@_skin, @_timer, @_config)->
@@ -9,6 +10,7 @@ NotesLayer = cc.Layer.extend
     @_notifier = new EventObserver()
     @_judge = new Judge()
     @_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
+    @_keyEffectsLayer = new KeyEffectsLayer @_skin.keyEffect
     @_notes = []
     @_genTime = []
 
@@ -21,7 +23,9 @@ NotesLayer = cc.Layer.extend
     @_greatEffectsLayer.init bms.totalNote
     @addChild @_greatEffectsLayer, 10
     @_generate bms, measure, time for time, measure in @_genTime
-    xArr = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
+    xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
+    @_keyEffectsLayer.init xList
+    @addChild @_keyEffectsLayer, 0
 
   addListener: (name, listner)->
     @_notifier.on name, listner
@@ -88,6 +92,7 @@ NotesLayer = cc.Layer.extend
     @_isAuto = autoplay
 
   onTouch : (key, time)->
+    @_keyEffectsLayer.show key, 0.5
     for note in @children when note.key is key
       diffTime = note.timing - time
       unless note.clear
@@ -114,7 +119,7 @@ NotesLayer = cc.Layer.extend
     if @_isAuto
       for note in @children
         if @_timer.get() >= note.timing and not note.clear
-          #@_keyDownEffect.show note.key
+          @_keyEffectsLayer.show note.key, 0.5
           note.clear = true
           y = cc.director.getWinSize().height - @_skin.fallDist
           @_greatEffectsLayer.run note.x, y
@@ -124,7 +129,7 @@ NotesLayer = cc.Layer.extend
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
     for note in @_notes[@_index]
-      @addChild note, 0
+      @addChild note, 5
       note.start()
     @_index++
 

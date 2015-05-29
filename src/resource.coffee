@@ -5,6 +5,9 @@ resObjs =
   noteBlackImage : "res/note-black.png"
   noteTurntableImage : "res/note-turntable.png"
   greatEffectImage : "res/great-effect.png"
+  turntableKeydownImage : "../res/turntable-keydown.png"
+  whiteKeydownImage : "../res/white-keydown.png"
+  blackKeydownImage : "../res/black-keydown.png"
   
 resList = []
 

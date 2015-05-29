@@ -38,6 +38,14 @@ skin =
       colum  : 4
       delay  : 0.02
       z      : 5
+    keyEffect :
+      y : 160
+      turntableKeydownImage :
+        src : res.turntableKeydownImage
+      whiteKeydownImage :
+        src : res.whiteKeydownImage
+      blackKeydownImage :
+        src : res.blackKeydownImage
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

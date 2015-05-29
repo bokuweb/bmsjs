@@ -1,3 +1,5 @@
+# TODO: このレイヤーは廃止し、notesLayerに統合、Zindex調整のため
+
 Node = require './measureNode'
 
 MeasureNodesLayer = cc.Layer.extend
