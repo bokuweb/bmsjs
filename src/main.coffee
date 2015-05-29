@@ -10,11 +10,10 @@ cc.game.onStart = ->
 
   cc.view.enableRetina off
   cc.view.adjustViewPort on
-  cc.director.setContentScaleFactor 2
-
-  console.log cc.sys.isNative
+  #console.log cc.sys.isNative
 
   if cc.sys.isMobile
+    cc.director.setContentScaleFactor 2
     height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
     cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
     cc.view.resizeWithBrowserSize on
