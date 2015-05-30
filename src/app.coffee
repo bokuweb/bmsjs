@@ -41,8 +41,8 @@ skin =
       src    : res.greatEffectImage
       width  : 80
       height : 80
-      row    : 4
-      colum  : 4
+      row    : 6
+      colum  : 3
       delay  : 0.02
       z      : 5
     keyEffect :

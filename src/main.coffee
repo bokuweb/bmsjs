@@ -13,7 +13,6 @@ cc.game.onStart = ->
   #console.log cc.sys.isNative
 
   if cc.sys.isMobile
-    cc.director.setContentScaleFactor 2
     height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
     cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
     cc.view.resizeWithBrowserSize on
@@ -21,7 +20,8 @@ cc.game.onStart = ->
     policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.view.resizeWithBrowserSize off
-
+  cc.director.setContentScaleFactor 2
+  
   xhr = cc.loader.getXMLHttpRequest()
   xhr.timeout = 5000
   xhr.open 'GET', './bms/va.bms', true

@@ -9,8 +9,8 @@ GreatEffectLayer = cc.Layer.extend
   init : (num)->
     for i in [0...num]
       params =
-        width  : @_res.width / cc.director.getContentScaleFactor()
-        height : @_res.height / cc.director.getContentScaleFactor()
+        width  : @_res.width
+        height : @_res.height
         row    : @_res.row
         colum  : @_res.colum
         delay  : @_res.delay
