@@ -1,4 +1,3 @@
-MeasureNodesLayer = require './measureNodesLayer'
 KeyboardService   = require './keyboardService'
 NotesLayer        = require './notesLayer'
 Timer             = require './timer'
@@ -15,12 +14,13 @@ skin =
     fallDist : 320
     keyNum   : 8
     offsetX  : 134
-    marginX  : 1.9
+    marginX  : 1.95
     z        : 4
     nodeImage :
       src    : res.nodeImage
       width  : 194
       height : 1
+      x      : 210
     noteTurntableImage :
       src    : res.noteTurntableImage
       width  : 41
@@ -61,10 +61,6 @@ AppLayer = cc.Layer.extend
     @_timer = new Timer()
     #@_addKey()
     @_addBackground()
-    @_measureNodesLayer = new MeasureNodesLayer @_timer
-    @addChild @_measureNodesLayer, skin.notes.z
-    genTime = @_measureNodesLayer.init skin.notes, @_bms
-    genTime.sort (a, b) -> a - b
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
     @_keyboard = new KeyboardService @_timer
@@ -96,14 +92,13 @@ AppLayer = cc.Layer.extend
         poor   : 200
 
     @_notesLayer = new NotesLayer skin.notes, @_timer, config
-    @_notesLayer.init @_bms, genTime
+    @_notesLayer.init @_bms
     @_notesLayer.addListener 'hit', @_onHit.bind this
     @_notesLayer.addListener 'judge', @_onJudge.bind this
     @addChild @_notesLayer, skin.notes.z
     @addChild @_audio
 
   start : ->
-    @_measureNodesLayer.start()
     @_notesLayer.start on
     @_audio.startBgm()
     @_timer.start()
@@ -126,7 +121,7 @@ AppLayer = cc.Layer.extend
     bg = new cc.Sprite "res/test.png"
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height - 240
-    #@addChild bg, 1
+    @addChild bg, 1
 
   _addKey : ->
     toucheventListener = cc.EventListener.create

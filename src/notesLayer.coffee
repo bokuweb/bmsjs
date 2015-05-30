@@ -3,6 +3,7 @@ Judge             = require './judge'
 Note              = require './note'
 GreatEffectsLayer = require './greatEffectsLayer'
 KeyEffectsLayer   = require './keyEffectsLayer'
+MeasureNode       = require './measureNode'
 
 NotesLayer = cc.Layer.extend
   ctor : (@_skin, @_timer, @_config)->
@@ -12,16 +13,29 @@ NotesLayer = cc.Layer.extend
     @_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
     @_keyEffectsLayer = new KeyEffectsLayer @_skin.keyEffect
     @_notes = []
+    @_nodes    = []
     @_genTime = []
 
   #
   # create notes
   #
-  init : (bms, @_genTime)->
+  init : (bms)->
+    time = 0
     @_index = 0
     @_notes.length = 0
+    @_nodes.length = 0
+    @_genTime.length = 0
 
-    console.log @_skin.bgImage.src
+    for v, i in bms.data
+      node = new MeasureNode @_skin.nodeImage.src, @_timer
+      node.x = @_skin.nodeImage.x
+      node.timing = v.timing
+      node.appendFallParams bms.bpms, time, @_skin.fallDist
+      @_genTime.push time
+      time = @_getGenTime node, @_skin.fallDist
+      @_nodes.push node
+    @_genTime.sort (a, b) -> a - b
+
     bg = new cc.Sprite @_skin.bgImage.src
     bg.setAnchorPoint cc.p(0.5, 0)
     bg.x = @_skin.bgImage.x
@@ -126,21 +140,33 @@ NotesLayer = cc.Layer.extend
   #
   update : ->
     if @_isAuto
-      for note in @children
-        if @_timer.get() >= note.timing and not note.clear
-          #console.log "key = " + note.key
-          @_keyEffectsLayer.show note.key, 0.5
-          note.clear = true
+      for child in @children when child.clear is false
+        if @_timer.get() >= child.timing
+          @_keyEffectsLayer.show child.key, 0.5
+          child.clear = true
           y = cc.director.getWinSize().height - @_skin.fallDist
-          @_greatEffectsLayer.run note.x, y
+          @_greatEffectsLayer.run child.x, y
           @_notifier.trigger 'judge', 'pgreat'
-          @_notifier.trigger 'hit', note.wav
+          @_notifier.trigger 'hit', child.wav
 
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
+
+    @addChild @_nodes[@_index]
+    @_nodes[@_index].start()
     for note in @_notes[@_index]
       @addChild note, 5
       note.start()
     @_index++
 
+  #
+  # get time when node y coordinate will be game.height
+  # to generate next node
+  #
+  _getGenTime : (obj, fallDist)->
+    size = cc.director.getWinSize()
+    for v, i in obj.dstY when v < size.height
+      return ~~(obj.bpm.timing[i] - (v / obj.calcSpeed(obj.bpm.val[i], fallDist)))
+    return 0
+    
 module.exports = NotesLayer
