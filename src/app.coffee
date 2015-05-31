@@ -1,5 +1,6 @@
 KeyboardService   = require './keyboardService'
 NotesLayer        = require './notesLayer'
+RateLayer         = require './rateLayer'
 Timer             = require './timer'
 Audio             = require './audio'
 res               = require './resource'
@@ -53,7 +54,17 @@ skin =
         src : res.whiteKeydownImage
       blackKeydownImage :
         src : res.blackKeydownImage
-
+  rate :
+    z : 10
+    gauge :
+      src    : "./res/gauge.png"
+      width  : 4
+      height : 12
+      x      : 126
+      y      : 206
+      z      : 10
+    label :
+      x : 0
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -95,12 +106,25 @@ AppLayer = cc.Layer.extend
     @_notesLayer.init @_bms
     @_notesLayer.addListener 'hit', @_onHit.bind this
     @_notesLayer.addListener 'judge', @_onJudge.bind this
+
     @addChild @_notesLayer, skin.notes.z
     @addChild @_audio
+
+    @_rate = new RateLayer skin.rate
+    @_rate.init
+      initRate    : 20
+      greatIncVal : 1
+      goodIncVal  : 0.5
+      badDecVal   : -0.4
+      poorDecVal  : -0.4
+      num         : 50
+      clearVal    : 40
+    @addChild @_rate, skin.rate.z
 
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
+    @_rate.start()
     @_timer.start()
 
   _onKeydown : (key, time, id)->
@@ -110,6 +134,7 @@ AppLayer = cc.Layer.extend
     @_audio.play wavId
 
   _onJudge : (event, judge)->
+    @_rate.reflectJudgement judge
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
