@@ -56,7 +56,7 @@ skin =
         src : res.blackKeydownImage
   rate :
     z : 10
-    gauge :
+    meter :
       src    : "./res/gauge.png"
       width  : 4
       height : 12
@@ -64,7 +64,12 @@ skin =
       y      : 206
       z      : 10
     label :
+      src    :  './res/numeral-font.png'
+      width  : 8
+      height : 8
+      scale  : 2
       x : 0
+      y : 0
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

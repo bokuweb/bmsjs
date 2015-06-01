@@ -1,30 +1,31 @@
+NumeralLayer = require './numeralLayer'
+
 RateLayer = cc.Layer.extend
-  ctor : (@_res)->
+  ctor : (@_skin)->
     @_super()
+    @_label new NumeralLayer @_skin.label
     @_sprites = []
 
   init : (@_config)->
     for i in [0...@_config.num]
-      @_sprites[i] = new cc.Sprite @_res.gauge.src, cc.rect 0, 0, @_res.gauge.width, @_res.gauge.height
-      @_sprites[i].x = @_res.gauge.x + i * @_res.gauge.width
-      @_sprites[i].y = @_res.gauge.y
+      @_sprites[i] = new cc.Sprite @_skin.meter.src, cc.rect 0, 0, @_skin.meter.width, @_skin.meter.height
+      @_sprites[i].x = @_skin.meter.x + i * @_skin.meter.width
+      @_sprites[i].y = @_skin.meter.y
       @addChild @_sprites[i]
     @_rate = @_config.initRate
-    ###
-    @_rateLabel = @_sys.createLabel res.rateLabel.font, res.rateLabel.color, res.rateLabel.align
-    @_rateLabel.x = res.rateLabel.x
-    @_rateLabel.y = res.rateLabel.y
-    @_sys.setText @_rateLabel, ~~@_rate + "%"
-    @_sys.addChild @_sys.getCurrentScene(), @_rateLabel, res.rateLabel.z
-    ###
+
+    @_label.init 3, 0
+    @_label.x = @_skin.label.x
+    @_label.y = @_skin.label.y
+    @addChild @_label
 
   get : -> ~~(@_rate.toFixed())
 
   start : -> @scheduleUpdate()
 
   update : ->
-    w = @_res.gauge.width
-    h = @_res.gauge.height
+    w = @_skin.meter.width
+    h = @_skin.meter.height
     for i in [0...@_config.num]
       if i > @_config.clearVal
         if @_rate - 6 <= i * 2 < @_rate - 2
@@ -50,6 +51,6 @@ RateLayer = cc.Layer.extend
       else
         @_rate = if @_rate - @_config.poorDecVal < 2 then 2 else @_rate - @_config.poorDecVal
 
-    #@_sys.setText @_rateLabel, ~~(@_rate.toFixed()) + "%"
+    @_label.reflect ~~(@_rate.toFixed())
 
 module.exports = RateLayer
