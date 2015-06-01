@@ -5,6 +5,7 @@ TimerTest          = require './test-timer'
 NoteTest           = require './test-note'
 NumeralLayerTest   = require './test-numeralLayer'
 StatsLayerTest     = require './test-statsLayer'
+PlaytimeLayerTest  = require './test-playtimeLayer'
 
 window.onload = ->
   cc.game.onStart = ->
@@ -14,6 +15,7 @@ window.onload = ->
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.director.setContentScaleFactor 2
 
+    playtimeLayerTest = new PlaytimeLayerTest()
     statsLayerTest = new StatsLayerTest()
     numeralLayerTest = new NumeralLayerTest()
     keyEffectLayerTest = new keyEffectLayerTest()
@@ -22,6 +24,7 @@ window.onload = ->
     timerTest  = new TimerTest()
     noteTest   = new NoteTest()
 
+    playtimeLayerTest.start()
     statsLayerTest.start()
     numeralLayerTest.start()
     keyEffectLayerTest.start()
