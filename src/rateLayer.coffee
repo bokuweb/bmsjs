@@ -3,7 +3,7 @@ NumeralLayer = require './numeralLayer'
 RateLayer = cc.Layer.extend
   ctor : (@_skin)->
     @_super()
-    @_label new NumeralLayer @_skin.label
+    @_label = new NumeralLayer @_skin.label
     @_sprites = []
 
   init : (@_config)->
