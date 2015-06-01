@@ -7,13 +7,11 @@ cc.game.onStart = ->
 
   if not cc.sys.isNative and document.getElementById "cocosLoading"
     document.body.removeChild(document.getElementById "cocosLoading")
-    canvasNode = document.getElementById cc.game.config["id"]
-    canvasNode.style.backgroundColor = "transparent"
 
   cc.view.enableRetina off
   cc.view.adjustViewPort on
 
-  if cc.sys.isMobile or cc.sys.isNative 
+  if cc.sys.isMobile
     height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
     cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
     cc.view.resizeWithBrowserSize on
@@ -45,9 +43,9 @@ cc.game.onStart = ->
     unless err?
       parser = new Parser()
       bms = parser.parse text
-      resList.push 'bms/' + v for k, v of bms.wav
+      resList.push './bms/' + v for k, v of bms.wav
       cc.LoaderScene.preload resList, ->
-        cc.director.runScene new AppScene bms, 'bms/'
+        cc.director.runScene new AppScene bms, './bms/'
       , this
 
 cc.game.run()
