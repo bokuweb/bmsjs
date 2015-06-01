@@ -10,7 +10,6 @@ cc.game.onStart = ->
 
   cc.view.enableRetina off
   cc.view.adjustViewPort on
-  #console.log cc.sys.isNative
 
   if cc.sys.isMobile
     height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
@@ -29,7 +28,6 @@ cc.game.onStart = ->
 
   xhr.onreadystatechange = ->
     if xhr.readyState is 4 and 200 <= xhr.status <= 207
-      console.log xhr.status
       res = xhr.responseText
       parser = new Parser()
       bms = parser.parse res

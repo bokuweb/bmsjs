@@ -121,7 +121,6 @@ Parser = cc.Class.extend
       when 18, 19
         _storeData.call @, data, @bms.data[measureNum].note.key[ch - 13], measureNum
       else
-        console.log "else ch" + ch
 
   _storeWAV = (msg, array, measureNum) ->
     if not @wavMessages[measureNum]?
@@ -215,7 +214,7 @@ Parser = cc.Class.extend
 
   _wavTiming = (time, bar, bpm, wavss) ->
     if not wavss?
-      console.log('wavss is null')
+      cc.log('wavss is null')
       return
     l = bar.bpm.message.length
     result = []
