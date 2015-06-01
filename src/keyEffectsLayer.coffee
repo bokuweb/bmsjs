@@ -18,8 +18,8 @@ KeyEffectsLayer = cc.Layer.extend
       @_effects[i].setOpacity 0
     return
 
-  show : (id, time)->
+  show : (id, time_sec)->
     @_effects[id].setOpacity 255
-    @_effects[id].runAction cc.fadeOut time
+    @_effects[id].runAction cc.fadeOut time_sec
 
 module.exports = KeyEffectsLayer
