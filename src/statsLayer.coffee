@@ -1,7 +1,11 @@
+NumeralLayer = require './numeralLayer'
+
 StatsLayer = cc.Layer.extend
   ctor: (@_skin) ->
+    @_super()
+    @_scoreLabel = new NumeralLayer @_skin.score
 
-  init : (noteNum, @_maxScore) ->
+  init : (noteNum, maxScore) ->
     @_score = 0
     @_dispScore = 0
     @_maxCombo = 0
@@ -14,14 +18,11 @@ StatsLayer = cc.Layer.extend
     @_pgreatIncVal = maxScore / noteNum
     @_greatIncVal = maxScore / noteNum * 0.7
     @_goodIncVal = maxScore / noteNum * 0.5
+    @_scoreLabel.init @_getDigits(maxScore), 0
+    @_scoreLabel.x = @_skin.score.x
+    @_scoreLabel.y = @_skin.score.y
+    @addChild @_scoreLabel
 
-    ###
-    @_scoreLabel = @_sys.createLabel res.scoreLabel.font, res.scoreLabel.color, res.scoreLabel.align
-    @_scoreLabel.x = res.scoreLabel.x
-    @_scoreLabel.y = res.scoreLabel.y
-    @_sys.setText @_scoreLabel, 0
-    @_sys.addChild @_sys.getCurrentScene(), @_scoreLabel, res.scoreLabel.z
-    ###
   get : ->
     score  : @_dispScore
     combo  : @_maxCombo
@@ -55,6 +56,8 @@ StatsLayer = cc.Layer.extend
         @_combo = 0
         @_poorNum++
     @_dispScore = ~~(@_score.toFixed())
-    #@_sys.setText @_scoreLabel, @_dispScore
+    @_scoreLabel.reflect @_dispScore
+
+  _getDigits : (num)-> Math.log(num) / Math.log(10) + 1 | 0
 
 module.exports = StatsLayer

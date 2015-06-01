@@ -4,6 +4,7 @@ ParserTest         = require './test-parser'
 TimerTest          = require './test-timer'
 NoteTest           = require './test-note'
 NumeralLayerTest   = require './test-numeralLayer'
+StatsLayerTest     = require './test-statsLayer'
 
 window.onload = ->
   cc.game.onStart = ->
@@ -12,7 +13,8 @@ window.onload = ->
     policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.director.setContentScaleFactor 2
-    
+
+    statsLayerTest = new StatsLayerTest()
     numeralLayerTest = new NumeralLayerTest()
     keyEffectLayerTest = new keyEffectLayerTest()
     greatEffectTest = new GreatEffectTest()
@@ -20,6 +22,7 @@ window.onload = ->
     timerTest  = new TimerTest()
     noteTest   = new NoteTest()
 
+    statsLayerTest.start()
     numeralLayerTest.start()
     keyEffectLayerTest.start()
     greatEffectTest.start()

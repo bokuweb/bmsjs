@@ -30,16 +30,16 @@ NumeralLayerTest = cc.Class.extend
 
             setTimeout =>
               numeralLayer.reflect 123456789
-              capture "test/capture/notes/notes" + capNum++
+              capture "test/capture/numeralLayer/num" + capNum++
             , 1000
 
             setTimeout =>
               numeralLayer.reflect 9876543210
-              capture "test/capture/notes/notes" + capNum++
+              capture "test/capture/numeralLayer/num" + capNum++
             , 2000
 
             setTimeout =>
-              capture "test/capture/notes/notes" + capNum++
+              capture "test/capture/numeralLayer/num" + capNum++
               done()
             , 3000
 
