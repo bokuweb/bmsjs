@@ -10,7 +10,6 @@ cc.game.onStart = ->
 
   cc.view.enableRetina off
   cc.view.adjustViewPort on
-  #console.log cc.sys.isNative
 
   if cc.sys.isMobile
     height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
@@ -21,7 +20,8 @@ cc.game.onStart = ->
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.view.resizeWithBrowserSize off
   cc.director.setContentScaleFactor 2
-  
+
+  ###
   xhr = cc.loader.getXMLHttpRequest()
   xhr.timeout = 5000
   xhr.open 'GET', './bms/va.bms', true
@@ -29,7 +29,6 @@ cc.game.onStart = ->
 
   xhr.onreadystatechange = ->
     if xhr.readyState is 4 and 200 <= xhr.status <= 207
-      console.log xhr.status
       res = xhr.responseText
       parser = new Parser()
       bms = parser.parse res
@@ -37,7 +36,16 @@ cc.game.onStart = ->
 
       cc.LoaderScene.preload resList, ->
         cc.director.runScene new AppScene bms, 'bms/'
-      , this
+      , this  
+  ###
 
+  cc.loader.loadTxt './bms/va.bms', (err, text)->
+    unless err?
+      parser = new Parser()
+      bms = parser.parse text
+      resList.push 'bms/' + v for k, v of bms.wav
+      cc.LoaderScene.preload resList, ->
+        cc.director.runScene new AppScene bms, 'bms/'
+      , this
 
 cc.game.run()

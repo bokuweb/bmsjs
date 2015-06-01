@@ -38,7 +38,6 @@ RateLayer = cc.Layer.extend
     return
 
   reflectJudgement : (judge) ->
-    console.log @_rate
     switch judge
       when "pgreat", "great"
         @_rate = if @_rate + @_config.greatIncVal > 100 then 100 else @_rate + @_config.greatIncVal

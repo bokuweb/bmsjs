@@ -12,7 +12,6 @@ KeyEffectsLayer = cc.Layer.extend
         when 7          then @_effects[i] = new cc.Sprite @_skin.turntableKeydownImage.src
         else throw new Error "error unlnown note"
       @_effects[i].x = x
-      console.log @_skin.y
       @_effects[i].y = @_skin.y
       @_effects[i].setAnchorPoint cc.p(0.5,0)
       @addChild @_effects[i]
