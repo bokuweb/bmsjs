@@ -20,7 +20,8 @@ cc.game.onStart = ->
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.view.resizeWithBrowserSize off
   cc.director.setContentScaleFactor 2
-  
+
+  ###
   xhr = cc.loader.getXMLHttpRequest()
   xhr.timeout = 5000
   xhr.open 'GET', './bms/va.bms', true
@@ -35,7 +36,16 @@ cc.game.onStart = ->
 
       cc.LoaderScene.preload resList, ->
         cc.director.runScene new AppScene bms, 'bms/'
-      , this
+      , this  
+  ###
 
+  cc.loader.loadTxt './bms/va.bms', (err, text)->
+    unless err?
+      parser = new Parser()
+      bms = parser.parse text
+      resList.push 'bms/' + v for k, v of bms.wav
+      cc.LoaderScene.preload resList, ->
+        cc.director.runScene new AppScene bms, 'bms/'
+      , this
 
 cc.game.run()

@@ -143,11 +143,13 @@ AppLayer = cc.Layer.extend
     @addChild bg, 0
 
     # test image
+    ###
     bg = new cc.Sprite "res/test.png"
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height - 240
     @addChild bg, 1
-
+    ###
+    
   _addKey : ->
     toucheventListener = cc.EventListener.create
       event: cc.EventListener.TOUCH_ONE_BY_ONE
