@@ -40,6 +40,7 @@ NotesLayer = cc.Layer.extend
     bg.setAnchorPoint cc.p(0.5, 0)
     bg.x = @_skin.bgImage.x
     bg.y = @_skin.bgImage.y
+    bg.setOpacity 180
     @addChild bg, 0
 
     @_greatEffectsLayer.init bms.totalNote
