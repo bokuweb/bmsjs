@@ -37,7 +37,7 @@ RateLayer = cc.Layer.extend
         else @_sprites[i].setTextureRect cc.rect  w * 3, 0, w, h
     return
 
-  reflectJudgement : (judge) ->
+  reflect : (judge) ->
     switch judge
       when "pgreat", "great"
         @_rate = if @_rate + @_config.greatIncVal > 100 then 100 else @_rate + @_config.greatIncVal

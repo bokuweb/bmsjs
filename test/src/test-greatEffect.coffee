@@ -14,8 +14,8 @@ GreatEffectTest = cc.Class.extend
           onEnter : ->
             @_super()
             params =
-              width  : 80 / cc.director.getContentScaleFactor()
-              height : 80 / cc.director.getContentScaleFactor()
+              width  : 80
+              height : 80
               row    : 4
               colum  : 4
               delay  : 0.02

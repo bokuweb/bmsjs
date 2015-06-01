@@ -134,7 +134,7 @@ AppLayer = cc.Layer.extend
     @_audio.play wavId
 
   _onJudge : (event, judge)->
-    @_rate.reflectJudgement judge
+    @_rate.reflect judge
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
