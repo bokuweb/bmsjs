@@ -177,7 +177,12 @@ MenuController = cc.Layer.extend
           )
         )
       else
-        @_itemMenu.children[i].runAction(cc.spawn(cc.fadeOut 0.2, cc.scaleTo 0.2, 0))
+        @_itemMenu.children[i].runAction(
+          cc.spawn(
+            cc.fadeOut 0.2
+            cc.scaleTo 0.2, 0
+          )
+        )
 
     @_itemMenu.height = (visibleItemNum + 1) * @_linespace
     if @_itemMenu.height < size.height
