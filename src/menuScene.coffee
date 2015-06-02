@@ -1,6 +1,8 @@
-AppScene = require './app'
-Parser   = require './parser'
-res      = require './resource'
+AppScene      = require './app'
+Parser        = require './parser'
+#_            = require 'lodash'
+EventObserver = require './eventObserver'
+res           = require './resource'
   .resObjs
 
 
@@ -11,8 +13,8 @@ menuList = [
   {url : './bms/va.bms', title : 'v_soflan2'}
   {url : './bms/va.bms', title : 'v_soflan3'}
   {url : './bms/va.bms', title : 'v_soflan4'}
-  {url : './bms/va.bms', title : 'v_soflan5'}
-  {url : './bms/va.bms', title : 'v_soflan6'}
+  {url : './bms/va.bms', title : 'テスト'}
+  {url : './bms/va.bms', title : 'あいうえお'}
   {url : './bms/va.bms', title : 'v_soflan7'}
   {url : './bms/va.bms', title : 'v_soflan8'}
   {url : './bms/va.bms', title : 'v_soflan9'}
@@ -40,9 +42,6 @@ MenuBaseLayer = cc.Layer.extend
     menu.init menuList, cc.director.getWinSize().width / 2, 50
     @addChild menu
 
-    search = new SearchController()
-    @addChild search
-
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
     bg.x = cc.director.getWinSize().width / 2
@@ -68,6 +67,8 @@ MenuController = cc.Layer.extend
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x
       menuItem.y = size.height - (i + 1) * linespace
+      menuItem.title = v.title
+      menuItem.visible = on
 
     @_itemMenu.width = size.width
     @_itemMenu.height = (list.length + 1) * linespace
@@ -77,6 +78,12 @@ MenuController = cc.Layer.extend
     else
       @_itemMenu.y = 0
     @addChild @_itemMenu
+
+    search = new SearchController()
+    search.init @_itemMenu.children
+    search.start()
+    search.addListener 'change', @_onChanged.bind this
+    @addChild search
 
     # 'browser' can use touches or mouse.
     # The benefit of using 'touches' in a browser, is that it works both with mouse events or touches events
@@ -155,10 +162,20 @@ MenuController = cc.Layer.extend
           cc.director.runScene new AppScene bms, prefix
         , this
 
+  _onChanged : (name, arrayOfVisible) ->
+    for v, i in arrayOfVisible
+      if v
+        @_itemMenu.children[i].stopAllActions()
+        @_itemMenu.children[i].runAction(cc.spawn(cc.fadeIn 0.2, cc.scaleTo 0.2, 1))
+      else
+        @_itemMenu.children[i].stopAllActions()
+        @_itemMenu.children[i].runAction(cc.spawn(cc.fadeOut 0.2, cc.scaleTo 0.2, 0))
+
 SearchController = cc.Layer.extend
   ctor : ->
     @_super()
-
+    @_notifier = new EventObserver()
+    @_oldTxt = null
     if 'touches' of cc.sys.capabilities
       cc.eventManager.addListener
         event : cc.EventListener.TOUCH_ALL_AT_ONCE
@@ -176,6 +193,43 @@ SearchController = cc.Layer.extend
     size = cc.director.getWinSize()
     @_textField.x = size.width / 2 - 200
     @_textField.y = size.height / 2 + 200
+
+  init : (@_searchItems) ->
+
+  addListener: (name, listner)->
+    @_notifier.on name, listner
+
+  start : -> @scheduleUpdate()
+
+  update : ->
+    txt = @_textField.getContentText()
+    if @_oldTxt isnt txt
+      @_oldTxt = txt
+      arrayOfVisible = []
+      for item in @_searchItems
+        if item.title.search(txt) is -1 and txt isnt ''
+          arrayOfVisible.push off
+          ###
+          v.stopAllActions()
+          v.runAction(cc.spawn(cc.fadeOut 0.2, cc.scaleTo 0.2, 0))
+          ###
+        else
+          arrayOfVisible.push on
+          ###
+          v.stopAllActions()
+          v.runAction(cc.spawn(cc.fadeIn 0.2, cc.scaleTo 0.2, 1))
+          ###
+      @_notifier.trigger 'change', arrayOfVisible 
+
+
+  # CCTextFieldDelegate
+  onTextFieldAttachWithIME : (sender) ->
+
+  onTextFieldDetachWithIME : (sender) ->
+
+  onTextFieldInsertText : (sender, text, len) ->
+
+  onTextFieldDeleteBackward : (sender, delText, len) ->
 
   _textInputGetRect : (node) ->
     r = cc.rect node.x, node.y, node.width, node.height
