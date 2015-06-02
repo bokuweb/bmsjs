@@ -57,14 +57,14 @@ skin =
   rate :
     z : 10
     meter :
-      src    : "./res/gauge.png"
+      src    : res.meterImage
       width  : 4
       height : 12
       x      : 126
       y      : 206
       z      : 10
     label :
-      src    :  './res/numeral-font.png'
+      src    : res.numeralImage
       width  : 8
       height : 8
       scale  : 2

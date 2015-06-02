@@ -1,6 +1,6 @@
 # TODO : add arg path to bms etc.
 cc.game.onStart = ->
-  AppScene = require './app'
+  MenuScene = require './menuScene'
   Parser   = require './parser'
   resList  = require './resource'
     .resList
@@ -11,7 +11,9 @@ cc.game.onStart = ->
   cc.view.enableRetina off
   cc.view.adjustViewPort on
 
-  if cc.sys.isMobile
+  cc.log cc.sys.isNative
+
+  if cc.sys.isMobile or cc.sys.isNative
     height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
     cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
     cc.view.resizeWithBrowserSize on
@@ -21,31 +23,8 @@ cc.game.onStart = ->
     cc.view.resizeWithBrowserSize off
   cc.director.setContentScaleFactor 2
 
-  ###
-  xhr = cc.loader.getXMLHttpRequest()
-  xhr.timeout = 5000
-  xhr.open 'GET', './bms/va.bms', true
-  xhr.send()
-
-  xhr.onreadystatechange = ->
-    if xhr.readyState is 4 and 200 <= xhr.status <= 207
-      res = xhr.responseText
-      parser = new Parser()
-      bms = parser.parse res
-      resList.push 'bms/' + v for k, v of bms.wav
-
-      cc.LoaderScene.preload resList, ->
-        cc.director.runScene new AppScene bms, 'bms/'
-      , this  
-  ###
-
-  cc.loader.loadTxt './bms/va.bms', (err, text)->
-    unless err?
-      parser = new Parser()
-      bms = parser.parse text
-      resList.push './bms/' + v for k, v of bms.wav
-      cc.LoaderScene.preload resList, ->
-        cc.director.runScene new AppScene bms, './bms/'
-      , this
+  cc.LoaderScene.preload resList, ->
+    cc.director.runScene new MenuScene()
+  , this
 
 cc.game.run()
