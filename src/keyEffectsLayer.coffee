@@ -1,9 +1,9 @@
 KeyEffectsLayer = cc.Layer.extend
-  ctor : (@_skin)->
+  ctor : (@_skin) ->
     @_super()
     @_effects = []
 
-  init : (xList)->
+  init : (xList) ->
     @_effects.length = 0
     for x, i in xList
       switch i
@@ -18,7 +18,7 @@ KeyEffectsLayer = cc.Layer.extend
       @_effects[i].setOpacity 0
     return
 
-  show : (id, time_sec)->
+  show : (id, time_sec) ->
     @_effects[id].setOpacity 255
     @_effects[id].runAction cc.fadeOut time_sec
 

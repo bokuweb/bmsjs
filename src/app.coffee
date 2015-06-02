@@ -61,7 +61,7 @@ skin =
       width  : 4
       height : 12
       x      : 126
-      y      : 206
+      y      : 207
       z      : 10
     label :
       src    : res.numeralImage
@@ -94,7 +94,7 @@ AppLayer = cc.Layer.extend
     ]
 
     @_keyboard.init()
-    @_keyboard.addListener v, @_onKeydown, id for v, id in keyConfig
+    @_keyboard.addListener v, @_onKeydown.bind this, id for v, id in keyConfig
     @addChild @_keyboard
 
     config =
@@ -133,7 +133,7 @@ AppLayer = cc.Layer.extend
     @_timer.start()
 
   _onKeydown : (key, time, id)->
-    @_notesLayer.onTouch id, time
+    @_notesLayer.onTouch key, time
 
   _onHit : (event, wavId)->
     @_audio.play wavId

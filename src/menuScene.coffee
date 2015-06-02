@@ -116,6 +116,7 @@ MenuController = cc.Layer.extend
       if newY < 0
         @_itemMenu.y = 0
         move = cc.moveBy 0.05, 0, 20
+        ###
         @_itemMenu.runAction cc.sequence(
           move
           move.reverse()
@@ -123,8 +124,10 @@ MenuController = cc.Layer.extend
             @_itemMenu.y = 0
           , this
         )
+        ###
       else if newY > @_itemMenu.height - size.height
         @_itemMenu.y = @_itemMenu.height - size.height
+        ###
         move = cc.moveBy 0.05, 0, -20
         @_itemMenu.runAction cc.sequence(
           move
@@ -133,6 +136,7 @@ MenuController = cc.Layer.extend
             @_itemMenu.y = @_itemMenu.height - size.height
           , this
         )
+        ###
       else
         @_itemMenu.y = newY
 
