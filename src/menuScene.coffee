@@ -3,6 +3,8 @@ Parser   = require './parser'
 res      = require './resource'
   .resObjs
 
+
+# TODO : cson化
 menuList = [
   {url : './bms/va.bms', title : 'v_soflan0'}
   {url : './bms/va.bms', title : 'v_soflan1'}
@@ -19,12 +21,14 @@ menuList = [
   {url : './bms/va.bms', title : 'v_soflan12'}
   {url : './bms/va.bms', title : 'v_soflan13'}
   {url : './bms/va.bms', title : 'v_soflan14'}
-  {url : './bms/va.bms', title : 'v_soflan15'}
-  {url : './bms/va.bms', title : 'v_soflan16'}
-  {url : './bms/va.bms', title : 'v_soflan17'}
-  {url : './bms/va.bms', title : 'v_soflan18'}
-  {url : './bms/va.bms', title : 'v_soflan19'}
+  {url : './bms/va.bms', title : 'bar'}
+  {url : './bms/va.bms', title : 'foo'}
+  {url : './bms/va.bms', title : 'fuga'}
+  {url : './bms/va.bms', title : 'fugafuga'}
+  {url : './bms/va.bms', title : 'hoge'}
 ]
+
+
 
 MenuBaseLayer = cc.Layer.extend
   ctor : ->
@@ -35,6 +39,9 @@ MenuBaseLayer = cc.Layer.extend
     menu = new MenuController()
     menu.init menuList, cc.director.getWinSize().width / 2, 50
     @addChild menu
+
+    search = new SearchController()
+    @addChild search
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
@@ -147,6 +154,48 @@ MenuController = cc.Layer.extend
         cc.LoaderScene.preload resources, ->
           cc.director.runScene new AppScene bms, prefix
         , this
+
+SearchController = cc.Layer.extend
+  ctor : ->
+    @_super()
+
+    if 'touches' of cc.sys.capabilities
+      cc.eventManager.addListener
+        event : cc.EventListener.TOUCH_ALL_AT_ONCE
+        onTouchesEnded: @onTouchesEnded
+      , this
+    else if 'mouse' of cc.sys.capabilities
+      cc.eventManager.addListener
+        event : cc.EventListener.MOUSE
+        onMouseUp: @_onMouseUp
+      , this
+
+    @_textField = new cc.TextFieldTTF "<click here for input>", "Arial", 20
+    @addChild @_textField
+    #@_textField.setDelegate this
+    size = cc.director.getWinSize()
+    @_textField.x = size.width / 2 - 200
+    @_textField.y = size.height / 2 + 200
+
+  _textInputGetRect : (node) ->
+    r = cc.rect node.x, node.y, node.width, node.height
+    r.x -= r.width / 2
+    r.y -= r.height / 2
+    r
+
+  _onClickTrackNode : (clicked) ->
+    if clicked
+      @_textField.attachWithIME()
+     else
+      @_textField.detachWithIME()
+
+  _onMouseUp : (event) ->
+    target = event.getCurrentTarget()
+    return unless target._textField
+
+    point = event.getLocation()
+    rect = target._textInputGetRect target._textField
+    target._onClickTrackNode cc.rectContainsPoint(rect, point)
 
 MenuScene = cc.Scene.extend
   ctor : ->
