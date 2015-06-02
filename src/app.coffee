@@ -1,9 +1,10 @@
-KeyboardService   = require './keyboardService'
-NotesLayer        = require './notesLayer'
-RateLayer         = require './rateLayer'
-Timer             = require './timer'
-Audio             = require './audio'
-res               = require './resource'
+KeyboardService = require './keyboardService'
+NotesLayer      = require './notesLayer'
+RateLayer       = require './rateLayer'
+StatsLayer      = require './statsLayer'
+Timer           = require './timer'
+Audio           = require './audio'
+res             = require './resource'
   .resObjs
 
 # TODO : move
@@ -71,6 +72,16 @@ skin =
       margin : 3
       x : 362
       y : 210
+  stats :
+    z : 10
+    score :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 175
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -127,6 +138,10 @@ AppLayer = cc.Layer.extend
       clearVal    : 40
     @addChild @_rate, skin.rate.z
 
+    @_stats = new StatsLayer skin.stats
+    @_stats.init @_bms.totalNote, 200000
+    @addChild @_stats, skin.stats.z
+
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
@@ -141,6 +156,7 @@ AppLayer = cc.Layer.extend
 
   _onJudge : (event, judge)->
     @_rate.reflect judge
+    @_stats.reflect judge
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage

@@ -10,8 +10,8 @@ res           = require './resource'
 menuList = [
   {url : './bms/va.bms', title : 'v_soflan0'}
   {url : './bms/dq.bms', title : 'DRAGON QUEST V'}
-  {url : './bms/va.bms', title : 'v_soflan2'}
-  {url : './bms/va.bms', title : 'v_soflan3'}
+  {url : './bms/_parousia_A.bme', title : 'parousia_A'}
+  {url : './bms/7_n_ka08_bt7god.bms', title : '7_n_ka08'}
   {url : './bms/va.bms', title : 'v_soflan4'}
   {url : './bms/va.bms', title : 'テスト'}
   {url : './bms/va.bms', title : 'あいうえお'}
