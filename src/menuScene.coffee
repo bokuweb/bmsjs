@@ -1,6 +1,6 @@
 AppScene      = require './app'
 Parser        = require './parser'
-#_            = require 'lodash'
+_             = require 'lodash'
 EventObserver = require './eventObserver'
 res           = require './resource'
   .resObjs
@@ -53,7 +53,7 @@ MenuController = cc.Layer.extend
     @_super()
     @_offsetY = 0
 
-  init : (list, x, linespace) ->
+  init : (list, x, @_linespace) ->
     #var closeItem = new cc.MenuItemImage(s_pathClose, s_pathClose, this.onCloseCallback, this);
     #closeItem.x = winSize.width - 30;
     #closeItem.y = winSize.height - 30;
@@ -66,12 +66,11 @@ MenuController = cc.Layer.extend
       menuItem = new cc.MenuItemLabel label, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x
-      menuItem.y = size.height - (i + 1) * linespace
+      menuItem.y = size.height - (i + 1) * @_linespace
       menuItem.title = v.title
-      menuItem.visible = on
 
     @_itemMenu.width = size.width
-    @_itemMenu.height = (list.length + 1) * linespace
+    @_itemMenu.height = (list.length + 1) * @_linespace
     @_itemMenu.x = 0
     if @_itemMenu.height < size.height
       @_itemMenu.y = (@_itemMenu.height - size.height) / 2
@@ -163,13 +162,28 @@ MenuController = cc.Layer.extend
         , this
 
   _onChanged : (name, arrayOfVisible) ->
+    size = cc.director.getWinSize()
+    visibleItemNum = 0 
     for v, i in arrayOfVisible
+      @_itemMenu.children[i].stopAllActions()
       if v
-        @_itemMenu.children[i].stopAllActions()
-        @_itemMenu.children[i].runAction(cc.spawn(cc.fadeIn 0.2, cc.scaleTo 0.2, 1))
+        destY = size.height - (visibleItemNum + 1) * @_linespace
+        visibleItemNum += 1
+        @_itemMenu.children[i].runAction(
+          cc.spawn(
+            cc.fadeIn 0.2
+            cc.scaleTo 0.2, 1
+            cc.moveTo 0.2, cc.p(size.width / 2, destY)
+          )
+        )
       else
-        @_itemMenu.children[i].stopAllActions()
         @_itemMenu.children[i].runAction(cc.spawn(cc.fadeOut 0.2, cc.scaleTo 0.2, 0))
+
+    @_itemMenu.height = (visibleItemNum + 1) * @_linespace
+    if @_itemMenu.height < size.height
+      @_itemMenu.y = (@_itemMenu.height - size.height) / 2
+    else
+      @_itemMenu.y = 0
 
 SearchController = cc.Layer.extend
   ctor : ->
@@ -187,7 +201,7 @@ SearchController = cc.Layer.extend
         onMouseUp: @_onMouseUp
       , this
 
-    @_textField = new cc.TextFieldTTF "<click here for input>", "Arial", 20
+    @_textField = new cc.TextFieldTTF "<search>", "Arial", 20
     @addChild @_textField
     #@_textField.setDelegate this
     size = cc.director.getWinSize()
@@ -201,6 +215,8 @@ SearchController = cc.Layer.extend
 
   start : -> @scheduleUpdate()
 
+  stop : -> @unscheduleUpdate()
+
   update : ->
     txt = @_textField.getContentText()
     if @_oldTxt isnt txt
@@ -209,16 +225,8 @@ SearchController = cc.Layer.extend
       for item in @_searchItems
         if item.title.search(txt) is -1 and txt isnt ''
           arrayOfVisible.push off
-          ###
-          v.stopAllActions()
-          v.runAction(cc.spawn(cc.fadeOut 0.2, cc.scaleTo 0.2, 0))
-          ###
         else
           arrayOfVisible.push on
-          ###
-          v.stopAllActions()
-          v.runAction(cc.spawn(cc.fadeIn 0.2, cc.scaleTo 0.2, 1))
-          ###
       @_notifier.trigger 'change', arrayOfVisible 
 
 
