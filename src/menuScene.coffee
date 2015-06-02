@@ -4,26 +4,26 @@ res      = require './resource'
   .resObjs
 
 menuList = [
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
-  {url : './bms/va.bms'}
+  {url : './bms/va.bms', title : 'v_soflan0'}
+  {url : './bms/va.bms', title : 'v_soflan1'}
+  {url : './bms/va.bms', title : 'v_soflan2'}
+  {url : './bms/va.bms', title : 'v_soflan3'}
+  {url : './bms/va.bms', title : 'v_soflan4'}
+  {url : './bms/va.bms', title : 'v_soflan5'}
+  {url : './bms/va.bms', title : 'v_soflan6'}
+  {url : './bms/va.bms', title : 'v_soflan7'}
+  {url : './bms/va.bms', title : 'v_soflan8'}
+  {url : './bms/va.bms', title : 'v_soflan9'}
+  {url : './bms/va.bms', title : 'v_soflan10'}
+  {url : './bms/va.bms', title : 'v_soflan11'}
+  {url : './bms/va.bms', title : 'v_soflan12'}
+  {url : './bms/va.bms', title : 'v_soflan13'}
+  {url : './bms/va.bms', title : 'v_soflan14'}
+  {url : './bms/va.bms', title : 'v_soflan15'}
+  {url : './bms/va.bms', title : 'v_soflan16'}
+  {url : './bms/va.bms', title : 'v_soflan17'}
+  {url : './bms/va.bms', title : 'v_soflan18'}
+  {url : './bms/va.bms', title : 'v_soflan19'}
 ]
 
 MenuBaseLayer = cc.Layer.extend
@@ -32,20 +32,7 @@ MenuBaseLayer = cc.Layer.extend
 
   start : ->
     @_addBackground()
-
-    toucheventListener = cc.EventListener.create
-      event: cc.EventListener.TOUCH_ONE_BY_ONE
-      swallowTouches: true
-      onTouchBegan: @_onTouch.bind this
-
-    button = new cc.Sprite res.buttonImage
-    button.attr
-      x : cc.director.getWinSize().width / 2
-      y : cc.director.getWinSize().height / 2
-    @addChild button
-    cc.eventManager.addListener toucheventListener.clone(), button
     menu = new MenuController()
-
     menu.init menuList, cc.director.getWinSize().width / 2, 50
     @addChild menu
 
@@ -54,26 +41,6 @@ MenuBaseLayer = cc.Layer.extend
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height / 2
     @addChild bg, 0
-
-  _onTouch : (touch, event)->
-    target = event.getCurrentTarget()
-    locationInNode = target.convertToNodeSpace touch.getLocation()
-    s = target.getContentSize()
-    rect = cc.rect 0, 0, s.width, s.height
-    if cc.rectContainsPoint rect, locationInNode
-      uri = './bms/va.bms'
-      prefix = @_getPrefix uri
-      cc.log prefix
-      cc.loader.loadTxt uri, (err, text)->
-        unless err?
-          parser = new Parser()
-          bms = parser.parse text
-          resources = []
-          resources.push prefix + v for k, v of bms.wav
-          cc.log resources
-          cc.LoaderScene.preload resources, ->
-            cc.director.runScene new AppScene bms, prefix
-          , this
 
 MenuController = cc.Layer.extend
   ctor : ->
@@ -88,8 +55,8 @@ MenuController = cc.Layer.extend
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
 
-    for i in [0...list.length]
-      label = new cc.LabelTTF "hoge" + i, "Arial", 24
+    for v, i in list
+      label = new cc.LabelTTF v.title, "Arial", 24
       menuItem = new cc.MenuItemLabel label, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x
@@ -134,10 +101,27 @@ MenuController = cc.Layer.extend
       newY = (@_itemMenu.height - size.height) / 2
     else
       if newY < 0
-        newY = 0
+        @_itemMenu.y = 0
+        move = cc.moveBy 0.05, 0, 20
+        @_itemMenu.runAction cc.sequence(
+          move
+          move.reverse()
+          cc.CallFunc.create ->
+            @_itemMenu.y = 0
+          , this
+        )
       else if newY > @_itemMenu.height - size.height
-        newY = @_itemMenu.height - size.height
-    @_itemMenu.y = newY
+        @_itemMenu.y = @_itemMenu.height - size.height
+        move = cc.moveBy 0.05, 0, -20
+        @_itemMenu.runAction cc.sequence(
+          move
+          move.reverse()
+          cc.CallFunc.create ->
+            @_itemMenu.y = @_itemMenu.height - size.height
+          , this
+        )
+      else
+        @_itemMenu.y = newY
 
   _getPrefix : (url)->
       m = /^.+\//.exec url
