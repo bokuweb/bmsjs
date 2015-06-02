@@ -60,16 +60,17 @@ skin =
       src    : res.meterImage
       width  : 4
       height : 12
-      x      : 126
+      x      : 122
       y      : 207
       z      : 10
     label :
       src    : res.numeralImage
-      width  : 8
-      height : 8
-      scale  : 2
-      x : 0
-      y : 0
+      width  : 25
+      height : 37.1
+      scale  : 0.3
+      margin : 3
+      x : 362
+      y : 210
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

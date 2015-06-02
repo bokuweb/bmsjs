@@ -116,6 +116,7 @@ NotesLayer = cc.Layer.extend
     @_isAuto = autoplay
 
   onTouch : (key, time)->
+    return if @_isAuto
     @_keyEffectsLayer.show key, 0.5
     for note in @children when note.key is key
       diffTime = note.timing - time

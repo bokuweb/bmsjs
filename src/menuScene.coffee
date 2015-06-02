@@ -9,7 +9,7 @@ res           = require './resource'
 # TODO : cson化
 menuList = [
   {url : './bms/va.bms', title : 'v_soflan0'}
-  {url : './bms/va.bms', title : 'v_soflan1'}
+  {url : './bms/dq.bms', title : 'DRAGON QUEST V'}
   {url : './bms/va.bms', title : 'v_soflan2'}
   {url : './bms/va.bms', title : 'v_soflan3'}
   {url : './bms/va.bms', title : 'v_soflan4'}
