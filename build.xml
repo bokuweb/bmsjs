@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Javascript compress project" basedir="/Users/12log/bmssp" default="compile">
+<project name="Javascript compress project" basedir="/Users/12log/bmsjs" default="compile">
 
     <taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask"
              classpath="/Users/12log/cocos2d-js-v3.6/tools/cocos2d-console/plugins/project_compile/build_web/bin/compiler-1.7.jar"/>
@@ -8,11 +8,11 @@
         <jscomp compilationLevel="simple" 
                 warning="quiet"
                 debug="false" 
-                output="/Users/12log/bmssp/publish/html5/game.min.js"
+                output="/Users/12log/bmsjs/publish/html5/game.min.js"
                 languagein="ECMASCRIPT5"
                 
                 >
-            <sources dir="/Users/12log/bmssp/frameworks/cocos2d-html5">
+            <sources dir="/Users/12log/bmsjs/frameworks/cocos2d-html5">
                 <file name="CCBoot.js"/>
                 <file name="CCDebugger.js"/>
                 <file name="cocos2d/core/utils/BinaryLoader.js"/>
