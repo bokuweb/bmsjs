@@ -7,12 +7,12 @@ resObjs =
   noteTurntableImage : "res/note-turntable.png"
   noteBgImage : "res/note-bg.png"
   greatEffectImage : "res/great-effect.png"
-  turntableKeydownImage : "../res/turntable-keydown.png"
-  whiteKeydownImage : "../res/white-keydown.png"
-  blackKeydownImage : "../res/black-keydown.png"
-  testImage : "../res/test.png"
-  meterImage : "../res/gauge.png"
-  numeralImage : "../res/numeral-font.png"
+  turntableKeydownImage : "res/turntable-keydown.png"
+  whiteKeydownImage : "res/white-keydown.png"
+  blackKeydownImage : "res/black-keydown.png"
+  testImage : "res/test.png"
+  meterImage : "res/gauge.png"
+  numeralImage : "res/numeral-font.png"
 
 resList = []
 
