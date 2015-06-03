@@ -18,9 +18,10 @@ StatsLayerTest = cc.Class.extend
             stats = new StatsLayer
               score :
                 src    :  '../res/numeral-font.png'
-                width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE
@@ -46,9 +47,10 @@ StatsLayerTest = cc.Class.extend
             stats = new StatsLayer
               score :
                 src    :  '../res/numeral-font.png'
-                width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE
@@ -76,8 +78,10 @@ StatsLayerTest = cc.Class.extend
               score :
                 src    :  '../res/numeral-font.png'
                 width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE
@@ -104,9 +108,10 @@ StatsLayerTest = cc.Class.extend
             stats = new StatsLayer
               score :
                 src    :  '../res/numeral-font.png'
-                width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE
@@ -133,9 +138,10 @@ StatsLayerTest = cc.Class.extend
             stats = new StatsLayer
               score :
                 src    :  '../res/numeral-font.png'
-                width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE
@@ -162,9 +168,10 @@ StatsLayerTest = cc.Class.extend
             stats = new StatsLayer
               score :
                 src    :  '../res/numeral-font.png'
-                width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE
@@ -191,9 +198,10 @@ StatsLayerTest = cc.Class.extend
             stats = new StatsLayer
               score :
                 src    :  '../res/numeral-font.png'
-                width  : 8
-                height : 8
-                scale  : 2
+                width  : 25
+                height : 37.1
+                scale  : 0.6
+                margin : 3
                 x : size.width / 2
                 y : size.height / 2
             stats.init TEST_NOTE_NUM, MAX_SCORE

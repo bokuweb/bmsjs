@@ -11,7 +11,7 @@ NumeralLayer = cc.Layer.extend
       @_sprites[i].scale = @_skin.scale
       @addChild @_sprites[i]
       num ?= 0
-    #@reflect num
+    @reflect num
 
   reflect : (num) ->
     for i in [0...@_digits]
