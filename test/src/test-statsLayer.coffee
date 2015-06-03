@@ -1,3 +1,69 @@
+skin =
+  z : 10
+  judge :
+    src    : '../res/judge-image.png'
+    width  : 51
+    height : 15
+    x : 216
+    y : 340
+  score :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    x : 202
+    y : 175
+  pgreatNum :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.3
+    margin : 2
+    x : 296
+    y : 174
+  greatNum :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.3
+    margin : 2
+    x : 296
+    y : 165
+  goodNum :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    x : 296
+    y : 156
+  badNum :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    x : 297
+    y : 147
+  poorNum :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    x : 297
+    y : 138
+  comboNum :
+    src    : '../res/numeral-font.png'
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    x : 211
+    y : 156
+
+
 StatsLayerTest = cc.Class.extend
   start : ->
     describe 'stats layer class test', ->
@@ -15,15 +81,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             expect(stats.get().score).to.be.equal 0
@@ -44,15 +102,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             stats.reflect 'pgreat' for i in [0...TEST_NOTE_NUM]
@@ -74,16 +124,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 8
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             stats.reflect 'great' for i in [0...TEST_NOTE_NUM]
@@ -105,15 +146,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             stats.reflect 'good' for i in [0...TEST_NOTE_NUM]
@@ -135,15 +168,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             stats.reflect 'bad' for i in [0...TEST_NOTE_NUM]
@@ -165,15 +190,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             stats.reflect 'poor' for i in [0...TEST_NOTE_NUM]
@@ -195,15 +212,7 @@ StatsLayerTest = cc.Class.extend
           onEnter : ->
             @_super()
             size = cc.director.getWinSize()
-            stats = new StatsLayer
-              score :
-                src    :  '../res/numeral-font.png'
-                width  : 25
-                height : 37.1
-                scale  : 0.6
-                margin : 3
-                x : size.width / 2
-                y : size.height / 2
+            stats = new StatsLayer skin
             stats.init TEST_NOTE_NUM, MAX_SCORE
             @addChild stats
             for i in [0...TEST_NOTE_NUM / 5]
