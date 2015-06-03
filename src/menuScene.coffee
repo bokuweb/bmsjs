@@ -1,7 +1,6 @@
 AppScene      = require './app'
 Parser        = require './parser'
-_             = require 'lodash'
-EventObserver = require './eventObserver'
+SearchLayer   = require './searchLayer'
 res           = require './resource'
   .resObjs
 
@@ -78,7 +77,7 @@ MenuController = cc.Layer.extend
       @_itemMenu.y = 0
     @addChild @_itemMenu
 
-    search = new SearchController()
+    search = new SearchLayer()
     search.init @_itemMenu.children
     search.start()
     search.addListener 'change', @_onChanged.bind this
@@ -116,27 +115,8 @@ MenuController = cc.Layer.extend
       if newY < 0
         @_itemMenu.y = 0
         move = cc.moveBy 0.05, 0, 20
-        ###
-        @_itemMenu.runAction cc.sequence(
-          move
-          move.reverse()
-          cc.CallFunc.create ->
-            @_itemMenu.y = 0
-          , this
-        )
-        ###
       else if newY > @_itemMenu.height - size.height
         @_itemMenu.y = @_itemMenu.height - size.height
-        ###
-        move = cc.moveBy 0.05, 0, -20
-        @_itemMenu.runAction cc.sequence(
-          move
-          move.reverse()
-          cc.CallFunc.create ->
-            @_itemMenu.y = @_itemMenu.height - size.height
-          , this
-        )
-        ###
       else
         @_itemMenu.y = newY
 
@@ -165,108 +145,29 @@ MenuController = cc.Layer.extend
           cc.director.runScene new AppScene bms, prefix
         , this
 
-  _onChanged : (name, arrayOfVisible) ->
+  _onChanged : (name, visibleItems) ->
     size = cc.director.getWinSize()
-    visibleItemNum = 0 
-    for v, i in arrayOfVisible
-      @_itemMenu.children[i].stopAllActions()
-      if v
-        destY = size.height - (visibleItemNum + 1) * @_linespace
-        visibleItemNum += 1
-        @_itemMenu.children[i].runAction(
-          cc.spawn(
-            cc.fadeIn 0.2
-            cc.scaleTo 0.2, 1
-            cc.moveTo 0.2, cc.p(size.width / 2, destY)
-          )
-        )
-      else
-        @_itemMenu.children[i].runAction(
-          cc.spawn(
-            cc.fadeOut 0.2
-            cc.scaleTo 0.2, 0
-          )
-        )
 
-    @_itemMenu.height = (visibleItemNum + 1) * @_linespace
+    for item in @_itemMenu.children
+      item.runAction cc.spawn cc.fadeOut(0.2), cc.scaleTo(0.2, 0)
+
+    for item, i in visibleItems
+      item.stopAllActions()
+      destY = size.height - (i + 1) * @_linespace
+      item.runAction(
+        cc.spawn(
+          cc.fadeIn 0.2
+          cc.scaleTo 0.2, 1
+          cc.moveTo 0.2, cc.p(size.width / 2, destY)
+        )
+      )
+
+    @_itemMenu.height = (visibleItems.length + 1) * @_linespace
     if @_itemMenu.height < size.height
       @_itemMenu.y = (@_itemMenu.height - size.height) / 2
     else
       @_itemMenu.y = 0
 
-SearchController = cc.Layer.extend
-  ctor : ->
-    @_super()
-    @_notifier = new EventObserver()
-    @_oldTxt = null
-    if 'touches' of cc.sys.capabilities
-      cc.eventManager.addListener
-        event : cc.EventListener.TOUCH_ALL_AT_ONCE
-        onTouchesEnded: @onTouchesEnded
-      , this
-    else if 'mouse' of cc.sys.capabilities
-      cc.eventManager.addListener
-        event : cc.EventListener.MOUSE
-        onMouseUp: @_onMouseUp
-      , this
-
-    @_textField = new cc.TextFieldTTF "<search>", "Arial", 20
-    @addChild @_textField
-    #@_textField.setDelegate this
-    size = cc.director.getWinSize()
-    @_textField.x = size.width / 2 - 200
-    @_textField.y = size.height / 2 + 200
-
-  init : (@_searchItems) ->
-
-  addListener: (name, listner)->
-    @_notifier.on name, listner
-
-  start : -> @scheduleUpdate()
-
-  stop : -> @unscheduleUpdate()
-
-  update : ->
-    txt = @_textField.getContentText()
-    if @_oldTxt isnt txt
-      @_oldTxt = txt
-      arrayOfVisible = []
-      for item in @_searchItems
-        if item.title.search(txt) is -1 and txt isnt ''
-          arrayOfVisible.push off
-        else
-          arrayOfVisible.push on
-      @_notifier.trigger 'change', arrayOfVisible 
-
-
-  # CCTextFieldDelegate
-  onTextFieldAttachWithIME : (sender) ->
-
-  onTextFieldDetachWithIME : (sender) ->
-
-  onTextFieldInsertText : (sender, text, len) ->
-
-  onTextFieldDeleteBackward : (sender, delText, len) ->
-
-  _textInputGetRect : (node) ->
-    r = cc.rect node.x, node.y, node.width, node.height
-    r.x -= r.width / 2
-    r.y -= r.height / 2
-    r
-
-  _onClickTrackNode : (clicked) ->
-    if clicked
-      @_textField.attachWithIME()
-     else
-      @_textField.detachWithIME()
-
-  _onMouseUp : (event) ->
-    target = event.getCurrentTarget()
-    return unless target._textField
-
-    point = event.getLocation()
-    rect = target._textInputGetRect target._textField
-    target._onClickTrackNode cc.rectContainsPoint(rect, point)
 
 MenuScene = cc.Scene.extend
   ctor : ->
