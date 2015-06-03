@@ -6,6 +6,8 @@ JudgementLayer = cc.Layer.extend
     @_judgement = new cc.Sprite @_skin.src, cc.rect 0, 0, @_skin.width, @_skin.height
     @_judgement.x = @_skin.x
     @_judgement.y = @_skin.y
+    # FIXME
+    @_judgement.scale = 2
     @_judgement.setOpacity 0
     @addChild @_judgement
 

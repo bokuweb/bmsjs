@@ -79,8 +79,8 @@ skin =
       src    : './res/judge-image.png'
       width  : 51
       height : 15
-      x : 400
-      y : 550
+      x : 216
+      y : 340
     score :
       src    : res.numeralImage
       width  : 25
@@ -93,18 +93,18 @@ skin =
       src    : res.numeralImage
       width  : 25
       height : 37.1
-      scale  : 0.35
-      margin : 3
-      x : 202
-      y : 10
+      scale  : 0.3
+      margin : 2
+      x : 300
+      y : 170
     greatNum :
       src    : res.numeralImage
       width  : 25
       height : 37.1
-      scale  : 0.35
-      margin : 3
-      x : 202
-      y : 10
+      scale  : 0.3
+      margin : 2
+      x : 310
+      y : 150
     goodNum :
       src    : res.numeralImage
       width  : 25
@@ -112,7 +112,7 @@ skin =
       scale  : 0.35
       margin : 3
       x : 202
-      y : 10
+      y : 90
     badNum :
       src    : res.numeralImage
       width  : 25
@@ -120,7 +120,7 @@ skin =
       scale  : 0.35
       margin : 3
       x : 202
-      y : 10
+      y : 100
     poorNum :
       src    : res.numeralImage
       width  : 25
@@ -128,15 +128,15 @@ skin =
       scale  : 0.35
       margin : 3
       x : 202
-      y : 10
+      y : 110
     comboNum :
       src    : res.numeralImage
       width  : 25
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 202
-      y : 145
+      x : 211
+      y : 156
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

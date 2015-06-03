@@ -35,7 +35,8 @@ StatsLayer = cc.Layer.extend
     @_scoreLabel.y = @_skin.score.y
     @addChild @_scoreLabel
 
-    @_pgreatLabel.init 4, 0
+    @_pgreatLabel = new cc.LabelTTF 'PG 0', "Arial", 9,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
+    #@_pgreatLabel.init 4, 0
     @_pgreatLabel.x = @_skin.pgreatNum.x
     @_pgreatLabel.y = @_skin.pgreatNum.y
     @addChild @_pgreatLabel
@@ -51,18 +52,18 @@ StatsLayer = cc.Layer.extend
     @addChild @_goodLabel
 
     @_badLabel.init 4, 0
-    @_greatLabel.x = @_skin.badNum.x
-    @_greatLabel.y = @_skin.badNum.y
+    @_badLabel.x = @_skin.badNum.x
+    @_badLabel.y = @_skin.badNum.y
     @addChild @_badLabel
 
     @_poorLabel.init 4, 0
-    @_greatLabel.x = @_skin.poorNum.x
-    @_greatLabel.y = @_skin.poorNum.y
+    @_poorLabel.x = @_skin.poorNum.x
+    @_poorLabel.y = @_skin.poorNum.y
     @addChild @_poorLabel
 
     @_comboLabel.init 4, 0
-    @_greatLabel.x = @_skin.comboNum.x
-    @_greatLabel.y = @_skin.comboNum.y
+    @_comboLabel.x = @_skin.comboNum.x
+    @_comboLabel.y = @_skin.comboNum.y
     @addChild @_comboLabel
 
   get : ->
@@ -80,7 +81,8 @@ StatsLayer = cc.Layer.extend
         @_score += @_pgreatIncVal
         @_combo++
         @_pgreatNum++
-        @_pgreatLabel.reflect @_pgreatNum
+        @_pgreatLabel.setString "PG #{@_pgreatNum}"
+        #@_pgreatLabel.reflect @_pgreatNum
         @_judgement.show 0, 0, 1
 
       when "great"
@@ -111,6 +113,7 @@ StatsLayer = cc.Layer.extend
 
     if @_combo > @_maxCombo
       @_maxCombo = @_combo
+      cc.log @_maxCombo      
       @_comboLabel.reflect @_maxCombo
 
     @_dispScore = ~~(@_score.toFixed())
