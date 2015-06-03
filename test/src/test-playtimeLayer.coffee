@@ -18,9 +18,10 @@ PlaytimeLayerTest = cc.Class.extend
 
             skin =
               src : '../res/numeral-font.png'
-              width  : 8
-              height : 8
-              scale  : 2
+              width  : 25
+              height : 37.1
+              scale  : 0.6
+              margin : 5
               minuite :
                 x : size.width / 2 - 20
                 y : size.height / 2
