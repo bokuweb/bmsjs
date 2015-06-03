@@ -1,4 +1,5 @@
-NumeralLayer = require './numeralLayer'
+NumeralLayer   = require './numeralLayer'
+JudgementLayer = require './judgementLayer'
 
 StatsLayer = cc.Layer.extend
   ctor: (@_skin) ->
@@ -10,6 +11,7 @@ StatsLayer = cc.Layer.extend
     @_badLabel =  new NumeralLayer @_skin.badNum
     @_poorLabel =  new NumeralLayer @_skin.poorNum
     @_comboLabel =  new NumeralLayer @_skin.comboNum
+    @_judgement = new JudgementLayer @_skin.judge
 
   init : (noteNum, maxScore) ->
     @_score = 0
@@ -24,6 +26,9 @@ StatsLayer = cc.Layer.extend
     @_pgreatIncVal = maxScore / noteNum
     @_greatIncVal = maxScore / noteNum * 0.7
     @_goodIncVal = maxScore / noteNum * 0.5
+
+    @_judgement.init()
+    @addChild @_judgement
 
     @_scoreLabel.init @_getDigits(maxScore), 0
     @_scoreLabel.x = @_skin.score.x
@@ -76,28 +81,33 @@ StatsLayer = cc.Layer.extend
         @_combo++
         @_pgreatNum++
         @_pgreatLabel.reflect @_pgreatNum
+        @_judgement.show 0, 0, 1
 
       when "great"
         @_score += @_greatIncVal
         @_combo++
         @_greatNum++
         @_greatLabel.reflect @_greatNum
+        @_judgement.show 0, 0, 0.5
 
       when "good"
         @_score += @_goodIncVal
         @_combo++
         @_goodNum++
         @_goodLabel.reflect @_goodNum
+        @_judgement.show 1, 0, 0.5
 
       when "bad"
         @_combo = 0
         @_badNum++
         @_badLabel.reflect @_badNum
+        @_judgement.show 2, 0, 0.5
 
       else
         @_combo = 0
         @_poorNum++
         @_poorLabel.reflect @_poorNum
+        @_judgement.show 3, 0, 0.5
 
     if @_combo > @_maxCombo
       @_maxCombo = @_combo

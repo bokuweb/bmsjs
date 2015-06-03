@@ -15,12 +15,11 @@ JudgementLayerTest = cc.Class.extend
             @_super()
             size = cc.director.getWinSize()
             judgement = new JudgementLayer
-              judge :
-                src    :  '../res/judge-image.png'
-                width  : 51
-                height : 15
-                x : size.width / 2
-                y : size.height / 2
+              src    :  '../res/judge-image.png'
+              width  : 51
+              height : 15
+              x : size.width / 2
+              y : size.height / 2
             judgement.init()
             @addChild judgement
 
