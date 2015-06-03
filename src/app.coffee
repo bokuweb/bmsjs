@@ -82,6 +82,54 @@ skin =
       margin : 3
       x : 202
       y : 175
+    pgreatNum :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 10
+    greatNum :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 10
+    goodNum :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 10
+    badNum :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 10
+    poorNum :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 10
+    comboNum :
+      src    : res.numeralImage
+      width  : 25
+      height : 37.1
+      scale  : 0.35
+      margin : 3
+      x : 202
+      y : 145
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

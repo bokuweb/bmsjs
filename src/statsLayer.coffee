@@ -4,6 +4,12 @@ StatsLayer = cc.Layer.extend
   ctor: (@_skin) ->
     @_super()
     @_scoreLabel = new NumeralLayer @_skin.score
+    @_pgreatLabel =  new NumeralLayer @_skin.pgreatNum
+    @_greatLabel =  new NumeralLayer @_skin.greatNum
+    @_goodLabel =  new NumeralLayer @_skin.goodNum
+    @_badLabel =  new NumeralLayer @_skin.badNum
+    @_poorLabel =  new NumeralLayer @_skin.poorNum
+    @_comboLabel =  new NumeralLayer @_skin.comboNum
 
   init : (noteNum, maxScore) ->
     @_score = 0
@@ -18,10 +24,41 @@ StatsLayer = cc.Layer.extend
     @_pgreatIncVal = maxScore / noteNum
     @_greatIncVal = maxScore / noteNum * 0.7
     @_goodIncVal = maxScore / noteNum * 0.5
+
     @_scoreLabel.init @_getDigits(maxScore), 0
     @_scoreLabel.x = @_skin.score.x
     @_scoreLabel.y = @_skin.score.y
     @addChild @_scoreLabel
+
+    @_pgreatLabel.init 4, 0
+    @_pgreatLabel.x = @_skin.pgreatNum.x
+    @_pgreatLabel.y = @_skin.pgreatNum.y
+    @addChild @_pgreatLabel
+
+    @_greatLabel.init 4, 0
+    @_greatLabel.x = @_skin.greatNum.x
+    @_greatLabel.y = @_skin.greatNum.y
+    @addChild @_greatLabel
+
+    @_goodLabel.init 4, 0
+    @_goodLabel.x = @_skin.goodNum.x
+    @_goodLabel.y = @_skin.goodNum.y
+    @addChild @_goodLabel
+
+    @_badLabel.init 4, 0
+    @_greatLabel.x = @_skin.badNum.x
+    @_greatLabel.y = @_skin.badNum.y
+    @addChild @_badLabel
+
+    @_poorLabel.init 4, 0
+    @_greatLabel.x = @_skin.poorNum.x
+    @_greatLabel.y = @_skin.poorNum.y
+    @addChild @_poorLabel
+
+    @_comboLabel.init 4, 0
+    @_greatLabel.x = @_skin.comboNum.x
+    @_greatLabel.y = @_skin.comboNum.y
+    @addChild @_comboLabel
 
   get : ->
     score  : @_dispScore
@@ -38,23 +75,34 @@ StatsLayer = cc.Layer.extend
         @_score += @_pgreatIncVal
         @_combo++
         @_pgreatNum++
-        if @_combo > @_maxCombo then @_maxCombo = @_combo
+        @_pgreatLabel.reflect @_pgreatNum
+
       when "great"
         @_score += @_greatIncVal
         @_combo++
         @_greatNum++
-        if @_combo > @_maxCombo then @_maxCombo = @_combo
+        @_greatLabel.reflect @_greatNum
+
       when "good"
         @_score += @_goodIncVal
         @_combo++
         @_goodNum++
-        if @_combo > @_maxCombo then @_maxCombo = @_combo
+        @_goodLabel.reflect @_goodNum
+
       when "bad"
         @_combo = 0
         @_badNum++
+        @_badLabel.reflect @_badNum
+
       else
         @_combo = 0
         @_poorNum++
+        @_poorLabel.reflect @_poorNum
+
+    if @_combo > @_maxCombo
+      @_maxCombo = @_combo
+      @_comboLabel.reflect @_maxCombo
+
     @_dispScore = ~~(@_score.toFixed())
     @_scoreLabel.reflect @_dispScore
 
