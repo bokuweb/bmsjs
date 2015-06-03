@@ -35,28 +35,32 @@ StatsLayer = cc.Layer.extend
     @_scoreLabel.y = @_skin.score.y
     @addChild @_scoreLabel
 
-    @_pgreatLabel = new cc.LabelTTF 'PG 0', "Arial", 9,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
+    @_pgreatLabel = new cc.LabelTTF 'PG 0', "Arial", 6,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     #@_pgreatLabel.init 4, 0
     @_pgreatLabel.x = @_skin.pgreatNum.x
     @_pgreatLabel.y = @_skin.pgreatNum.y
     @addChild @_pgreatLabel
 
-    @_greatLabel.init 4, 0
+    @_greatLabel = new cc.LabelTTF 'GR 0', "Arial", 6,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
+    #@_greatLabel.init 4, 0
     @_greatLabel.x = @_skin.greatNum.x
     @_greatLabel.y = @_skin.greatNum.y
     @addChild @_greatLabel
 
-    @_goodLabel.init 4, 0
+    @_goodLabel = new cc.LabelTTF 'GD 0', "Arial", 6,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
+    #@_goodLabel.init 4, 0
     @_goodLabel.x = @_skin.goodNum.x
     @_goodLabel.y = @_skin.goodNum.y
     @addChild @_goodLabel
 
-    @_badLabel.init 4, 0
+    @_badLabel = new cc.LabelTTF 'BD 0', "Arial", 6,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
+    #@_badLabel.init 4, 0
     @_badLabel.x = @_skin.badNum.x
     @_badLabel.y = @_skin.badNum.y
     @addChild @_badLabel
 
-    @_poorLabel.init 4, 0
+    @_poorLabel = new cc.LabelTTF 'PR 0', "Arial", 6,  cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
+    #@_poorLabel.init 4, 0
     @_poorLabel.x = @_skin.poorNum.x
     @_poorLabel.y = @_skin.poorNum.y
     @addChild @_poorLabel

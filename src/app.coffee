@@ -95,40 +95,40 @@ skin =
       height : 37.1
       scale  : 0.3
       margin : 2
-      x : 300
-      y : 170
+      x : 296
+      y : 174
     greatNum :
       src    : res.numeralImage
       width  : 25
       height : 37.1
       scale  : 0.3
       margin : 2
-      x : 310
-      y : 150
+      x : 296
+      y : 165
     goodNum :
       src    : res.numeralImage
       width  : 25
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 202
-      y : 90
+      x : 296
+      y : 156
     badNum :
       src    : res.numeralImage
       width  : 25
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 202
-      y : 100
+      x : 297
+      y : 147
     poorNum :
       src    : res.numeralImage
       width  : 25
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 202
-      y : 110
+      x : 297
+      y : 138
     comboNum :
       src    : res.numeralImage
       width  : 25

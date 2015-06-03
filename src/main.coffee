@@ -23,6 +23,10 @@ cc.game.onStart = ->
     cc.view.resizeWithBrowserSize off
   cc.director.setContentScaleFactor 2
 
+  height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
+  cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
+  cc.view.resizeWithBrowserSize on
+
   cc.LoaderScene.preload resList, ->
     cc.director.runScene new MenuScene()
   , this
