@@ -1,8 +1,8 @@
-BmpLayerTest = cc.Class.extend
+AnimationLayerTest = cc.Class.extend
   start : ->
-    describe 'bmp layer class test', ->
+    describe 'animation layer class test', ->
       @timeout 10000
-      BmpLayer = require '../../src/bmpLayer'
+      AnimationLayer = require '../../src/animationLayer'
       Timer = require '../../src/timer'
       capture = require './test-utils'
         .capture
@@ -20,7 +20,7 @@ BmpLayerTest = cc.Class.extend
               height : 128
               x : size.width / 2
               y : size.height / 2
-            bmp = new BmpLayer skin, timer
+            bmp = new AnimationLayer skin, timer
             srcs = [
               '../res/test1.png'
               '../res/test2.png'
@@ -44,6 +44,6 @@ BmpLayerTest = cc.Class.extend
 
         cc.director.runScene new TestScene()
 
-module.exports = BmpLayerTest
+module.exports = AnimationLayerTest
 
 

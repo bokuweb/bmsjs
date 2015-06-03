@@ -1,6 +1,6 @@
 POOR_INDICATOR_TIME_MSEC = 200
 
-BpmLayer = cc.Layer.extend
+AnimationLayer = cc.Layer.extend
   ctor: (@_skin, @_timer) ->
     @_super()
 
@@ -31,4 +31,4 @@ BpmLayer = cc.Layer.extend
 
   _disablePoor : -> @_isPoor = false
 
-module.exports = BpmLayer
+module.exports = AnimationLayer

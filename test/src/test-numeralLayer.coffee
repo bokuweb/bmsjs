@@ -9,16 +9,17 @@ NumeralLayerTest = cc.Class.extend
       expect  = chai.expect
       capNum = 0
 
-      it 'numeral layer create and reflect test x2', (done)->
+      it 'numeral layer create and reflect test', (done)->
         TestScene = cc.Scene.extend
           onEnter : ->
             @_super()
 
             numeralLayer = new NumeralLayer
               src    :  '../res/numeral-font.png'
-              width  : 8
-              height : 8
-              scale  : 2
+              width  : 25
+              height : 37.1
+              scale  : 0.6
+              margin : 3
             numeralLayer.init 10, 0
             size = cc.director.getWinSize()
             numeralLayer.x = size.width / 2
@@ -45,16 +46,17 @@ NumeralLayerTest = cc.Class.extend
 
         cc.director.runScene new TestScene()
 
-      it 'numeral layer create and reflect test x4', (done)->
+      it 'numeral layer create and reflect test x2', (done)->
         TestScene = cc.Scene.extend
           onEnter : ->
             @_super()
 
             numeralLayer = new NumeralLayer
               src    :  '../res/numeral-font.png'
-              width  : 8
-              height : 8
-              scale  : 4
+              width  : 25
+              height : 37.1
+              scale  : 1.2
+              margin : 3
             numeralLayer.init 10, 0
             size = cc.director.getWinSize()
             numeralLayer.x = size.width / 2
