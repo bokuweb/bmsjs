@@ -55,6 +55,7 @@ skin =
         src : res.whiteKeydownImage
       blackKeydownImage :
         src : res.blackKeydownImage
+
   rate :
     z : 10
     meter :
@@ -74,6 +75,12 @@ skin =
       y : 210
   stats :
     z : 10
+    judge :
+      src    : './res/judge-image.png'
+      width  : 51
+      height : 15
+      x : 400
+      y : 550
     score :
       src    : res.numeralImage
       width  : 25
@@ -217,7 +224,7 @@ AppLayer = cc.Layer.extend
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height - 240
     @addChild bg, 1
-    
+
   _addKey : ->
     toucheventListener = cc.EventListener.create
       event: cc.EventListener.TOUCH_ONE_BY_ONE

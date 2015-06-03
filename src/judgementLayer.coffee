@@ -3,9 +3,9 @@ JudgementLayer = cc.Layer.extend
     @_super()
 
   init : ->
-    @_judgement = new cc.Sprite @_skin.judge.src, cc.rect 0, 0, @_skin.judge.width, @_skin.judge.height
-    @_judgement.x = @_skin.judge.x
-    @_judgement.y = @_skin.judge.y
+    @_judgement = new cc.Sprite @_skin.src, cc.rect 0, 0, @_skin.width, @_skin.height
+    @_judgement.x = @_skin.x
+    @_judgement.y = @_skin.y
     @_judgement.setOpacity 0
     @addChild @_judgement
 
@@ -17,7 +17,7 @@ JudgementLayer = cc.Layer.extend
   #  3 : poor
   # 
   show : (frame, combo, time_sec) ->
-    @_judgement.setTextureRect cc.rect  0, @_skin.judge.height * frame, @_skin.judge.width, @_skin.judge.height
+    @_judgement.setTextureRect cc.rect  0, @_skin.height * frame, @_skin.width, @_skin.height
     @_judgement.stopAllActions()
     @_judgement.setOpacity 255
     @_judgement.runAction cc.fadeOut time_sec
