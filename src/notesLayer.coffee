@@ -5,6 +5,8 @@ GreatEffectsLayer = require './greatEffectsLayer'
 KeyEffectsLayer   = require './keyEffectsLayer'
 MeasureNode       = require './measureNode'
 
+GENERATE_OFFSET_TIME_MSEC = 200
+
 NotesLayer = cc.Layer.extend
   ctor : (@_skin, @_timer, @_config)->
     @_super()
@@ -22,6 +24,7 @@ NotesLayer = cc.Layer.extend
   init : (bms)->
     time = 0
     @_index = 0
+    @_notesIndex = 0
     @_notes.length = 0
     @_nodes.length = 0
     @_genTime.length = 0
@@ -30,8 +33,8 @@ NotesLayer = cc.Layer.extend
       node = new MeasureNode @_skin.nodeImage.src, @_timer
       node.x = @_skin.nodeImage.x
       node.timing = v.timing
-      node.appendFallParams bms.bpms, time, @_skin.fallDist
       @_genTime.push time
+      node.appendFallParams bms.bpms, time, @_skin.fallDist
       time = @_getGenTime node, @_skin.fallDist
       @_nodes.push node
     @_genTime.sort (a, b) -> a - b
@@ -46,7 +49,7 @@ NotesLayer = cc.Layer.extend
     @_greatEffectsLayer.init bms.totalNote
     @addChild @_greatEffectsLayer, 10
 
-    @_generate bms, measure, time for time, measure in @_genTime
+    @_generateNotes bms, measure, time for time, measure in @_genTime
     xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
     @_keyEffectsLayer.init xList
     @addChild @_keyEffectsLayer, 0
@@ -57,7 +60,7 @@ NotesLayer = cc.Layer.extend
   #
   # generate and pool note
   #
-  _generate : (bms, measure, time)->
+  _generateNotes : (bms, measure, time)->
     turntable = @_skin.noteTurntableImage
     white = @_skin.noteWhiteImage
     black = @_skin.noteBlackImage
@@ -85,6 +88,8 @@ NotesLayer = cc.Layer.extend
         note.key = i
         note.clear = false
         note.appendFallParams bpms, time, fallDist
+        note.genTime = @_getGenTime note, fallDist
+        note.started = false
         @_notes[measure].push note
     return
 
@@ -136,10 +141,6 @@ NotesLayer = cc.Layer.extend
           return
     return
 
-  #
-  # add note to game scene
-  # @attention - _add called by window
-  #
   update : ->
     if @_isAuto
       for child in @children when child.clear is false
@@ -151,15 +152,21 @@ NotesLayer = cc.Layer.extend
           @_notifier.trigger 'judge', 'pgreat'
           @_notifier.trigger 'hit', child.wav
 
-    return unless @_genTime[@_index]?
-    return unless @_genTime[@_index] <= @_timer.get()
+    if @_genTime[@_index]?
+      if @_genTime[@_index] <= @_timer.get() and not @_nodes[@_index].started
+        @addChild @_nodes[@_index]
+        @_nodes[@_index].started = true
+        @_nodes[@_index].start()
 
-    @addChild @_nodes[@_index]
-    @_nodes[@_index].start()
-    for note in @_notes[@_index]
-      @addChild note, 5
-      note.start()
-    @_index++
+      if @_notes[@_index]?
+        for note in @_notes[@_index]
+          if note.genTime <= @_timer.get() and not note.started
+            note.started = true
+            @addChild note, 5
+            note.start()
+      if note?
+        if note.started then @_index++
+      else @_index++
 
   #
   # get time when node y coordinate will be game.height
@@ -168,7 +175,7 @@ NotesLayer = cc.Layer.extend
   _getGenTime : (obj, fallDist)->
     size = cc.director.getWinSize()
     for v, i in obj.dstY when v < size.height
-      return ~~(obj.bpm.timing[i] - (v / obj.calcSpeed(obj.bpm.val[i], fallDist)))
+      return ~~(obj.bpm.timing[i] - ((v + GENERATE_OFFSET_TIME_MSEC) / obj.calcSpeed(obj.bpm.val[i], fallDist)))
     return 0
-    
+
 module.exports = NotesLayer
