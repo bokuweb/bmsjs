@@ -7,7 +7,6 @@ BpmLayer = cc.Layer.extend
 
   init : ->
     @_index = 0
-    cc.log @_bpms[0].val
     @_bpm.init 3, @_bpms[0].val
     @_bpm.x = @_skin.x
     @_bpm.y = @_skin.y

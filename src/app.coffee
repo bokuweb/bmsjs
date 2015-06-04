@@ -2,6 +2,7 @@ KeyboardService = require './keyboardService'
 NotesLayer      = require './notesLayer'
 RateLayer       = require './rateLayer'
 StatsLayer      = require './statsLayer'
+BpmLayer        = require './bpmLayer'
 Timer           = require './timer'
 Audio           = require './audio'
 res             = require './resource'
@@ -137,6 +138,14 @@ skin =
       margin : 3
       x : 211
       y : 156
+  bpm :
+    src    : res.numeralImage
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    x : 400
+    y : 580
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -164,6 +173,7 @@ AppLayer = cc.Layer.extend
     @_keyboard.addListener v, @_onKeydown.bind this, id for v, id in keyConfig
     @addChild @_keyboard
 
+    # FIXME : move to argument
     config =
       reactionTime : 200
       removeTime : 200
@@ -184,6 +194,7 @@ AppLayer = cc.Layer.extend
 
     @_rate = new RateLayer skin.rate
     @_rate.init
+      # FIXME : move to argument
       initRate    : 20
       greatIncVal : 1
       goodIncVal  : 0.5
@@ -197,10 +208,15 @@ AppLayer = cc.Layer.extend
     @_stats.init @_bms.totalNote, 200000
     @addChild @_stats, skin.stats.z
 
+    @_bpm = new BpmLayer skin.bpm, @_timer, @_bms.bpms
+    @_bpm.init()
+    @addChild @_bpm
+
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
     @_rate.start()
+    @_bpm.start()
     @_timer.start()
 
   _onKeydown : (key, time, id)->
