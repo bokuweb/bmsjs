@@ -5,6 +5,8 @@ SearchController = cc.Layer.extend
 
   search : (txt) ->
     visibleItems = _.filter @_items, (item) ->
-      item.title.search(txt) isnt -1
+      txt = txt.replace /[Ａ-Ｚａ-ｚ０-９]/g, (s)-> String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+      re = new RegExp txt, "i"
+      item.title.search(re) isnt -1
 
 module.exports = SearchController
