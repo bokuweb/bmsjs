@@ -16,8 +16,8 @@ GreatEffectTest = cc.Class.extend
             params =
               width  : 80
               height : 80
-              row    : 4
-              colum  : 4
+              row    : 6
+              colum  : 3
               delay  : 0.02
             effect = new GreatEffect '../res/great-effect.png', params
             effect.x = cc.director.getWinSize().width / 2
@@ -35,10 +35,6 @@ GreatEffectTest = cc.Class.extend
             , 1000
 
         cc.director.runScene new TestScene()
-
-      before ->
-
-      after ->
 
 
 module.exports = GreatEffectTest
