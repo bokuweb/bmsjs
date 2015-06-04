@@ -1,13 +1,15 @@
-_             = require 'lodash'
-EventObserver = require './eventObserver'
+EventObserver    = require './eventObserver'
+SearchController = require './searchController'
 
 SearchLayer = cc.Layer.extend
   ctor : ->
     @_super()
     @_notifier = new EventObserver()
 
-  init : (@_searchItems) ->
+  init : (searchItems) ->
     @_oldTxt = null
+    @_searchController = new SearchController searchItems
+
     if 'touches' of cc.sys.capabilities
       cc.eventManager.addListener
         event : cc.EventListener.TOUCH_ALL_AT_ONCE
@@ -31,23 +33,11 @@ SearchLayer = cc.Layer.extend
 
   start : -> @scheduleUpdate()
 
-  stop : -> @unscheduleUpdate()
-
   update : ->
     txt = @_textField.getContentText()
     if @_oldTxt isnt txt
       @_oldTxt = txt
-      arrayOfVisible = []
-      #for item in @_searchItems
-      #  if item.title.search(txt) is -1 and txt isnt ''
-      #    arrayOfVisible.push off
-      #  else
-      #    arrayOfVisible.push on
-      #@_notifier.trigger 'change', arrayOfVisible
-
-      visibleItems = _.filter @_searchItems, (item) ->
-        item.title.search(txt) isnt -1
-      @_notifier.trigger 'change', visibleItems
+      @_notifier.trigger 'change', @_searchController.search(txt)
 
   # CCTextFieldDelegate
   onTextFieldAttachWithIME : (sender) ->
@@ -67,7 +57,7 @@ SearchLayer = cc.Layer.extend
   _onClickTrackNode : (clicked) ->
     if clicked
       @_textField.attachWithIME()
-     else
+    else
       @_textField.detachWithIME()
 
   _onMouseUp : (event) ->
