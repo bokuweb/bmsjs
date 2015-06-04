@@ -3,6 +3,7 @@ NotesLayer      = require './notesLayer'
 RateLayer       = require './rateLayer'
 StatsLayer      = require './statsLayer'
 BpmLayer        = require './bpmLayer'
+PlaytimeLayer   = require './playtimeLayer'
 Timer           = require './timer'
 Audio           = require './audio'
 res             = require './resource'
@@ -146,7 +147,19 @@ skin =
     margin : 3
     x : 400
     y : 580
-
+  plytime :
+    src    : res.numeralImage
+    width  : 25
+    height : 37.1
+    scale  : 0.35
+    margin : 3
+    minuite :
+      x : 600
+      y : 580
+    second :
+      x : 700
+      y : 580
+      
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
@@ -212,11 +225,16 @@ AppLayer = cc.Layer.extend
     @_bpm.init()
     @addChild @_bpm
 
+    @_plytime = new PlaytimeLayer skin.plytime, @_timer
+    @_plytime.init()
+    @addChild @_plytime
+
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()
+    @_plytime.start()
     @_timer.start()
 
   _onKeydown : (key, time, id)->
