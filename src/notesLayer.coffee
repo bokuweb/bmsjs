@@ -1,20 +1,26 @@
-EventObserver     = require './eventObserver'
-Judge             = require './judge'
+#EventObserver     = require './eventObserver'
+#Judge             = require './judge'
 Note              = require './note'
-GreatEffectsLayer = require './greatEffectsLayer'
-KeyEffectsLayer   = require './keyEffectsLayer'
+#GreatEffectsLayer = require './greatEffectsLayer'
+#KeyEffectsLayer   = require './keyEffectsLayer'
 MeasureNode       = require './measureNode'
 
 NotesLayer = cc.Layer.extend
   ctor : (@_skin, @_timer, @_config)->
     @_super()
-    @_notifier = new EventObserver()
-    @_judge = new Judge()
-    @_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
-    @_keyEffectsLayer = new KeyEffectsLayer @_skin.keyEffect
+    #@_notifier = new EventObserver()
+    #@_judge = new Judge()
+    #@_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
+    #@_keyEffectsLayer = new KeyEffectsLayer @_skin.keyEffect
     @_notes = []
     @_nodes    = []
     @_genTime = []
+
+    @_debug = new cc.LabelTTF "aaa", "Arial", 24
+    @_debug.x =  120
+    @_debug.y =  200
+    @addChild @_debug
+    @_count = 0
 
   #
   # create notes
@@ -42,17 +48,17 @@ NotesLayer = cc.Layer.extend
     bg.y = @_skin.bgImage.y
     bg.setOpacity 180
     @addChild bg, 0
-
-    @_greatEffectsLayer.init bms.totalNote
-    @addChild @_greatEffectsLayer, 10
+    @_debug.setString bms.title
+    #@_greatEffectsLayer.init bms.totalNote
+    #@addChild @_greatEffectsLayer, 10
 
     @_generate bms, measure, time for time, measure in @_genTime
     xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
-    @_keyEffectsLayer.init xList
-    @addChild @_keyEffectsLayer, 0
+    #@_keyEffectsLayer.init xList
+    #@addChild @_keyEffectsLayer, 0
 
   addListener: (name, listner)->
-    @_notifier.on name, listner
+    #@_notifier.on name, listner
 
   #
   # generate and pool note
@@ -117,7 +123,7 @@ NotesLayer = cc.Layer.extend
 
   onTouch : (key, time)->
     return if @_isAuto
-    @_keyEffectsLayer.show key, 0.5
+    #@_keyEffectsLayer.show key, 0.5
     for note in @children when note.key is key
       diffTime = note.timing - time
       unless note.clear
@@ -151,6 +157,7 @@ NotesLayer = cc.Layer.extend
           @_notifier.trigger 'judge', 'pgreat'
           @_notifier.trigger 'hit', child.wav
 
+    #@_debug.setString @_count++
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
 

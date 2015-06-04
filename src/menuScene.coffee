@@ -7,14 +7,14 @@ res           = require './resource'
 
 # TODO : cson化
 menuList = [
-  {url : './bms/va.bms', title : 'v_soflan0'}
+  {url : "res/va.txt", title : 'v_soflan0'}
   {url : './bms/dq.bms', title : 'DRAGON QUEST V'}
   {url : './bms/_parousia_A.bme', title : 'parousia_A'}
   {url : './bms/7_n_ka08_bt7god.bms', title : '7_n_ka08'}
-  {url : './bms/va.bms', title : 'v_soflan4'}
-  {url : './bms/va.bms', title : 'テスト'}
-  {url : './bms/va.bms', title : 'あいうえお'}
-  {url : './bms/va.bms', title : 'v_soflan7'}
+  {url : 'bms/va.bms', title : 'v_soflan4'}
+  {url : 'res/bms/va.bms', title : 'テスト'}
+  {url : '.res/bms/va.bms', title : 'あいうえお'}
+  {url : 'bms/va.txt', title : 'v_soflan7'}
   {url : './bms/va.bms', title : 'v_soflan8'}
   {url : './bms/va.bms', title : 'v_soflan9'}
   {url : './bms/va.bms', title : 'v_soflan10'}
@@ -51,7 +51,11 @@ MenuController = cc.Layer.extend
   ctor : ->
     @_super()
     @_offsetY = 0
-
+    @_debug = new cc.LabelTTF "test", "Arial", 24
+    @_debug.x =  120
+    @_debug.y =  200
+    @addChild @_debug
+    
   init : (list, x, @_linespace) ->
     #var closeItem = new cc.MenuItemImage(s_pathClose, s_pathClose, this.onCloseCallback, this);
     #closeItem.x = winSize.width - 30;
@@ -59,7 +63,7 @@ MenuController = cc.Layer.extend
     director = cc.director
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
-
+    @_debug.setString "init"
     for v, i in list
       label = new cc.LabelTTF v.title, "Arial", 24
       menuItem = new cc.MenuItemLabel label, @_onMenuCallback, this
@@ -77,11 +81,11 @@ MenuController = cc.Layer.extend
       @_itemMenu.y = 0
     @addChild @_itemMenu
 
-    search = new SearchLayer()
-    search.init @_itemMenu.children
-    search.start()
-    search.addListener 'change', @_onChanged.bind this
-    @addChild search
+    #search = new SearchLayer()
+    #search.init @_itemMenu.children
+    #search.start()
+    #search.addListener 'change', @_onChanged.bind this
+    #@addChild search
 
     # 'browser' can use touches or mouse.
     # The benefit of using 'touches' in a browser, is that it works both with mouse events or touches events
@@ -125,25 +129,26 @@ MenuController = cc.Layer.extend
       m[0] if m
 
   _onMenuCallback : (sender) ->
+
     @_offsetY = @_itemMenu.y
-    # get id
     id = sender.getLocalZOrder() - 10000
-    # get the userdata, it's the index of the menu item clicked
-    # create the test scene and run it
-    cc.log "touch menu id = #{id}"
     url = menuList[id].url
     prefix = @_getPrefix url
-    cc.log prefix
+    text = jsb.fileUtils.getStringFromFile url
+    @_debug.setString "ok"
     cc.loader.loadTxt url, (err, text)->
-      unless err?
-        parser = new Parser()
-        bms = parser.parse text
-        resources = []
-        resources.push prefix + v for k, v of bms.wav
-        cc.log resources
-        cc.LoaderScene.preload resources, ->
-          cc.director.runScene new AppScene bms, prefix
-        , this
+      parser = new Parser()
+      @_debug.setString "ok2"
+      bms = parser.parse text
+
+      resources = []
+      @_debug.setString bms.title
+      resources.push prefix + v for k, v of bms.wav
+      cc.LoaderScene.preload resources, ->
+        @_debug.prefix
+        cc.director.runScene new AppScene bms, prefix
+      , this
+
 
   _onChanged : (name, visibleItems) ->
     size = cc.director.getWinSize()

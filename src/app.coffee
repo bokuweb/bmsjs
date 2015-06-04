@@ -154,12 +154,12 @@ skin =
     scale  : 0.35
     margin : 3
     minuite :
-      x : 600
-      y : 580
+      x : 160
+      y : 200
     second :
-      x : 700
-      y : 580
-      
+      x : 190
+      y : 200
+
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
@@ -168,7 +168,7 @@ AppLayer = cc.Layer.extend
     @_addBackground()
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
-    @_keyboard = new KeyboardService @_timer
+    #@_keyboard = new KeyboardService @_timer
 
     # FIXME : move to argument
     keyConfig = [
@@ -182,9 +182,9 @@ AppLayer = cc.Layer.extend
       16
     ]
 
-    @_keyboard.init()
-    @_keyboard.addListener v, @_onKeydown.bind this, id for v, id in keyConfig
-    @addChild @_keyboard
+    #@_keyboard.init()
+    #@_keyboard.addListener v, @_onKeydown.bind this, id for v, id in keyConfig
+    #@addChild @_keyboard
 
     # FIXME : move to argument
     config =
@@ -204,7 +204,7 @@ AppLayer = cc.Layer.extend
 
     @addChild @_notesLayer, skin.notes.z
     @addChild @_audio
-
+    ###
     @_rate = new RateLayer skin.rate
     @_rate.init
       # FIXME : move to argument
@@ -224,7 +224,7 @@ AppLayer = cc.Layer.extend
     @_bpm = new BpmLayer skin.bpm, @_timer, @_bms.bpms
     @_bpm.init()
     @addChild @_bpm
-
+    ###
     @_plytime = new PlaytimeLayer skin.plytime, @_timer
     @_plytime.init()
     @addChild @_plytime
@@ -232,8 +232,8 @@ AppLayer = cc.Layer.extend
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
-    @_rate.start()
-    @_bpm.start()
+    #@_rate.start()
+    #@_bpm.start()
     @_plytime.start()
     @_timer.start()
 
