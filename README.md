@@ -1,5 +1,7 @@
 ## bmsjs
 
+![](https://travis-ci.org/bokuweb/bmsjs.svg?branch=master)
+
 *** work in progress ***
 
 browser bms player project.
