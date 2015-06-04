@@ -39,7 +39,7 @@ window.onload = ->
     statsLayerTest.start()
     numeralLayerTest.start()
     keyEffectLayerTest.start()
-    greatEffectTest.start()
+    #greatEffectTest.start()
     parserTest.start()
     timerTest.start()
     noteTest.start()
