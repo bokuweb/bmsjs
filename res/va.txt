@@ -1,9 +1,8 @@
-aaaaa
 *---------------------- HEADER FIELD
 #PLAYER 1
 #GENRE retrogressive
 #TITLE V(SOFT LANDING PARADISE)
-#ARTIST ��Ѳ�� (SUGI �� OSAM)�@feat. VAKA
+#ARTIST ｵｻﾑｲﾓﾝ (SUGI ＆ OSAM)　feat. VAKA
 #BPM 450
 #PLAYLEVEL 0
 #RANK 3

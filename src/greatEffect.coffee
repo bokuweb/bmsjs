@@ -13,7 +13,7 @@ GreatEffect = cc.Sprite.extend
     animation = new cc.Animation animationframe, params.delay
     cb = -> @removeFromParent on
     @_action = cc.sequence(
-      new cc.animate animation
+      new cc.Animate animation
       cc.CallFunc.create cb, this
     )
 

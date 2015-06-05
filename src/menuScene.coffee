@@ -134,21 +134,18 @@ MenuController = cc.Layer.extend
     id = sender.getLocalZOrder() - 10000
     url = menuList[id].url
     prefix = @_getPrefix url
-    text = jsb.fileUtils.getStringFromFile url
-    @_debug.setString "ok"
-    cc.loader.loadTxt url, (err, text)->
-      parser = new Parser()
-      @_debug.setString "ok2"
-      bms = parser.parse text
 
+    text = jsb.fileUtils.getStringFromFile "res/va.txt"
+    cc.log text
+
+    cc.loader.loadTxt "res/va.txt", (err, text) =>
+      parser = new Parser()
+      bms = parser.parse text
       resources = []
-      @_debug.setString bms.title
       resources.push prefix + v for k, v of bms.wav
       cc.LoaderScene.preload resources, ->
-        @_debug.prefix
         cc.director.runScene new AppScene bms, prefix
       , this
-
 
   _onChanged : (name, visibleItems) ->
     size = cc.director.getWinSize()
