@@ -5,7 +5,8 @@ StatsLayer      = require './statsLayer'
 BpmLayer        = require './bpmLayer'
 PlaytimeLayer   = require './playtimeLayer'
 Timer           = require './timer'
-Audio           = require './audio'
+#Audio           = require './audio'
+Audio           = require './enchantAudio'
 res             = require './resource'
   .resObjs
 
@@ -159,12 +160,13 @@ skin =
     second :
       x : 700
       y : 580
-      
+
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
     #@_addKey()
+    cc.log "app layer0"
     @_addBackground()
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
@@ -297,6 +299,7 @@ AppScene = cc.Scene.extend
 
   ctor : (bms, prefix)->
     @_super()
+    cc.log "app scene"
     layer = new AppLayer bms, prefix
     @addChild layer
     layer.start()

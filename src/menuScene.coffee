@@ -141,9 +141,14 @@ MenuController = cc.Layer.extend
         resources = []
         resources.push prefix + v for k, v of bms.wav
         cc.log resources
-        cc.LoaderScene.preload resources, ->
+        cc.enchant.preload resources
+        cc.enchant.start()
+        cc.enchant.onload = ->
+          cc.log "enchant load ok"
+
+        #cc.LoaderScene.preload resources, ->
           cc.director.runScene new AppScene bms, prefix
-        , this
+        #, this
 
   _onChanged : (name, visibleItems) ->
     size = cc.director.getWinSize()

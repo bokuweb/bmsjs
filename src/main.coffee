@@ -6,6 +6,11 @@ cc.game.onStart = ->
   resList     = require './resource'
     .resList
 
+  unless cc.sys.isNative
+    require '../lib/enchant'
+    enchant()
+    cc.enchant = new Core 0, 0
+
   if not cc.sys.isNative and document.getElementById "cocosLoading"
     document.body.removeChild(document.getElementById "cocosLoading")
 
@@ -25,7 +30,7 @@ cc.game.onStart = ->
     cc.view.resizeWithBrowserSize off
   cc.director.setContentScaleFactor 2
 
-  LoaderScene.preload resList, ->
+  cc.LoaderScene.preload resList, ->
     cc.director.runScene new MenuScene()
   , this
 
