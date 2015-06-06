@@ -131,8 +131,6 @@ MenuController = cc.Layer.extend
     if cc.sys.isNative
       text = jsb.fileUtils.getStringFromFile "bms/va.txt"
       cc.log text
-
-    cc.loader.loadTxt "bms/va.txt", (err, text) =>
       parser = new Parser()
       bms = parser.parse text
       resources = []
@@ -142,6 +140,17 @@ MenuController = cc.Layer.extend
       cc.LoaderScene.preload resources, ->
         cc.director.runScene new AppScene bms, prefix
       , this
+    else
+      cc.loader.loadTxt "bms/va.txt", (err, text) =>
+        parser = new Parser()
+        bms = parser.parse text
+        resources = []
+        for k, v of bms.wav
+          resources.push prefix + v 
+          cc.log v
+        cc.LoaderScene.preload resources, ->
+          cc.director.runScene new AppScene bms, prefix
+        , this
 
   _onChanged : (name, visibleItems) ->
     size = cc.director.getWinSize()
