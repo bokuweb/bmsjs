@@ -19,7 +19,7 @@ cc.game.onStart = ->
       searchPaths.push "res"
       searchPaths.push "src"
       searchPaths.push "bms"
-      searchPaths.push "res/bms"
+
     jsb.fileUtils.setSearchPaths searchPaths
 
   if cc.sys.isMobile or cc.sys.isNative

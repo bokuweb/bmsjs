@@ -5,15 +5,16 @@ res           = require './resource'
   .resObjs
 
 # TODO : cson化
+# ファイルはutf-8の*.txtである必要がある
+# txtはresディレクトリの下に配置する必要あり
 menuList = [
-  {url : "res/va.txt", title : 'v_soflan0'}
-  {url : './bms/dq.bms', title : 'DRAGON QUEST V'}
-  {url : './bms/_parousia_A.bme', title : 'parousia_A'}
-  {url : './bms/7_n_ka08_bt7god.bms', title : '7_n_ka08'}
-  {url : 'bms/va.bms', title : 'v_soflan4'}
-  {url : 'res/bms/va.bms', title : 'テスト'}
-  {url : '.res/bms/va.bms', title : 'あいうえお'}
-  {url : 'bms/va.txt', title : 'v_soflan7'}
+  {url : "res/bms/va3.txt", title : 'v_soflan0'}
+  {url : "res/bms/dq.txt", title : 'DRAGON QUEST V', artist : 'mattaku'}
+  {url : 'bms/7_n_ka08_bt7god.txt', title : '7_n_ka08_bt7god'}
+  {url : 'bms/7_n_ka08_bt8master.txt', title : '7_n_ka08_btmaster'}
+  {url : 'bms/va.txt', title : 'テスト'}
+  {url : './bms/va.bms', title : 'あいうえお'}
+  {url : './bms/va.txt', title : 'v_soflan7'}
   {url : './bms/va.bms', title : 'v_soflan8'}
   {url : './bms/va.bms', title : 'v_soflan9'}
   {url : './bms/va.bms', title : 'v_soflan10'}
@@ -74,11 +75,11 @@ MenuController = cc.Layer.extend
       @_itemMenu.y = 0
     @addChild @_itemMenu
 
-    search = new SearchLayer()
-    search.init @_itemMenu.children
-    search.start()
-    search.addListener 'change', @_onChanged.bind this
-    @addChild search
+    #search = new SearchLayer()
+    #search.init @_itemMenu.children
+    #search.start()
+    #search.addListener 'change', @_onChanged.bind this
+    #@addChild search
 
     # 'browser' can use touches or mouse.
     # The benefit of using 'touches' in a browser, is that it works both with mouse events or touches events
@@ -127,10 +128,14 @@ MenuController = cc.Layer.extend
     id = sender.getLocalZOrder() - 10000
     url = menuList[id].url
     prefix = @_getPrefix url
+    cc.log url
 
     if cc.sys.isNative
-      text = jsb.fileUtils.getStringFromFile "bms/va.txt"
+      text = jsb.fileUtils.getStringFromFile url
       cc.log text
+      cc.log url
+      cc.log jsb.fileUtils.fullPathForFilename url
+      cc.log jsb.fileUtils.isFileExist url
       parser = new Parser()
       bms = parser.parse text
       resources = []
@@ -141,7 +146,7 @@ MenuController = cc.Layer.extend
         cc.director.runScene new AppScene bms, prefix
       , this
     else
-      cc.loader.loadTxt "bms/va.txt", (err, text) =>
+      cc.loader.loadTxt url, (err, text) =>
         parser = new Parser()
         bms = parser.parse text
         resources = []
