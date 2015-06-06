@@ -159,7 +159,7 @@ Parser = cc.Class.extend
       ret[i] = value
     return ret
 
-  # 全体をパースした後でtiming等を修正
+  # 全体をパースした後でtiming等を修正
   _modifyAfterParse = () ->
     bpm = @bms.bpm
     time = 0

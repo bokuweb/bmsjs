@@ -4,7 +4,6 @@ SearchLayer   = require './searchLayer'
 res           = require './resource'
   .resObjs
 
-
 # TODO : cson化
 menuList = [
   {url : "res/va.txt", title : 'v_soflan0'}
@@ -30,7 +29,6 @@ menuList = [
 ]
 
 
-
 MenuBaseLayer = cc.Layer.extend
   ctor : ->
     @_super()
@@ -51,11 +49,7 @@ MenuController = cc.Layer.extend
   ctor : ->
     @_super()
     @_offsetY = 0
-    @_debug = new cc.LabelTTF "test", "Arial", 24
-    @_debug.x =  120
-    @_debug.y =  200
-    @addChild @_debug
-    
+
   init : (list, x, @_linespace) ->
     #var closeItem = new cc.MenuItemImage(s_pathClose, s_pathClose, this.onCloseCallback, this);
     #closeItem.x = winSize.width - 30;
@@ -63,7 +57,6 @@ MenuController = cc.Layer.extend
     director = cc.director
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
-    @_debug.setString "init"
     for v, i in list
       label = new cc.LabelTTF v.title, "Arial", 24
       menuItem = new cc.MenuItemLabel label, @_onMenuCallback, this
@@ -81,11 +74,11 @@ MenuController = cc.Layer.extend
       @_itemMenu.y = 0
     @addChild @_itemMenu
 
-    #search = new SearchLayer()
-    #search.init @_itemMenu.children
-    #search.start()
-    #search.addListener 'change', @_onChanged.bind this
-    #@addChild search
+    search = new SearchLayer()
+    search.init @_itemMenu.children
+    search.start()
+    search.addListener 'change', @_onChanged.bind this
+    @addChild search
 
     # 'browser' can use touches or mouse.
     # The benefit of using 'touches' in a browser, is that it works both with mouse events or touches events
@@ -136,14 +129,16 @@ MenuController = cc.Layer.extend
     prefix = @_getPrefix url
 
     if cc.sys.isNative
-      text = jsb.fileUtils.getStringFromFile "res/va.txt"
+      text = jsb.fileUtils.getStringFromFile "bms/va.txt"
       cc.log text
 
-    cc.loader.loadTxt "res/va.txt", (err, text) =>
+    cc.loader.loadTxt "bms/va.txt", (err, text) =>
       parser = new Parser()
       bms = parser.parse text
       resources = []
-      resources.push prefix + v for k, v of bms.wav
+      for k, v of bms.wav
+        resources.push prefix + v 
+        cc.log v
       cc.LoaderScene.preload resources, ->
         cc.director.runScene new AppScene bms, prefix
       , this

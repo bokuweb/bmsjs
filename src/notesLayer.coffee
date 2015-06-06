@@ -29,13 +29,14 @@ NotesLayer = cc.Layer.extend
     for v, i in bms.data
       node = new MeasureNode @_skin.nodeImage.src, @_timer
       node.x = @_skin.nodeImage.x
+      node.y = -node.height
       node.timing = v.timing
       node.appendFallParams bms.bpms, time, @_skin.fallDist
       @_genTime.push time
       time = @_getGenTime node, @_skin.fallDist
       @_nodes.push node
       node.retain()
-      
+
     @_genTime.sort (a, b) -> a - b
 
     bg = new cc.Sprite @_skin.bgImage.src
