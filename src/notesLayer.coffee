@@ -34,6 +34,8 @@ NotesLayer = cc.Layer.extend
       @_genTime.push time
       time = @_getGenTime node, @_skin.fallDist
       @_nodes.push node
+      node.retain()
+      
     @_genTime.sort (a, b) -> a - b
 
     bg = new cc.Sprite @_skin.bgImage.src
@@ -84,6 +86,7 @@ NotesLayer = cc.Layer.extend
         note.key = i
         note.clear = false
         note.appendFallParams bpms, time, fallDist
+        note.retain()
         @_notes[measure].push note
     return
 
@@ -156,6 +159,7 @@ NotesLayer = cc.Layer.extend
     # FIXME : ここでエラー
     #         配列にプールしているのがまずい？
     #         cc.poolを使わなくては？
+    #         propのみ配列に保持。spriteはcc.pool
     @addChild @_nodes[@_index]
     @_nodes[@_index].start()
     for note in @_notes[@_index]

@@ -10,6 +10,8 @@ MeasureNode = FallObj.extend
     
   update : ->
     @_super()
-    if @y < @dstY[@index] then @removeFromParent on
+    if @y < @dstY[@index]
+      @removeFromParent on
+      @release()
 
 module.exports = MeasureNode

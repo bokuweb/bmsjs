@@ -135,8 +135,9 @@ MenuController = cc.Layer.extend
     url = menuList[id].url
     prefix = @_getPrefix url
 
-    text = jsb.fileUtils.getStringFromFile "res/va.txt"
-    cc.log text
+    if cc.sys.isNative
+      text = jsb.fileUtils.getStringFromFile "res/va.txt"
+      cc.log text
 
     cc.loader.loadTxt "res/va.txt", (err, text) =>
       parser = new Parser()
