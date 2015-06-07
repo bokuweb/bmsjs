@@ -8,56 +8,56 @@ skin =
     y : 340
   score :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.35
     margin : 3
     x : 202
     y : 175
   pgreatNum :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
-    scale  : 0.3
-    margin : 2
+    width  : 29.5
+    height : 36.5
+    scale  : 0.35
+    margin : 3
     x : 296
     y : 174
   greatNum :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
-    scale  : 0.3
+    width  : 29.5
+    height : 36.5
+    scale  : 0.35
     margin : 2
     x : 296
     y : 165
   goodNum :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.35
     margin : 3
     x : 296
     y : 156
   badNum :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.35
     margin : 3
     x : 297
     y : 147
   poorNum :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.35
     margin : 3
     x : 297
     y : 138
   comboNum :
     src    : '../res/numeral-font.png'
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.35
     margin : 3
     x : 211
