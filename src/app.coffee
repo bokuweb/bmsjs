@@ -97,7 +97,7 @@ skin =
       height : 37.1
       scale  : 0.3
       margin : 2
-      x : 296
+      x : 302
       y : 174
     greatNum :
       src    : res.numeralImage
@@ -105,7 +105,7 @@ skin =
       height : 37.1
       scale  : 0.3
       margin : 2
-      x : 296
+      x : 302
       y : 165
     goodNum :
       src    : res.numeralImage
@@ -113,7 +113,7 @@ skin =
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 296
+      x : 302
       y : 156
     badNum :
       src    : res.numeralImage
@@ -121,7 +121,7 @@ skin =
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 297
+      x : 302
       y : 147
     poorNum :
       src    : res.numeralImage
@@ -129,7 +129,7 @@ skin =
       height : 37.1
       scale  : 0.35
       margin : 3
-      x : 297
+      x : 302
       y : 138
     comboNum :
       src    : res.numeralImage
@@ -145,20 +145,22 @@ skin =
     height : 37.1
     scale  : 0.35
     margin : 3
-    x : 400
-    y : 580
+    x : 472
+    y : 160
+    z : 10
   plytime :
     src    : res.numeralImage
     width  : 25
     height : 37.1
-    scale  : 0.35
+    scale  : 0.2
     margin : 3
+    z : 10
     minuite :
-      x : 160
-      y : 200
+      x : 580
+      y : 170
     second :
-      x : 190
-      y : 200
+      x : 600
+      y : 170
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -223,10 +225,10 @@ AppLayer = cc.Layer.extend
 
     @_bpm = new BpmLayer skin.bpm, @_timer, @_bms.bpms
     @_bpm.init()
-    @addChild @_bpm
+    @addChild @_bpm, skin.bpm.z
     @_plytime = new PlaytimeLayer skin.plytime, @_timer
     @_plytime.init()
-    @addChild @_plytime
+    @addChild @_plytime, skin.plytime.z
 
   start : ->
     @_notesLayer.start on
