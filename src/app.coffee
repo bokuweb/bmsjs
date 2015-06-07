@@ -14,6 +14,11 @@ skin =
   body :
     bgImage :
       src : res.bgImage
+    turntable :
+      src : res.turntableImage
+      x : 125
+      y : 252
+      z : 10
   notes :
     fallDist : 320
     keyNum   : 8
@@ -69,8 +74,8 @@ skin =
       z      : 10
     label :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
+      width  : 29.5
+      height : 36.5
       scale  : 0.3
       margin : 3
       x : 362
@@ -85,64 +90,64 @@ skin =
       y : 340
     score :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
+      width  : 29.5
+      height : 36.5
       scale  : 0.35
       margin : 3
       x : 202
       y : 175
     pgreatNum :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
-      scale  : 0.3
-      margin : 2
+      width  : 29.5
+      height : 36.5
+      scale  : 0.2
+      margin : 1
       x : 302
       y : 174
     greatNum :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
-      scale  : 0.3
-      margin : 2
+      width  : 29.5
+      height : 36.5
+      scale  : 0.2
+      margin : 1
       x : 302
       y : 165
     goodNum :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
-      scale  : 0.35
-      margin : 3
+      width  : 29.5
+      height : 36.5
+      scale  : 0.2
+      margin : 1
       x : 302
       y : 156
     badNum :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
-      scale  : 0.35
-      margin : 3
+      width  : 29.5
+      height : 36.5
+      scale  : 0.2
+      margin : 1
       x : 302
       y : 147
     poorNum :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
-      scale  : 0.35
-      margin : 3
+      width  : 29.5
+      height : 36.5
+      scale  : 0.2
+      margin : 1
       x : 302
       y : 138
     comboNum :
       src    : res.numeralImage
-      width  : 25
-      height : 37.1
+      width  : 29.5
+      height : 36.5
       scale  : 0.35
-      margin : 3
+      margin : 1
       x : 211
       y : 156
   bpm :
     src    : res.numeralImage
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.35
     margin : 3
     x : 472
@@ -150,8 +155,8 @@ skin =
     z : 10
   plytime :
     src    : res.numeralImage
-    width  : 25
-    height : 37.1
+    width  : 29.5
+    height : 36.5
     scale  : 0.2
     margin : 3
     z : 10
@@ -259,6 +264,13 @@ AppLayer = cc.Layer.extend
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height - 240
     @addChild bg, 1
+
+    turntable = new cc.Sprite res.turntableImage
+    turntable.x = skin.body.turntable.x
+    turntable.y = skin.body.turntable.y
+    @addChild turntable, skin.body.turntable.z
+    turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
+
 
   _addKey : ->
     toucheventListener = cc.EventListener.create
