@@ -16,6 +16,7 @@ Note = FallObj.extend
 
     if time > @timing +  @_removeTime
       @removeFromParent on
+      @release()
       return
 
 module.exports = Note

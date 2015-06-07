@@ -1,5 +1,4 @@
 GreatEffect = cc.Sprite.extend
-
   ctor : (src, params)->
     w = params.width
     h = params.height
@@ -9,14 +8,19 @@ GreatEffect = cc.Sprite.extend
     for i in [0...num]
       frame = new cc.SpriteFrame src, cc.rect w * (i % params.row), h * ~~(i / params.row), w, h
       animationframe.push frame
+    @_animation = new cc.Animation animationframe, params.delay
+    @_animation.retain()
 
-    animation = new cc.Animation animationframe, params.delay
-    cb = -> @removeFromParent on
-    @_action = cc.sequence(
-      new cc.animate animation
+  run : ->
+    cb = ->
+      @removeFromParent on
+      @_animation.release()
+      @release()
+
+    action = cc.sequence(
+      new cc.Animate @_animation
       cc.CallFunc.create cb, this
     )
-
-  run : -> @runAction @_action
+    @runAction action
 
 module.exports = GreatEffect

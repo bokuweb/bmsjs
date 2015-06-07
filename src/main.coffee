@@ -12,7 +12,15 @@ cc.game.onStart = ->
   cc.view.enableRetina off
   cc.view.adjustViewPort on
 
-  cc.log cc.sys.isNative
+  if cc.sys.isNative
+    searchPaths = jsb.fileUtils.getSearchPaths()
+    searchPaths.push 'script'
+    if cc.sys.os is cc.sys.OS_IOS or  cc.sys.os == cc.sys.OS_OSX
+      searchPaths.push "res"
+      searchPaths.push "src"
+      searchPaths.push "bms"
+
+    jsb.fileUtils.setSearchPaths searchPaths
 
   if cc.sys.isMobile or cc.sys.isNative
     #height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
@@ -23,9 +31,10 @@ cc.game.onStart = ->
     policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.view.resizeWithBrowserSize off
+  cc.director.setProjection cc.Director.PROJECTION_2D
   cc.director.setContentScaleFactor 2
 
-  LoaderScene.preload resList, ->
+  cc.LoaderScene.preload resList, ->
     cc.director.runScene new MenuScene()
   , this
 

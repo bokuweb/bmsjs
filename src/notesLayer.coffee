@@ -29,11 +29,14 @@ NotesLayer = cc.Layer.extend
     for v, i in bms.data
       node = new MeasureNode @_skin.nodeImage.src, @_timer
       node.x = @_skin.nodeImage.x
+      node.y = -node.height
       node.timing = v.timing
       node.appendFallParams bms.bpms, time, @_skin.fallDist
       @_genTime.push time
       time = @_getGenTime node, @_skin.fallDist
       @_nodes.push node
+      node.retain()
+
     @_genTime.sort (a, b) -> a - b
 
     bg = new cc.Sprite @_skin.bgImage.src
@@ -42,7 +45,6 @@ NotesLayer = cc.Layer.extend
     bg.y = @_skin.bgImage.y
     bg.setOpacity 180
     @addChild bg, 0
-
     @_greatEffectsLayer.init bms.totalNote
     @addChild @_greatEffectsLayer, 10
 
@@ -85,6 +87,7 @@ NotesLayer = cc.Layer.extend
         note.key = i
         note.clear = false
         note.appendFallParams bpms, time, fallDist
+        note.retain()
         @_notes[measure].push note
     return
 
@@ -154,6 +157,10 @@ NotesLayer = cc.Layer.extend
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()
 
+    # FIXME : ここでエラー
+    #         配列にプールしているのがまずい？
+    #         cc.poolを使わなくては？
+    #         propのみ配列に保持。spriteはcc.pool
     @addChild @_nodes[@_index]
     @_nodes[@_index].start()
     for note in @_notes[@_index]

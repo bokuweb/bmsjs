@@ -154,12 +154,12 @@ skin =
     scale  : 0.35
     margin : 3
     minuite :
-      x : 600
-      y : 580
+      x : 160
+      y : 200
     second :
-      x : 700
-      y : 580
-      
+      x : 190
+      y : 200
+
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
@@ -224,7 +224,6 @@ AppLayer = cc.Layer.extend
     @_bpm = new BpmLayer skin.bpm, @_timer, @_bms.bpms
     @_bpm.init()
     @addChild @_bpm
-
     @_plytime = new PlaytimeLayer skin.plytime, @_timer
     @_plytime.init()
     @addChild @_plytime

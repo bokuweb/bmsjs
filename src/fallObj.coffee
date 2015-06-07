@@ -52,5 +52,4 @@ fallObj = cc.Sprite.extend
     measureTime = 240000 / bpm
     fallDist / measureTime
 
-
 module.exports = fallObj

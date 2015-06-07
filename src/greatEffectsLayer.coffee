@@ -17,6 +17,7 @@ GreatEffectLayer = cc.Layer.extend
       effect = new GreatEffect @_res.src, params
       effect.y = -effect.y
       @_effects.push effect
+      effect.retain()
     return
 
   run : (x, y)->
