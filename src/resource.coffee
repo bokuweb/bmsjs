@@ -13,7 +13,7 @@ resObjs =
   testImage : "res/test.png"
   meterImage : "res/gauge.png"
   numeralImage : "res/numeral-font.png"
-  test : "bms/dq.txt"
+  turntableImage : "res/turntable.png"
 
 resList = []
 

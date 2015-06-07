@@ -16,9 +16,9 @@ NumeralLayerTest = cc.Class.extend
 
             numeralLayer = new NumeralLayer
               src    :  '../res/numeral-font.png'
-              width  : 25
-              height : 37.1
-              scale  : 0.6
+              width  : 29.5
+              height : 36.5
+              scale  : 0.35
               margin : 3
             numeralLayer.init 10, 0
             size = cc.director.getWinSize()
@@ -53,9 +53,9 @@ NumeralLayerTest = cc.Class.extend
 
             numeralLayer = new NumeralLayer
               src    :  '../res/numeral-font.png'
-              width  : 25
-              height : 37.1
-              scale  : 1.2
+              width  : 29.5
+              height : 36.5
+              scale  : 0.7
               margin : 3
             numeralLayer.init 10, 0
             size = cc.director.getWinSize()
