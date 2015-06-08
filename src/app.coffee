@@ -172,9 +172,13 @@ AppLayer = cc.Layer.extend
     @_super()
     @_timer = new Timer()
     #@_addKey()
+
     @_addBackground()
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
+    @addChild @_audio
+
+    ###
     @_keyboard = new KeyboardService @_timer
 
     # FIXME : move to argument
@@ -189,9 +193,11 @@ AppLayer = cc.Layer.extend
       16
     ]
 
-    @_keyboard.init()
+    _keyboard.init()
     @_keyboard.addListener v, @_onKeydown.bind this, id for v, id in keyConfig
     @addChild @_keyboard
+    ###
+
 
     # FIXME : move to argument
     config =
@@ -210,8 +216,9 @@ AppLayer = cc.Layer.extend
     @_notesLayer.addListener 'judge', @_onJudge.bind this
 
     @addChild @_notesLayer, skin.notes.z
-    @addChild @_audio
 
+
+    ###
     @_rate = new RateLayer skin.rate
     @_rate.init
       # FIXME : move to argument
@@ -234,13 +241,14 @@ AppLayer = cc.Layer.extend
     @_plytime = new PlaytimeLayer skin.plytime, @_timer
     @_plytime.init()
     @addChild @_plytime, skin.plytime.z
-
+    ###
+    
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
-    @_rate.start()
-    @_bpm.start()
-    @_plytime.start()
+    #@_rate.start()
+    #@_bpm.start()
+    #@_plytime.start()
     @_timer.start()
 
   _onKeydown : (key, time, id)->
