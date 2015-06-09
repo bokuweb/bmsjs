@@ -14,6 +14,7 @@ resObjs =
   meterImage : "res/gauge.png"
   numeralImage : "res/numeral-font.png"
   turntableImage : "res/turntable.png"
+  soundonlyImage : "res/sound-only.png"
 
 resList = []
 
