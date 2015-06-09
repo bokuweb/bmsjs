@@ -1,7 +1,7 @@
 EventObserver     = require './eventObserver'
 Judge             = require './judge'
 Note              = require './note'
-GreatEffectsLayer = require './greatEffectsLayer'
+#GreatEffectsLayer = require './greatEffectsLayer'
 KeyEffectsLayer   = require './keyEffectsLayer'
 MeasureNode       = require './measureNode'
 
@@ -10,7 +10,7 @@ NotesLayer = cc.Layer.extend
     @_super()
     @_notifier = new EventObserver()
     @_judge = new Judge()
-    @_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
+    #@_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
     @_keyEffectsLayer = new KeyEffectsLayer @_skin.keyEffect
     @_notes = []
     @_nodes    = []
@@ -45,8 +45,8 @@ NotesLayer = cc.Layer.extend
     bg.y = @_skin.bgImage.y
     bg.setOpacity 180
     @addChild bg, 0
-    @_greatEffectsLayer.init bms.totalNote
-    @addChild @_greatEffectsLayer, 10
+    #@_greatEffectsLayer.init bms.totalNote
+    #@addChild @_greatEffectsLayer, 10
 
     @_generate bms, measure, time for time, measure in @_genTime
     xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
@@ -132,7 +132,7 @@ NotesLayer = cc.Layer.extend
           if judgement is 'pgreat' or 'great'
             size = cc.director.getWinSize()
             y = size.height - @_skin.fallDist
-            @_greatEffectsLayer.run note.x, y
+            #@_greatEffectsLayer.run note.x, y
           return
         else
           @_notifier.trigger 'judge', 'epoor'
@@ -147,10 +147,10 @@ NotesLayer = cc.Layer.extend
     if @_isAuto
       for child in @children when child.clear is false
         if @_timer.get() >= child.timing
-          @_keyEffectsLayer.show child.key, 0.5
+          #@_keyEffectsLayer.show child.key, 0.5
           child.clear = true
           y = cc.director.getWinSize().height - @_skin.fallDist
-          @_greatEffectsLayer.run child.x, y
+          #@_greatEffectsLayer.run child.x, y
           @_notifier.trigger 'hit', child.wav
           #@_notifier.trigger 'judge', 'pgreat'
 

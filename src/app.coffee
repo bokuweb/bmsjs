@@ -45,7 +45,7 @@ skin =
     bgImage :
       src : res.noteBgImage
       x   : 210
-      y   : 280
+      y   : 160
     greatEffect :
       src    : res.greatEffectImage
       width  : 80
@@ -268,16 +268,16 @@ AppLayer = cc.Layer.extend
     @addChild bg, 0
 
     # test image
-    bg = new cc.Sprite "res/test.png"
-    bg.x = cc.director.getWinSize().width / 2
-    bg.y = cc.director.getWinSize().height - 240
-    @addChild bg, 1
+    #bg = new cc.Sprite "res/test.png"
+    #bg.x = cc.director.getWinSize().width / 2
+    #bg.y = cc.director.getWinSize().height - 240
+    #@addChild bg, 1
 
-    turntable = new cc.Sprite res.turntableImage
-    turntable.x = skin.body.turntable.x
-    turntable.y = skin.body.turntable.y
-    @addChild turntable, skin.body.turntable.z
-    turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
+    #turntable = new cc.Sprite res.turntableImage
+    #turntable.x = skin.body.turntable.x
+    #turntable.y = skin.body.turntable.y
+    #@addChild turntable, skin.body.turntable.z
+    #turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
 
 
   _addKey : ->

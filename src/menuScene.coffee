@@ -10,23 +10,6 @@ res           = require './resource'
 menuList = [
   {url : "res/bms/va2.txt", title : 'v_soflan0'}
   {url : "res/bms/dq.txt", title : 'DRAGON QUEST V', artist : 'mattaku'}
-  {url : 'bms/7_n_ka08_bt7god.txt', title : '7_n_ka08_bt7god'}
-  {url : 'bms/7_n_ka08_bt8master.txt', title : '7_n_ka08_btmaster'}
-  {url : 'bms/va.txt', title : 'テスト'}
-  {url : './bms/va.bms', title : 'あいうえお'}
-  {url : './bms/va.txt', title : 'v_soflan7'}
-  {url : './bms/va.bms', title : 'v_soflan8'}
-  {url : './bms/va.bms', title : 'v_soflan9'}
-  {url : './bms/va.bms', title : 'v_soflan10'}
-  {url : './bms/va.bms', title : 'v_soflan11'}
-  {url : './bms/va.bms', title : 'v_soflan12'}
-  {url : './bms/va.bms', title : 'v_soflan13'}
-  {url : './bms/va.bms', title : 'v_soflan14'}
-  {url : './bms/va.bms', title : 'bar'}
-  {url : './bms/va.bms', title : 'foo'}
-  {url : './bms/va.bms', title : 'fuga'}
-  {url : './bms/va.bms', title : 'fugafuga'}
-  {url : './bms/va.bms', title : 'hoge'}
 ]
 
 
