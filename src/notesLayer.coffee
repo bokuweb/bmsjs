@@ -151,8 +151,9 @@ NotesLayer = cc.Layer.extend
           child.clear = true
           y = cc.director.getWinSize().height - @_skin.fallDist
           @_greatEffectsLayer.run child.x, y
-          @_notifier.trigger 'judge', 'pgreat'
           @_notifier.trigger 'hit', child.wav
+          #@_notifier.trigger 'judge', 'pgreat'
+
 
     return unless @_genTime[@_index]?
     return unless @_genTime[@_index] <= @_timer.get()

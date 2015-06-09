@@ -8,7 +8,7 @@ res           = require './resource'
 # ファイルはutf-8の*.txtである必要がある
 # txtはresディレクトリの下に配置する必要あり
 menuList = [
-  {url : "res/bms/va3.txt", title : 'v_soflan0'}
+  {url : "res/bms/va2.txt", title : 'v_soflan0'}
   {url : "res/bms/dq.txt", title : 'DRAGON QUEST V', artist : 'mattaku'}
   {url : 'bms/7_n_ka08_bt7god.txt', title : '7_n_ka08_bt7god'}
   {url : 'bms/7_n_ka08_bt8master.txt', title : '7_n_ka08_btmaster'}
