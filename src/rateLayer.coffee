@@ -5,6 +5,7 @@ RateLayer = cc.Layer.extend
     @_super()
     @_label = new NumeralLayer @_skin.label
     @_sprites = []
+    @_count = 0
 
   init : (@_config)->
     for i in [0...@_config.num]
@@ -24,6 +25,8 @@ RateLayer = cc.Layer.extend
   start : -> @scheduleUpdate()
 
   update : ->
+    @_count += 1
+    return unless @_count % 4 is 0
     w = @_skin.meter.width
     h = @_skin.meter.height
     for i in [0...@_config.num]
