@@ -75,11 +75,11 @@ MenuController = cc.Layer.extend
       @_itemMenu.y = 0
     @addChild @_itemMenu
 
-    #search = new SearchLayer()
-    #search.init @_itemMenu.children
-    #search.start()
-    #search.addListener 'change', @_onChanged.bind this
-    #@addChild search
+    search = new SearchLayer()
+    search.init @_itemMenu.children
+    search.start()
+    search.addListener 'change', @_onChanged.bind this
+    @addChild search
 
     # 'browser' can use touches or mouse.
     # The benefit of using 'touches' in a browser, is that it works both with mouse events or touches events
