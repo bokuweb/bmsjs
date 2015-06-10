@@ -1,9 +1,8 @@
-
 *---------------------- HEADER FIELD
 #PLAYER 1
 #GENRE retrogressive
 #TITLE V(SOFT LANDING PARADISE)
-#ARTIST µª—≤”› (SUGI Åï OSAM)Å@feat. VAKA
+#ARTIST ÔΩµÔΩªÔæëÔΩ≤ÔæìÔæù (SUGI ÔºÜ OSAM)„ÄÄfeat. VAKA
 #BPM 450
 #PLAYLEVEL 0
 #RANK 3
@@ -11,6 +10,7 @@
 #STAGEFILE 
 %EMAIL 
 %URL 
+
 
 #WAV12 17.wav
 #WAV14 19.wav

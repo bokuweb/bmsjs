@@ -1,7 +1,6 @@
 ;Created by GDA Creator Professional Ver.0.16
-
 ;Header
-#TITLE DRAGON QUEST VÅ`êÌì¨Å`
+#TITLE DRAGON QUEST V
 #ARTIST mattaku
 #GENRE game music(7KEYS)
 #BPM 162
