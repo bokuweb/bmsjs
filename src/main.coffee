@@ -1,8 +1,8 @@
 # TODO : add arg path to bms etc.
+cc.game.run()
+
 cc.game.onStart = ->
   MenuScene   = require './menuScene'
-  LoaderScene = require './loaderScene'
-  Parser      = require './parser'
   resList     = require './resource'
     .resList
 
@@ -38,4 +38,4 @@ cc.game.onStart = ->
     cc.director.runScene new MenuScene()
   , this
 
-cc.game.run()
+

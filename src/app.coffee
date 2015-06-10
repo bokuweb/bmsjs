@@ -6,6 +6,7 @@ BpmLayer        = require './bpmLayer'
 PlaytimeLayer   = require './playtimeLayer'
 Timer           = require './timer'
 Audio           = require './audio'
+GameoverScene   = require './gameoverScene'
 res             = require './resource'
   .resObjs
 
@@ -211,6 +212,7 @@ AppLayer = cc.Layer.extend
     @_notesLayer.init @_bms
     @_notesLayer.addListener 'hit', @_onHit.bind this
     @_notesLayer.addListener 'judge', @_onJudge.bind this
+    @_notesLayer.addListener 'end', @_onEnd.bind this
 
     @addChild @_notesLayer, skin.notes.z
 
@@ -253,14 +255,33 @@ AppLayer = cc.Layer.extend
     @_bpm.start()
     @_playtime.start()
     @_timer.start()
+    #@scheduleUpdate()
 
-  _onKeydown : (key, time, id)->
+  ###
+  update : ->
+    # FIXME : calc play time
+    if @_timer.get() > 10000
+      cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
+  ###
+
+  onExit : ->
+    @_super()
+    @removeAllChildren on
+
+  _onKeydown : (key, time, id) ->
     @_notesLayer.onTouch key, time
 
-  _onHit : (event, wavId)->
+  _onHit : (event, wavId) ->
     @_audio.play wavId
 
-  _onJudge : (event, judge)->
+  _onEnd : (event) ->
+    @scheduleOnce @_changeSceneToGameOver, 5
+
+  _changeSceneToGameOver : ->
+    cc.log "change"
+    cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
+
+  _onJudge : (event, judge) ->
     @_rate.reflect judge
     @_stats.reflect judge
 
@@ -327,4 +348,6 @@ AppScene = cc.Scene.extend
     @addChild layer
     layer.start()
 
+  onExit : -> @removeAllChildren on
+  
 module.exports = AppScene
