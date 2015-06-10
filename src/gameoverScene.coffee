@@ -12,6 +12,12 @@ GameOverLayer = cc.Layer.extend
       onTouchBegan: @_onTouch.bind this
     cc.eventManager.addListener toucheventListener, this
 
+    if 'keyboard' of cc.sys.capabilities
+      cc.eventManager.addListener
+        event : cc.EventListener.KEYBOARD
+        onKeyPressed : @_onKeyPressed.bind this
+      , this
+
   onExit : ->
     @_super()
     @removeAllChildren on
@@ -32,6 +38,10 @@ GameOverLayer = cc.Layer.extend
       cc.director.runScene new cc.TransitionFade(1.2, new MenuScene())
       return true
     return false
+
+  _onKeyPressed : (key, event) ->
+    MenuScene = require './menuScene'
+    cc.director.runScene new cc.TransitionFade(1.2, new MenuScene())
 
 GameOverScene = cc.Scene.extend
 

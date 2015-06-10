@@ -155,13 +155,12 @@ NotesLayer = cc.Layer.extend
           @_notifier.trigger 'judge', 'pgreat'
 
 
-    return unless @_genTime[@_index]?
+    unless @_genTime[@_index]?
+      @_notifier.trigger 'end'
+      return
+
     return unless @_genTime[@_index] <= @_timer.get()
 
-    # FIXME : ここでエラー
-    #         配列にプールしているのがまずい？
-    #         cc.poolを使わなくては？
-    #         propのみ配列に保持。spriteはcc.pool
     @addChild @_nodes[@_index]
     @_nodes[@_index].start()
     for note in @_notes[@_index]
