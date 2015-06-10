@@ -258,7 +258,7 @@ AppLayer = cc.Layer.extend
 
   update : ->
     # FIXME : calc play time
-    if @_timer.get() > 90000
+    if @_timer.get() > 10000
       cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
 
   onExit : -> @removeAllChildren on

@@ -1,5 +1,4 @@
-MenuScene = require './menuScene'
-res       = require './resource'
+res = require './resource'
   .resObjs
 
 GameOverLayer = cc.Layer.extend
@@ -13,7 +12,9 @@ GameOverLayer = cc.Layer.extend
       onTouchBegan: @_onTouch.bind this
     cc.eventManager.addListener toucheventListener, this
 
-  onExit : -> @removeAllChildren on
+  onExit : ->
+    @_super()
+    @removeAllChildren on
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
@@ -22,7 +23,7 @@ GameOverLayer = cc.Layer.extend
     @addChild bg, 0
 
   _onTouch : (touch, event)->
-    time = @_timer.get()
+    MenuScene = require './menuScene'
     target = event.getCurrentTarget()
     locationInNode = target.convertToNodeSpace touch.getLocation()
     s = target.getContentSize()

@@ -40,7 +40,9 @@ MenuBaseLayer = cc.Layer.extend
     menu.init menuList, cc.director.getWinSize().width / 2, 50
     @addChild menu
 
-  onExit : -> @removeAllChildren on
+  onExit : ->
+    @_super()
+    @removeAllChildren on
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
@@ -106,7 +108,9 @@ MenuController = cc.Layer.extend
             y : deltaY
       , this
 
-  onExit : -> @removeAllChildren on
+  onExit : ->
+    @_super()
+    @removeAllChildren on
   
   _moveMenu : (delta) ->
     newY = @_itemMenu.y + delta.y
@@ -127,7 +131,6 @@ MenuController = cc.Layer.extend
       m[0] if m
 
   _onMenuCallback : (sender) ->
-
     @_offsetY = @_itemMenu.y
     id = sender.getLocalZOrder() - 10000
     url = menuList[id].url
@@ -192,6 +195,8 @@ MenuScene = cc.Scene.extend
     @addChild layer
     layer.start()
 
-  onExit : -> @removeAllChildren on
-  
+  onExit : ->
+    @_super()
+    @removeAllChildren on
+
 module.exports = MenuScene
