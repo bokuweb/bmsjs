@@ -6,6 +6,7 @@ BpmLayer        = require './bpmLayer'
 PlaytimeLayer   = require './playtimeLayer'
 Timer           = require './timer'
 Audio           = require './audio'
+GameoverScene   = require './gameoverScene'
 res             = require './resource'
   .resObjs
 
@@ -253,6 +254,14 @@ AppLayer = cc.Layer.extend
     @_bpm.start()
     @_playtime.start()
     @_timer.start()
+    @scheduleUpdate()
+
+  update : ->
+    # FIXME : calc play time
+    if @_timer.get() > 90000
+      cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
+
+  onExit : -> @removeAllChildren on
 
   _onKeydown : (key, time, id)->
     @_notesLayer.onTouch key, time
@@ -327,4 +336,6 @@ AppScene = cc.Scene.extend
     @addChild layer
     layer.start()
 
+  onExit : -> @removeAllChildren on
+  
 module.exports = AppScene
