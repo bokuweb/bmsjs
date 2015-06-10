@@ -17,7 +17,7 @@ skin =
     turntable :
       src : res.turntableImage
       x : 125
-      y : 252
+      y : 250
       z : 10
   notes :
     fallDist : 320
@@ -150,10 +150,10 @@ skin =
     height : 36.5
     scale  : 0.35
     margin : 3
-    x : 472
+    x : 443
     y : 160
     z : 10
-  plytime :
+  playtime :
     src    : res.numeralImage
     width  : 29.5
     height : 36.5
@@ -161,11 +161,11 @@ skin =
     margin : 3
     z : 10
     minuite :
-      x : 580
-      y : 170
+      x : 602
+      y : 174
     second :
-      x : 600
-      y : 170
+      x : 622
+      y : 174
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -234,16 +234,24 @@ AppLayer = cc.Layer.extend
     @_bpm = new BpmLayer skin.bpm, @_timer, @_bms.bpms
     @_bpm.init()
     @addChild @_bpm, skin.bpm.z
-    @_plytime = new PlaytimeLayer skin.plytime, @_timer
-    @_plytime.init()
-    @addChild @_plytime, skin.plytime.z
+    @_playtime = new PlaytimeLayer skin.playtime, @_timer
+    @_playtime.init()
+    @addChild @_playtime, skin.playtime.z
+
+    cc.log @_bms.animations.length
+    if @_bms.animations.length is 0
+      soundonly = new cc.Sprite res.soundonlyImage
+      soundonly.x = 500
+      soundonly.y = 400
+      soundonly.setOpacity 200
+      @addChild soundonly, 100
 
   start : ->
     @_notesLayer.start on
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()
-    @_plytime.start()
+    @_playtime.start()
     @_timer.start()
 
   _onKeydown : (key, time, id)->
@@ -266,11 +274,13 @@ AppLayer = cc.Layer.extend
     bg = new cc.Sprite "res/test.png"
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height - 240
+    bg.setOpacity 220
     @addChild bg, 1
 
     turntable = new cc.Sprite res.turntableImage
     turntable.x = skin.body.turntable.x
     turntable.y = skin.body.turntable.y
+    turntable.setOpacity 200
     @addChild turntable, skin.body.turntable.z
     turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
 
