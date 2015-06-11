@@ -5,6 +5,7 @@ GreatEffect = cc.Sprite.extend
     @_super src, cc.rect 0, 0, w, h
     animationframe = []
     num = params.row * params.colum
+
     for i in [0...num]
       frame = new cc.SpriteFrame src, cc.rect w * (i % params.row), h * ~~(i / params.row), w, h
       animationframe.push frame

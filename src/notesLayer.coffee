@@ -46,7 +46,7 @@ NotesLayer = cc.Layer.extend
     bg.setOpacity 180
     @addChild bg, 0
     @_greatEffectsLayer.init bms.totalNote
-    @addChild @_greatEffectsLayer, 10
+    @addChild @_greatEffectsLayer, 100
 
     @_generate bms, measure, time for time, measure in @_genTime
     xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
@@ -67,16 +67,23 @@ NotesLayer = cc.Layer.extend
     bpms = bms.bpms
     @_notes[measure] ?= []
 
+    @_whiteBatchNode = new cc.SpriteBatchNode white.src
+    @_blackBatchNode = new cc.SpriteBatchNode black.src
+    @_turntableBatchNode = new cc.SpriteBatchNode turntable.src
+    @addChild @_whiteBatchNode, 99
+    @addChild @_blackBatchNode, 99
+    @addChild @_turntableBatchNode, 99
+
     return unless bms.data[measure]?
     for key, i in bms.data[measure].note.key
       for timing, j in key.timing
         switch i
           when 0, 2, 4, 6
-            note = new Note white.src, @_timer, @_config.removeTime
+            note = new Note @_whiteBatchNode.getTexture(), @_timer, @_config.removeTime
           when 1, 3, 5
-            note = new Note black.src, @_timer, @_config.removeTime
+            note = new Note @_blackBatchNode.getTexture(), @_timer, @_config.removeTime
           when 7
-            note = new Note turntable.src, @_timer, @_config.removeTime
+            note = new Note @_turntableBatchNode.getTexture(), @_timer, @_config.removeTime
           else throw new Error "error unlnown note"
 
         note.x = @_calcNoteXCoordinate i
@@ -145,26 +152,32 @@ NotesLayer = cc.Layer.extend
   #
   update : ->
     if @_isAuto
-      for child in @children when child.clear is false
-        if @_timer.get() >= child.timing
-          @_keyEffectsLayer.show child.key, 0.5
-          child.clear = true
-          y = cc.director.getWinSize().height - @_skin.fallDist
-          @_greatEffectsLayer.run child.x, y
-          @_notifier.trigger 'hit', child.wav
-          @_notifier.trigger 'judge', 'pgreat'
-
+      for batchNode in @children
+        for note in batchNode.children when note.clear is false
+          if @_timer.get() >= note.timing
+            @_keyEffectsLayer.show note.key, 0.5
+            note.clear = true
+            y = cc.director.getWinSize().height - @_skin.fallDist
+            @_greatEffectsLayer.run note.x, y
+            @_notifier.trigger 'hit', note.wav
+            @_notifier.trigger 'judge', 'pgreat'
 
     unless @_genTime[@_index]?
       @_notifier.trigger 'end'
       return
 
     return unless @_genTime[@_index] <= @_timer.get()
-
-    @addChild @_nodes[@_index]
+    @addChild @_nodes[@_index], 99
     @_nodes[@_index].start()
     for note in @_notes[@_index]
-      @addChild note, 5
+      switch note.key
+        when 0, 2, 4, 6
+          @_whiteBatchNode.addChild note, 99
+        when 1, 3, 5
+          @_blackBatchNode.addChild note, 99
+        when 7
+          @_turntableBatchNode.addChild note, 99
+        else
       note.start()
     @_index++
 
