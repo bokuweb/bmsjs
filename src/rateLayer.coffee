@@ -7,7 +7,7 @@ RateLayer = cc.Layer.extend
     @_sprites = []
     @_count = 0
 
-  init : (@_config)->
+  init : (@_config) ->
     for i in [0...@_config.num]
       @_sprites[i] = new cc.Sprite @_skin.meter.src, cc.rect 0, 0, @_skin.meter.width, @_skin.meter.height
       @_sprites[i].x = @_skin.meter.x + i * @_skin.meter.width
@@ -29,7 +29,8 @@ RateLayer = cc.Layer.extend
     return unless @_count % 4 is 0
     w = @_skin.meter.width
     h = @_skin.meter.height
-    for i in [0...@_config.num]
+    base = if @_rate - 6 then 0 else @_rate
+    for i in [base...@_config.num]
       if i > @_config.clearVal
         if @_rate - 6 <= i * 2 < @_rate - 2
           @_sprites[i].setTextureRect cc.rect  ~~(Math.random() * 2) * 2 * w, 0, w, h

@@ -340,6 +340,10 @@ AppLayer = cc.Layer.extend
       return true
     return false
 
+#window.onblur = ->
+#  window.stop();
+
+
 AppScene = cc.Scene.extend
 
   ctor : (bms, prefix)->
