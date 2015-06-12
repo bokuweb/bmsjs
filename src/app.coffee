@@ -259,7 +259,7 @@ AppLayer = cc.Layer.extend
 
   update : ->
     if @_timer.get() > @bms.lastTime.note + 5000 and @_timer.get() > @bms.lastTime.bgm + 5000
-      cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
+      cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
 
   onExit : ->
     @_super()
@@ -274,9 +274,9 @@ AppLayer = cc.Layer.extend
   _onEnd : (event) ->
     @scheduleOnce @_changeSceneToGameOver, 5
 
-  _changeSceneToGameOver : ->
-    cc.log "change"
-    cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
+  #_changeSceneToGameOver : ->
+  #  cc.log "change"
+  #  cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene())
 
   _onJudge : (event, judge) ->
     @_rate.reflect judge

@@ -2,9 +2,11 @@ res = require './resource'
   .resObjs
 
 GameOverLayer = cc.Layer.extend
-  ctor : ->
+  ctor : (@_stats) ->
     @_super()
     @_addBackground()
+    @_MenuScene = require './menuScene'
+    console.dir stats
 
     toucheventListener = cc.EventListener.create
       event: cc.EventListener.TOUCH_ONE_BY_ONE
@@ -29,25 +31,23 @@ GameOverLayer = cc.Layer.extend
     @addChild bg, 0
 
   _onTouch : (touch, event)->
-    MenuScene = require './menuScene'
     target = event.getCurrentTarget()
     locationInNode = target.convertToNodeSpace touch.getLocation()
     s = target.getContentSize()
     rect = cc.rect 0, 0, s.width, s.height
     if cc.rectContainsPoint rect, locationInNode
-      cc.director.runScene new cc.TransitionFade(1.2, new MenuScene())
+      cc.director.runScene new cc.TransitionFade(1.2, new @_MenuScene())
       return true
     return false
 
   _onKeyPressed : (key, event) ->
-    MenuScene = require './menuScene'
-    cc.director.runScene new cc.TransitionFade(1.2, new MenuScene())
+    cc.director.runScene new cc.TransitionFade(1.2, new @_MenuScene())
 
 GameOverScene = cc.Scene.extend
 
-  ctor : (bms, prefix)->
+  ctor : (stats) ->
     @_super()
-    layer = new GameOverLayer()
+    layer = new GameOverLayer stats
     @addChild layer
 
 module.exports = GameOverScene
