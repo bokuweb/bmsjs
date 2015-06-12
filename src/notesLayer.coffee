@@ -67,25 +67,23 @@ NotesLayer = cc.Layer.extend
     bpms = bms.bpms
     @_notes[measure] ?= []
 
-    @_whiteBatchNode = new cc.SpriteBatchNode white.src
-    @_blackBatchNode = new cc.SpriteBatchNode black.src
-    @_turntableBatchNode = new cc.SpriteBatchNode turntable.src
-    @addChild @_whiteBatchNode, 99
-    @addChild @_blackBatchNode, 99
-    @addChild @_turntableBatchNode, 99
+    @_batchNodes = {}
+    @_batchNodes["white"] = new cc.SpriteBatchNode white.src
+    @_batchNodes["black"] = new cc.SpriteBatchNode black.src
+    @_batchNodes["turntable"] = new cc.SpriteBatchNode turntable.src
+    @addChild v, 100 for k, v of @_batchNodes
 
     return unless bms.data[measure]?
     for key, i in bms.data[measure].note.key
       for timing, j in key.timing
         switch i
-          when 0, 2, 4, 6
-            note = new Note @_whiteBatchNode.getTexture(), @_timer, @_config.removeTime
-          when 1, 3, 5
-            note = new Note @_blackBatchNode.getTexture(), @_timer, @_config.removeTime
-          when 7
-            note = new Note @_turntableBatchNode.getTexture(), @_timer, @_config.removeTime
+          when 0, 2, 4, 6 then type = "white"
+          when 1, 3, 5    then type = "black"
+          when 7          then type = "turntable"
           else throw new Error "error unlnown note"
 
+        note = new Note @_batchNodes[type].getTexture(), @_timer, @_config.removeTime
+        note.type = type
         note.x = @_calcNoteXCoordinate i
         note.y = -note.height
         note.setAnchorPoint cc.p(0.5,0)
@@ -163,21 +161,14 @@ NotesLayer = cc.Layer.extend
             @_notifier.trigger 'judge', 'pgreat'
 
     unless @_genTime[@_index]?
-      @_notifier.trigger 'end'
+      #@_notifier.trigger 'end'
       return
 
     return unless @_genTime[@_index] <= @_timer.get()
     @addChild @_nodes[@_index], 99
     @_nodes[@_index].start()
     for note in @_notes[@_index]
-      switch note.key
-        when 0, 2, 4, 6
-          @_whiteBatchNode.addChild note, 99
-        when 1, 3, 5
-          @_blackBatchNode.addChild note, 99
-        when 7
-          @_turntableBatchNode.addChild note, 99
-        else
+      @_batchNodes[note.type].addChild note, 99
       note.start()
     @_index++
 
@@ -190,5 +181,5 @@ NotesLayer = cc.Layer.extend
     for v, i in obj.dstY when v < size.height
       return ~~(obj.bpm.timing[i] - (v / obj.calcSpeed(obj.bpm.val[i], fallDist)))
     return 0
-    
+
 module.exports = NotesLayer

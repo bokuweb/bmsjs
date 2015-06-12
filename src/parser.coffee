@@ -20,11 +20,15 @@ Parser = cc.Class.extend
       bgms       : []
       animations : []
       bpms       : []
+      lastTime   : {}
 
     @wavMessages = []
 
+
   parse : (bms_text) ->
-    for row in bms_text.split('\n')
+    _ = require 'lodash'
+
+    for row in bms_text.split '\n'
       _parse.call @, row
 
     _modifyAfterParse.call @
@@ -38,7 +42,17 @@ Parser = cc.Class.extend
 
     @bms.totalNote = _calcTotalNote.call @
 
-    return @bms
+    # OPTIMIZE :
+    @bms.lastTime.bgm = if @bms.bgms.length is 0 then 0 else _.max(@bms.bgms, 'timing').timing
+    @bms.lastTime.note = _.max(_.map(_.last(@bms.data).note.key, (key) =>
+      if key.timing.length isnt 0
+        _.max(key.timing)
+      else 0
+    ))
+
+    console.log "@bms.lastTime.bgm = #{@bms.lastTime.bgm}"
+    console.log "@bms.lastTime.note = #{@bms.lastTime.note}"
+    @bms
 
   _parse = (row)->
     if row.substring(0, 1) isnt '#'
