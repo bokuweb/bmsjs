@@ -1,8 +1,9 @@
+_ = require 'lodash'
+
 SearchController = cc.Layer.extend
   ctor : (@_items) ->
 
   search : (txt) ->
-    _ = require 'lodash'
     visibleItems = _.filter @_items, (item) ->
       list = txt.split /\s*/
 

@@ -1,3 +1,5 @@
+_ = require 'lodash'
+
 Parser = cc.Class.extend
   ctor: ->
     @bms =
@@ -26,8 +28,6 @@ Parser = cc.Class.extend
 
 
   parse : (bms_text) ->
-    _ = require 'lodash'
-
     for row in bms_text.split '\n'
       _parse.call @, row
 
@@ -106,7 +106,7 @@ Parser = cc.Class.extend
         val : []
       meter: 1.0
       note :
-        key : ({ message: [], timing : [], id : [] } for _ in [0..8])
+        key : ({ message: [], timing : [], id : [] } for i in [0..8])
      }
 
   _parseChannelMsg = (msg)->
@@ -157,7 +157,7 @@ Parser = cc.Class.extend
   # ex. expand([1,2,3],6) == [1,0,2,0,3,0]
   _expand = (array, length) ->
     if array.length == 0
-      return (0 for _ in [0..length-1])
+      return (0 for i in [0..length-1])
     interval = length / array.length
     return ((if i % interval == 0 then array[i / interval] else 0) \
       for i in [0..length-1])
@@ -193,7 +193,7 @@ Parser = cc.Class.extend
       _wavTiming(time, bar, bpm, @wavMessages[i])
 
       l = bar.bpm.message.length
-      for val, _ in bar.bpm.message
+      for val, i in bar.bpm.message
         if val != 0
           bar.bpm.val.push(val)
           bar.bpm.timing.push(time)
