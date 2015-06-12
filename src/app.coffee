@@ -260,6 +260,7 @@ AppLayer = cc.Layer.extend
   update : ->
     if @_timer.get() > @_bms.endTime + 5000
       @unscheduleUpdate()
+      @_timer.stop()
       cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
 
   onExit : ->

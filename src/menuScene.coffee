@@ -5,28 +5,14 @@ res           = require './resource'
   .resObjs
 
 # TODO : cson化
-# ファイルはutf-8の*.txtである必要がある
+# jsbで読む場合ファイルはutf-8の*.txtである必要がある
 # txtはresディレクトリの下に配置する必要あり
 menuList = [
-  {url : "res/bms/va2.txt", title : 'v_soflan0'}
-  {url : "res/bms/dq.txt", title : 'DRAGON QUEST V', artist : 'mattaku'}
-  {url : 'bms/7_n_ka08_bt7god.txt', title : '7_n_ka08_bt7god'}
-  {url : 'bms/7_n_ka08_bt8master.txt', title : '7_n_ka08_btmaster'}
-  {url : 'bms/va.txt', title : 'テスト'}
-  {url : './bms/va.bms', title : 'あいうえお'}
-  {url : './bms/va.txt', title : 'v_soflan7'}
-  {url : './bms/va.bms', title : 'v_soflan8'}
-  {url : './bms/va.bms', title : 'v_soflan9'}
-  {url : './bms/va.bms', title : 'v_soflan10'}
-  {url : './bms/va.bms', title : 'v_soflan11'}
-  {url : './bms/va.bms', title : 'v_soflan12'}
-  {url : './bms/va.bms', title : 'v_soflan13'}
-  {url : './bms/va.bms', title : 'v_soflan14'}
-  {url : './bms/va.bms', title : 'bar'}
-  {url : './bms/va.bms', title : 'foo'}
-  {url : './bms/va.bms', title : 'fuga'}
-  {url : './bms/va.bms', title : 'fugafuga'}
-  {url : './bms/va.bms', title : 'hoge'}
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku'}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]'}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}
 ]
 
 

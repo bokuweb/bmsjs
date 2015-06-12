@@ -19,6 +19,11 @@ GameOverLayer = cc.Layer.extend
         onKeyPressed : @_onKeyPressed.bind this
       , this
 
+    label = new cc.LabelTTF @_stats.score, "Arial", 24
+    label.x = cc.director.getWinSize().width / 2
+    label.y = cc.director.getWinSize().height / 2
+    @addChild label, 5
+    
   onExit : ->
     @_super()
     @removeAllChildren on
