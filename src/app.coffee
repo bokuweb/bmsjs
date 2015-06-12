@@ -249,7 +249,7 @@ AppLayer = cc.Layer.extend
       @addChild soundonly, 100
 
   start : ->
-    @_notesLayer.start on
+    @_notesLayer.start off
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()
@@ -259,14 +259,15 @@ AppLayer = cc.Layer.extend
 
   update : ->
     if @_timer.get() > @_bms.endTime + 5000
+      @unscheduleUpdate()
       cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
 
   onExit : ->
     @_super()
     @removeAllChildren on
 
-  _onKeydown : (key, time, id) ->
-    @_notesLayer.onTouch key, time
+  _onKeydown : (id, key, time) ->
+    @_notesLayer.onTouch id, time
 
   _onHit : (event, wavId) ->
     @_audio.play wavId
@@ -275,6 +276,7 @@ AppLayer = cc.Layer.extend
     @scheduleOnce @_changeSceneToGameOver, 5
 
   _onJudge : (event, judge) ->
+    #cc.log judge
     @_rate.reflect judge
     @_stats.reflect judge
 
@@ -288,7 +290,6 @@ AppLayer = cc.Layer.extend
     bg = new cc.Sprite "res/test.png"
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height - 240
-    bg.setOpacity 220
     @addChild bg, 1
 
     turntable = new cc.Sprite res.turntableImage

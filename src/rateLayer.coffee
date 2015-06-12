@@ -1,7 +1,7 @@
 NumeralLayer = require './numeralLayer'
 
 RateLayer = cc.Layer.extend
-  ctor : (@_skin)->
+  ctor : (@_skin) ->
     @_super()
     @_label = new NumeralLayer @_skin.label
     @_sprites = []
@@ -25,6 +25,7 @@ RateLayer = cc.Layer.extend
     @_label.x = @_skin.label.x
     @_label.y = @_skin.label.y
     @addChild @_label
+    @_label.reflect ~~(@_rate.toFixed())
 
   get : -> ~~(@_rate.toFixed())
 
@@ -55,11 +56,11 @@ RateLayer = cc.Layer.extend
       when "good"
         @_rate = if @_rate + @_config.goodIncVal >= 100 then 100 else @_rate + @_config.goodIncVal
       when "bad"
-        @_rate = if @_rate - @_config.badDecVal < 2 then 2 else @_rate - @_config.badDecVal
+        @_rate = if @_rate + @_config.badDecVal < 2 then 2 else @_rate + @_config.badDecVal
       when "poor"
-        @_rate = if @_rate - @_config.poorDecVal < 2 then 2 else @_rate - @_config.poorDecVal
+        @_rate = if @_rate + @_config.poorDecVal < 2 then 2 else @_rate + @_config.poorDecVal
       else
-        @_rate = if @_rate - @_config.poorDecVal < 2 then 2 else @_rate - @_config.poorDecVal
+        @_rate = if @_rate + @_config.poorDecVal < 2 then 2 else @_rate + @_config.poorDecVal
     @_label.reflect ~~(@_rate.toFixed())
 
 module.exports = RateLayer

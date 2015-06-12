@@ -1,6 +1,6 @@
 Judge = cc.Class.extend
-
-  constructor : (@_config)->
+  ctor : (@_config)->
+    console.dir @_config
 
   exec : (diffTime)->
     return "pgreat" if -@_config.pgreat < diffTime < @_config.pgreat

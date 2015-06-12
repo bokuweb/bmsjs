@@ -1,4 +1,4 @@
-_ = require 'lodash'
+#_ = require 'lodash'
 
 Parser = cc.Class.extend
   ctor: ->
@@ -28,7 +28,6 @@ Parser = cc.Class.extend
 
 
   parse : (bms_text) ->
-    console.log "@bms.endTime = #{@bms.endTime}"
     for row in bms_text.split '\n'
       @_parse row
 
@@ -52,7 +51,7 @@ Parser = cc.Class.extend
     #  else 0
     #))
 
-    console.log "@bms.endTime = #{@bms.endTime}"
+    cc.log "@bms.endTime = #{@bms.endTime}"
     @bms
 
   _parse : (row) ->

@@ -9,7 +9,7 @@ NotesLayer = cc.Layer.extend
   ctor : (@_skin, @_timer, @_config)->
     @_super()
     @_notifier = new EventObserver()
-    @_judge = new Judge()
+    @_judge = new Judge @_config.judge
     @_greatEffectsLayer = new GreatEffectsLayer @_skin.greatEffect
     @_keyEffectsLayer = new KeyEffectsLayer @_skin.keyEffect
     @_notes = []
@@ -46,7 +46,7 @@ NotesLayer = cc.Layer.extend
     bg.setOpacity 180
     @addChild bg, 0
     @_greatEffectsLayer.init bms.totalNote
-    @addChild @_greatEffectsLayer, 100
+    @addChild @_greatEffectsLayer, 200
 
     @_generate bms, measure, time for time, measure in @_genTime
     xList = for i in [0...@_skin.keyNum] then @_calcNoteXCoordinate i
@@ -91,6 +91,7 @@ NotesLayer = cc.Layer.extend
         note.wav = key.id[j]
         note.key = i
         note.clear = false
+        note.addListener 'remove', @_onRemove.bind this
         note.appendFallParams bpms, time, fallDist
         note.retain()
         @_notes[measure].push note
@@ -126,22 +127,23 @@ NotesLayer = cc.Layer.extend
   onTouch : (key, time)->
     return if @_isAuto
     @_keyEffectsLayer.show key, 0.5
-    for note in @children when note.key is key
-      diffTime = note.timing - time
-      unless note.clear
-        if -@_config.reactionTime < diffTime < @_config.reactionTime
-          note.clear = true
-          @_notifier.trigger 'hit', note.wav
-          judgement = @_judge.exec diffTime
-          @_notifier.trigger 'judge', judgement
-          if judgement is 'pgreat' or 'great'
-            size = cc.director.getWinSize()
-            y = size.height - @_skin.fallDist
-            @_greatEffectsLayer.run note.x, y
-          return
-        else
-          @_notifier.trigger 'judge', 'epoor'
-          return
+    for batchNode in @children
+      for note in batchNode.children when note.key is key
+        diffTime = note.timing - time
+        unless note.clear
+          if -@_config.reactionTime < diffTime < @_config.reactionTime
+            note.clear = true
+            @_notifier.trigger 'hit', note.wav
+            judgement = @_judge.exec diffTime
+            @_notifier.trigger 'judge', judgement
+            if judgement is 'pgreat' or 'great'
+              size = cc.director.getWinSize()
+              y = size.height - @_skin.fallDist
+              @_greatEffectsLayer.run note.x, y
+            return
+          else
+            @_notifier.trigger 'judge', 'epoor'
+            return
     return
 
   #
@@ -171,6 +173,9 @@ NotesLayer = cc.Layer.extend
       @_batchNodes[note.type].addChild note, 99
       note.start()
     @_index++
+
+  _onRemove : (event, note) ->
+    @_notifier.trigger 'judge', 'poor' unless note.clear
 
   #
   # get time when node y coordinate will be game.height
