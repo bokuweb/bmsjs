@@ -161,7 +161,7 @@ NotesLayer = cc.Layer.extend
             @_notifier.trigger 'judge', 'pgreat'
 
     unless @_genTime[@_index]?
-      @_notifier.trigger 'end'
+      #@_notifier.trigger 'end'
       return
 
     return unless @_genTime[@_index] <= @_timer.get()
