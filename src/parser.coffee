@@ -44,7 +44,7 @@ Parser = cc.Class.extend
 
     # OPTIMIZE :
     @bms.lastTime.bgm = if @bms.bgms.length is 0 then 0 else _.max(@bms.bgms, 'timing').timing
-    @bms.lastTime.note = _.max(_.map(_.last(@bms.data).note.key, (key) =>
+    @bms.lastTime.note = _.max(_.map(_.last(@bms.data)?.note?.key, (key) =>
       if key.timing.length isnt 0
         _.max(key.timing)
       else 0
