@@ -6,7 +6,6 @@ GameOverLayer = cc.Layer.extend
     @_super()
     @_addBackground()
     @_MenuScene = require './menuScene'
-    console.dir stats
 
     toucheventListener = cc.EventListener.create
       event: cc.EventListener.TOUCH_ONE_BY_ONE

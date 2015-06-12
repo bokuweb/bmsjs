@@ -22,16 +22,17 @@ Parser = cc.Class.extend
       bgms       : []
       animations : []
       bpms       : []
-      lastTime   : {}
+      endTime    : 0 
 
     @wavMessages = []
 
 
   parse : (bms_text) ->
+    console.log "@bms.endTime = #{@bms.endTime}"
     for row in bms_text.split '\n'
-      _parse.call @, row
+      @_parse row
 
-    _modifyAfterParse.call @
+    @_modifyAfterParse()
     # OPTIMIZE:bpm,bmp,wavは小節に依存しないよう配列に詰めなおす
     @bms.bpms[0] =
       timing : 0
@@ -43,18 +44,18 @@ Parser = cc.Class.extend
     @bms.totalNote = _calcTotalNote.call @
 
     # OPTIMIZE :
-    @bms.lastTime.bgm = if @bms.bgms.length is 0 then 0 else _.max(@bms.bgms, 'timing').timing
-    @bms.lastTime.note = _.max(_.map(_.last(@bms.data)?.note?.key, (key) =>
-      if key.timing.length isnt 0
-        _.max(key.timing)
-      else 0
-    ))
+    #@bms.lastTime.bgm = if @bms.bgms.length is 0 then 0 else _.max(@bms.bgms, 'timing').timing
+    #cc.log _.last(@bms.data)
+    #@bms.lastTime.note = _.max(_.map(_.last(@bms.data)?.note?.key, (key) =>
+    #  if key.timing.length isnt 0
+    #    _.max(key.timing)
+    #  else 0
+    #))
 
-    console.log "@bms.lastTime.bgm = #{@bms.lastTime.bgm}"
-    console.log "@bms.lastTime.note = #{@bms.lastTime.note}"
+    console.log "@bms.endTime = #{@bms.endTime}"
     @bms
 
-  _parse = (row)->
+  _parse : (row) ->
     if row.substring(0, 1) isnt '#'
       return
 
@@ -174,7 +175,7 @@ Parser = cc.Class.extend
     return ret
 
   # 全体をパースした後でtiming等を修正
-  _modifyAfterParse = () ->
+  _modifyAfterParse : () ->
     bpm = @bms.bpm
     time = 0
     for bar, i in @bms.data
@@ -188,9 +189,9 @@ Parser = cc.Class.extend
       if bar.bpm.message.length == 0
         bar.bpm.message = [0]
 
-      _noteTiming(time, bar, bpm)
-      _bmpTiming(time, bar, bpm)
-      _wavTiming(time, bar, bpm, @wavMessages[i])
+      @_noteTiming time, bar, bpm
+      @_bmpTiming time, bar, bpm
+      @_wavTiming time, bar, bpm, @wavMessages[i]
 
       l = bar.bpm.message.length
       for val, i in bar.bpm.message
@@ -200,7 +201,7 @@ Parser = cc.Class.extend
           bpm = val
         time += (240000 / bpm) * (1 / l) * bar.meter
 
-  _calcTiming = (time, objects, bpmobj, bpm, meter) ->
+  _calcTiming : (time, objects, bpmobj, bpm, meter) ->
     bl = bpmobj.message.length
     ol = objects.message.length
     lcm = _lcm(bl, ol)
@@ -214,19 +215,24 @@ Parser = cc.Class.extend
       if objs[i] != 0
         objects.timing.push(time + t)
         objects.id.push(objs[i])
+        if @bms.endTime < time + t
+          @bms.endTime = time + t
+
       if val != 0 # change bpm
         b = val
       t += (240000 / b) * (1 / lcm) * meter
+    return
 
-  _noteTiming = (time, bar, bpm) ->
+  _noteTiming : (time, bar, bpm) ->
     l = bar.bpm.message.length
-    for n in bar.note.key when n.message.length != 0
-      _calcTiming(time, n, bar.bpm, bpm, bar.meter)
+    for n in bar.note.key when n.message.length isnt 0
+      @_calcTiming(time, n, bar.bpm, bpm, bar.meter)
+    return
 
-  _bmpTiming = (time, bar, bpm) ->
-    _calcTiming(time, bar.bmp, bar.bpm, bpm, bar.meter)
+  _bmpTiming : (time, bar, bpm) ->
+    @_calcTiming(time, bar.bmp, bar.bpm, bpm, bar.meter)
 
-  _wavTiming = (time, bar, bpm, wavss) ->
+  _wavTiming : (time, bar, bpm, wavss) ->
     if not wavss?
       cc.log('wavss is null')
       return
@@ -242,6 +248,8 @@ Parser = cc.Class.extend
       for val, i in bpms
         if wavs[i] != 0
           result.push { timing: time + t, id: wavs[i]}
+          if @bms.endTime < time + t
+            @bms.endTime = time + t
         if val != 0 # change bpm
           b = val
         t += (240000 / b) * (1 / lcm) * bar.meter

@@ -139,8 +139,6 @@ MenuController = cc.Layer.extend
 
     if cc.sys.isNative
       text = jsb.fileUtils.getStringFromFile url
-      cc.log text
-      cc.log url
       cc.log jsb.fileUtils.fullPathForFilename url
       cc.log jsb.fileUtils.isFileExist url
       parser = new Parser()
@@ -148,7 +146,6 @@ MenuController = cc.Layer.extend
       resources = []
       for k, v of bms.wav
         resources.push prefix + v 
-        cc.log v
       cc.LoaderScene.preload resources, ->
         cc.director.runScene new AppScene bms, prefix
       , this
@@ -159,7 +156,6 @@ MenuController = cc.Layer.extend
         resources = []
         for k, v of bms.wav
           resources.push prefix + v 
-          cc.log v
         cc.LoaderScene.preload resources, ->
           cc.director.runScene new AppScene bms, prefix
         , this
