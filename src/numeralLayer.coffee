@@ -3,19 +3,24 @@ NumeralLayer = cc.Layer.extend
     @_super()
     @_sprites = []
 
-  init : (@_digits, num) ->
+  init : (@_digits, num = 0) ->
     scaledWidth = @_skin.width * @_skin.scale
+    @_batchNode = new cc.SpriteBatchNode @_skin.src
+    @addChild @_batchNode
+    @_frames = for i in [0...10]
+      new cc.SpriteFrame @_batchNode.texture, cc.rect @_skin.width * i, 0, @_skin.width, @_skin.height
+
     for i in [0...@_digits]
-      @_sprites[i] = new cc.Sprite @_skin.src, cc.rect 0, 0, @_skin.width, @_skin.height
+      @_sprites[i] = new cc.Sprite()
+      @_sprites[i].setDisplayFrame @_frames[0]
       @_sprites[i].x = i * (-scaledWidth - @_skin.margin) + (scaledWidth * @_digits / 2)
       @_sprites[i].scale = @_skin.scale
-      @addChild @_sprites[i]
-      num ?= 0
+      @_batchNode.addChild @_sprites[i]
     @reflect num
 
   reflect : (num) ->
     for i in [0...@_digits]
-      @_sprites[i].setTextureRect cc.rect ~~(num % 10) * @_skin.width, 0, @_skin.width, @_skin.height
+      @_sprites[i].setDisplayFrame @_frames[~~(num % 10)]
       num /= 10
 
 module.exports = NumeralLayer
