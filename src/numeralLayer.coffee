@@ -12,7 +12,7 @@ NumeralLayer = cc.Layer.extend
 
     for i in [0...@_digits]
       @_sprites[i] = new cc.Sprite()
-      @_sprites[i].setDisplayFrame @_frames[0]
+      @_sprites[i].setSpriteFrame @_frames[0]
       @_sprites[i].x = i * (-scaledWidth - @_skin.margin) + (scaledWidth * @_digits / 2)
       @_sprites[i].scale = @_skin.scale
       @_batchNode.addChild @_sprites[i]
@@ -20,7 +20,7 @@ NumeralLayer = cc.Layer.extend
 
   reflect : (num) ->
     for i in [0...@_digits]
-      @_sprites[i].setDisplayFrame @_frames[~~(num % 10)]
+      @_sprites[i].setSpriteFrame @_frames[~~(num % 10)]
       num /= 10
 
 module.exports = NumeralLayer
