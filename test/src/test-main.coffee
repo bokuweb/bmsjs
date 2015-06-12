@@ -10,6 +10,7 @@ JudgementLayerTest = require './test-judgementLayer'
 #cocos2d-JS Lite can't execute initWithSpriteFrameName
 #AnimationLayerTest = require './test-animationLayer'
 BpmLayerTest       = require './test-bpmLayer'
+RateLayerTest      = require './test-rateLayer'
 
 window.onload = ->
   cc.game.onStart = ->
@@ -19,6 +20,7 @@ window.onload = ->
     cc.view.setDesignResolutionSize 800, 600, policy
     cc.director.setContentScaleFactor 2
 
+    rateLayerTest = new RateLayerTest()
     bpmLayerTest = new BpmLayerTest()
     # cocos2d-JS Lite can't execute initWithSpriteFrameName
     #animationLayerTest = new AnimationLayerTest()
@@ -32,6 +34,7 @@ window.onload = ->
     timerTest  = new TimerTest()
     noteTest   = new NoteTest()
 
+    rateLayerTest.start()
     bpmLayerTest.start()
     #animationLayerTest.start()
     judgmentLayerTest.start()

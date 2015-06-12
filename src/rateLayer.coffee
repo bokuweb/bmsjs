@@ -8,11 +8,17 @@ RateLayer = cc.Layer.extend
     @_count = 0
 
   init : (@_config) ->
+    @_batchNode = new cc.SpriteBatchNode @_skin.meter.src
+    @addChild @_batchNode
+    @_frames = for i in [0...4]
+      new cc.SpriteFrame @_batchNode.texture, cc.rect @_skin.meter.width * i, 0, @_skin.meter.width, @_skin.meter.height
+
     for i in [0...@_config.num]
-      @_sprites[i] = new cc.Sprite @_skin.meter.src, cc.rect 0, 0, @_skin.meter.width, @_skin.meter.height
+      @_sprites[i] = new cc.Sprite()
+      @_sprites[i].setDisplayFrame @_frames[0]
       @_sprites[i].x = @_skin.meter.x + i * @_skin.meter.width
       @_sprites[i].y = @_skin.meter.y
-      @addChild @_sprites[i]
+      @_batchNode.addChild @_sprites[i]
     @_rate = @_config.initRate
 
     @_label.init 3, 0
@@ -33,13 +39,13 @@ RateLayer = cc.Layer.extend
     for i in [base...@_config.num]
       if i > @_config.clearVal
         if @_rate - 6 <= i * 2 < @_rate - 2
-          @_sprites[i].setTextureRect cc.rect  ~~(Math.random() * 2) * 2 * w, 0, w, h
-        else if @_rate - 2 >= i * 2 then @_sprites[i].setTextureRect cc.rect  0, 0, w, h
-        else @_sprites[i].setTextureRect cc.rect  w * 2, 0, w, h
+          @_sprites[i].setDisplayFrame @_frames[~~(Math.random() * 2) * 2]
+        else if @_rate - 2 >= i * 2 then @_sprites[i].setDisplayFrame @_frames[0]
+        else @_sprites[i].setDisplayFrame @_frames[2]
       else
-        if @_rate - 6 <= i * 2 < @_rate - 2 then @_sprites[i].setTextureRect cc.rect  (~~(Math.random() * 2) * 2 + 1) * w, 0, w, h
-        else if @_rate - 2 >= i * 2 then @_sprites[i].setTextureRect cc.rect  w, 0, w, h
-        else @_sprites[i].setTextureRect cc.rect  w * 3, 0, w, h
+        if @_rate - 6 <= i * 2 < @_rate - 2 then @_sprites[i].setDisplayFrame @_frames[~~(Math.random() * 2) * 2 + 1]
+        else if @_rate - 2 >= i * 2 then @_sprites[i].setDisplayFrame @_frames[1]
+        else @_sprites[i].setDisplayFrame @_frames[3]
     return
 
   reflect : (judge) ->
