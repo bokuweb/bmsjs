@@ -4,6 +4,7 @@ plumber        = require 'gulp-plumber'
 rename         = require 'gulp-rename'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
 webserver      = require 'gulp-webserver'
+shell          = require 'gulp-shell'
 
 watching = off
 
@@ -31,6 +32,11 @@ gulp.task 'build:test', watchify (watchify)->
       basename: "test-all",
       extname: ".js"
     .pipe gulp.dest 'test'
+
+gulp.task 'run', ['build:app'], ->
+  shell.task [
+    'cocos run -p web'
+  ]
 
 gulp.task 'test', ['build:test'], ->
   gulp.src './test/runner.html'
