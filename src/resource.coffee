@@ -15,6 +15,7 @@ resObjs =
   numeralImage : "res/numeral-font.png"
   turntableImage : "res/turntable.png"
   soundonlyImage : "res/sound-only.png"
+  resultBgImage : "res/result-bg.png"
 
 resList = []
 

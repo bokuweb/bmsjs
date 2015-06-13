@@ -3,7 +3,7 @@
 
     "debugMode" : 1,
     "showFPS" : true,
-    "frameRate" : 60,
+    "frameRate" : 80,
     "id" : "gameCanvas",
     "renderMode" : 0,
     "engineDir":"frameworks/cocos2d-html5",
