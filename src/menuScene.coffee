@@ -31,7 +31,7 @@ MenuBaseLayer = cc.Layer.extend
     @removeAllChildren on
 
   _addBackground : ->
-    bg = new cc.Sprite res.bgImage
+    bg = new cc.Sprite res.menuBgImage
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height / 2
     @addChild bg, 0
