@@ -16,7 +16,7 @@ browser bms player project.
 ### Installation
 
 1. Install cocos2d-JS   
-download here cocos2d-JS v3.6.1, and execute ```setup.py```.   
+download here cocos2d-JS v3.6.1, and run ```setup.py```.   
 http://www.cocos2d-x.org/download
 
 2. Create cocos2d-JS project
@@ -67,4 +67,4 @@ http://bokuweb.github.io/bmsjs
 
 ### License
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a>
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a>
