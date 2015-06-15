@@ -21,12 +21,12 @@ SearchLayer = cc.Layer.extend
         onMouseUp: @_onMouseUp
       , this
 
-    @_textField = new cc.TextFieldTTF "<search>", "Arial", 20
+    @_textField = new cc.TextFieldTTF "search", "Arial", 20
     @addChild @_textField
     #@_textField.setDelegate this
     size = cc.director.getWinSize()
-    @_textField.x = size.width / 2 - 200
-    @_textField.y = size.height / 2 + 200
+    @_textField.x = 120
+    @_textField.y = 50
 
   addListener: (name, listner)->
     @_notifier.on name, listner
