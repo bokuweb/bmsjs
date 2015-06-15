@@ -28,7 +28,7 @@ MenuBaseLayer = cc.Layer.extend
   start : ->
     @_addBackground()
     menu = new MenuController()
-    menu.init menuList, cc.director.getWinSize().width / 2 + 150, 80
+    menu.init menuList, cc.director.getWinSize().width / 2 + 150, 70
     @addChild menu
 
   onExit : ->
@@ -66,7 +66,7 @@ MenuController = cc.Layer.extend
       item = new cc.Sprite res.itemBgImage
       label = new cc.LabelTTF v.title, "Arial", 22, cc.size(item.width, 0), cc.TEXT_ALIGNMENT_LEFT
       label.x = 320
-      label.y = 40
+      label.y = 38
       item.addChild label
       #label = new cc.LabelTTF v.title, "Arial", 24
       menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
