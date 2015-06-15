@@ -13,6 +13,11 @@ menuList = [
   {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
   {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
   {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku'}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]'}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}  
 ]
 
 
@@ -23,7 +28,7 @@ MenuBaseLayer = cc.Layer.extend
   start : ->
     @_addBackground()
     menu = new MenuController()
-    menu.init menuList, cc.director.getWinSize().width / 2, 50
+    menu.init menuList, cc.director.getWinSize().width / 2 + 150, 80
     @addChild menu
 
   onExit : ->
@@ -49,8 +54,22 @@ MenuController = cc.Layer.extend
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
     for v, i in list
-      label = new cc.LabelTTF v.title, "Arial", 24
-      menuItem = new cc.MenuItemLabel label, @_onMenuCallback, this
+      ###
+      item = new cc.Sprite res.itemBgImage
+      item.x = x
+      item.y = size.height - (i + 1) * @_linespace
+      
+      item.addChild label
+      menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
+      @_itemMenu.addChild menuItem, i + 10000
+      ###
+      item = new cc.Sprite res.itemBgImage
+      label = new cc.LabelTTF v.title, "Arial", 22, cc.size(item.width, 0), cc.TEXT_ALIGNMENT_LEFT
+      label.x = 320
+      label.y = 40
+      item.addChild label
+      #label = new cc.LabelTTF v.title, "Arial", 24
+      menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x
       menuItem.y = size.height - (i + 1) * @_linespace
@@ -159,7 +178,7 @@ MenuController = cc.Layer.extend
         cc.spawn(
           cc.fadeIn 0.2
           cc.scaleTo 0.2, 1
-          cc.moveTo 0.2, cc.p(size.width / 2, destY)
+          cc.moveTo 0.2, cc.p(size.width / 2 + 150, destY)
         )
       )
 
