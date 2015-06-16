@@ -76,7 +76,7 @@ skin =
     label :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.3
       margin : 3
       x : 362
@@ -92,7 +92,7 @@ skin =
     score :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.35
       margin : 3
       x : 202
@@ -100,7 +100,7 @@ skin =
     pgreatNum :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.2
       margin : 1
       x : 302
@@ -108,7 +108,7 @@ skin =
     greatNum :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.2
       margin : 1
       x : 302
@@ -116,7 +116,7 @@ skin =
     goodNum :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.2
       margin : 1
       x : 302
@@ -124,7 +124,7 @@ skin =
     badNum :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.2
       margin : 1
       x : 302
@@ -132,7 +132,7 @@ skin =
     poorNum :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 38
       scale  : 0.2
       margin : 1
       x : 302
@@ -140,7 +140,7 @@ skin =
     comboNum :
       src    : res.numeralImage
       width  : 29.5
-      height : 36.5
+      height : 37
       scale  : 0.35
       margin : 1
       x : 211
@@ -148,7 +148,7 @@ skin =
   bpm :
     src    : res.numeralImage
     width  : 29.5
-    height : 36.5
+    height : 37
     scale  : 0.35
     margin : 3
     x : 443
@@ -157,7 +157,7 @@ skin =
   playtime :
     src    : res.numeralImage
     width  : 29.5
-    height : 36.5
+    height : 37
     scale  : 0.2
     margin : 3
     z : 10

@@ -1,6 +1,7 @@
 AppScene      = require './app'
 Parser        = require './parser'
 SearchLayer   = require './searchLayer'
+LevelFont     = require './numeralLayer'
 res           = require './resource'
   .resObjs
 
@@ -47,28 +48,28 @@ MenuController = cc.Layer.extend
     @_offsetY = 0
 
   init : (list, x, @_linespace) ->
-    #var closeItem = new cc.MenuItemImage(s_pathClose, s_pathClose, this.onCloseCallback, this);
-    #closeItem.x = winSize.width - 30;
-    #closeItem.y = winSize.height - 30;
     director = cc.director
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
     for v, i in list
-      ###
-      item = new cc.Sprite res.itemBgImage
-      item.x = x
-      item.y = size.height - (i + 1) * @_linespace
-      
-      item.addChild label
-      menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
-      @_itemMenu.addChild menuItem, i + 10000
-      ###
+
       item = new cc.Sprite res.itemBgImage
       label = new cc.LabelTTF v.title, "Arial", 22, cc.size(item.width, 0), cc.TEXT_ALIGNMENT_LEFT
       label.x = 320
       label.y = 38
       item.addChild label
-      #label = new cc.LabelTTF v.title, "Arial", 24
+
+      level = new LevelFont
+        src    : res.levelFontImage
+        width  : 26.2
+        height : 16
+        scale  : 1
+        margin : 0
+      level.x = 30
+      level.y = 39
+      
+      item.addChild level
+      level.init 2, 19
       menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x

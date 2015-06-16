@@ -19,6 +19,8 @@ resObjs =
   menuBgImage : "res/menu-bg.jpg"
   itemBgImage : "res/item-bg.png"
 
+  levelFontImage : "res/level-font.png"  
+
 resList = []
 
 resList.push v for k, v of resObjs

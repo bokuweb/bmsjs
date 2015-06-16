@@ -13,12 +13,12 @@ SearchLayer = cc.Layer.extend
     if 'touches' of cc.sys.capabilities
       cc.eventManager.addListener
         event : cc.EventListener.TOUCH_ALL_AT_ONCE
-        onTouchesEnded: @onTouchesEnded
+        onTouchesEnded: @_onTouchesEnded
       , this
     else if 'mouse' of cc.sys.capabilities
       cc.eventManager.addListener
         event : cc.EventListener.MOUSE
-        onMouseUp: @_onMouseUp
+        onMouseUp: @_onMouseUp.bind this
       , this
 
     @_textField = new cc.TextFieldTTF "search", "Arial", 20
@@ -63,7 +63,6 @@ SearchLayer = cc.Layer.extend
   _onMouseUp : (event) ->
     target = event.getCurrentTarget()
     return unless target._textField
-
     point = event.getLocation()
     rect = target._textInputGetRect target._textField
     target._onClickTrackNode cc.rectContainsPoint(rect, point)
