@@ -6,17 +6,16 @@ JudgementLayer = cc.Layer.extend
     @_judgement = new cc.Sprite @_skin.src, cc.rect 0, 0, @_skin.width, @_skin.height
     @_judgement.x = @_skin.x
     @_judgement.y = @_skin.y
-    # FIXME
-    @_judgement.scale = 2
     @_judgement.setOpacity 0
     @addChild @_judgement
 
   #
   # frame =
-  #  0 : great
-  #  1 : good
-  #  2 : bad
-  #  3 : poor
+  #  0 : pgreat
+  #  1 : grear
+  #  2 : good
+  #  3 : bad
+  #  4 : poor
   # 
   show : (frame, combo, time_sec) ->
     @_judgement.setTextureRect cc.rect  0, @_skin.height * frame, @_skin.width, @_skin.height

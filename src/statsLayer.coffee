@@ -99,7 +99,7 @@ StatsLayer = cc.Layer.extend
         @_greatNum++
         #@_greatLabel.setString "   #{@_greatNum}"
         @_greatLabel.reflect @_greatNum
-        @_judgement.show 0, 0, 0.5
+        @_judgement.show 1, 0, 0.5
 
       when "good"
         @_score += @_goodIncVal
@@ -107,21 +107,21 @@ StatsLayer = cc.Layer.extend
         @_goodNum++
         #@_goodLabel.setString "   #{@_goodNum}"
         @_goodLabel.reflect @_goodNum
-        @_judgement.show 1, 0, 0.5
+        @_judgement.show 2, 0, 0.5
 
       when "bad"
         @_combo = 0
         @_badNum++
         #@_badLabel.setString "   #{@_badNum}"
         @_badLabel.reflect @_badNum
-        @_judgement.show 2, 0, 0.5
+        @_judgement.show 3, 0, 0.5
 
       else
         @_combo = 0
         @_poorNum++
         #@_poorLabel.setString "   #{@_poorNum}"
         @_poorLabel.reflect @_poorNum
-        @_judgement.show 3, 0, 0.5
+        @_judgement.show 4, 0, 0.5
 
     if @_combo > @_maxCombo
       @_maxCombo = @_combo

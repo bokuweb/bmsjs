@@ -85,9 +85,9 @@ skin =
     z : 10
     judge :
       src    : './res/judge-image.png'
-      width  : 51
-      height : 15
-      x : 216
+      width  : 153
+      height : 39.2
+      x : 210
       y : 340
     score :
       src    : res.numeralImage
