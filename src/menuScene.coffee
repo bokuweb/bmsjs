@@ -9,16 +9,16 @@ res           = require './resource'
 # jsbで読む場合ファイルはutf-8の*.txtである必要がある
 # txtはresディレクトリの下に配置する必要あり
 menuList = [
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku'}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]'}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku'}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]'}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}  
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
 ]
 
 
@@ -65,11 +65,12 @@ MenuController = cc.Layer.extend
         height : 16
         scale  : 1
         margin : 0
-      level.x = 30
+      level.x = 34
       level.y = 39
       
       item.addChild level
-      level.init 2, 19
+      digits = if ~~(v.level / 10) > 0 then 2 else 1
+      level.init digits, v.level
       menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x

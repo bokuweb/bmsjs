@@ -86,7 +86,7 @@ skin =
     judge :
       src    : './res/judge-image.png'
       width  : 153
-      height : 39.2
+      height : 38.8
       x : 210
       y : 340
     score :
