@@ -1,6 +1,7 @@
 AppScene      = require './app'
 Parser        = require './parser'
 SearchLayer   = require './searchLayer'
+LevelFont     = require './numeralLayer'
 res           = require './resource'
   .resObjs
 
@@ -8,16 +9,16 @@ res           = require './resource'
 # jsbで読む場合ファイルはutf-8の*.txtである必要がある
 # txtはresディレクトリの下に配置する必要あり
 menuList = [
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku'}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]'}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku'}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]'}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)'}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)'}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)'}  
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
 ]
 
 
@@ -47,28 +48,30 @@ MenuController = cc.Layer.extend
     @_offsetY = 0
 
   init : (list, x, @_linespace) ->
-    #var closeItem = new cc.MenuItemImage(s_pathClose, s_pathClose, this.onCloseCallback, this);
-    #closeItem.x = winSize.width - 30;
-    #closeItem.y = winSize.height - 30;
     director = cc.director
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
     for v, i in list
-      ###
-      item = new cc.Sprite res.itemBgImage
-      item.x = x
-      item.y = size.height - (i + 1) * @_linespace
-      
-      item.addChild label
-      menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
-      @_itemMenu.addChild menuItem, i + 10000
-      ###
+
       item = new cc.Sprite res.itemBgImage
       label = new cc.LabelTTF v.title, "Arial", 22, cc.size(item.width, 0), cc.TEXT_ALIGNMENT_LEFT
       label.x = 320
       label.y = 38
       item.addChild label
-      #label = new cc.LabelTTF v.title, "Arial", 24
+
+      # TODO : to cson
+      level = new LevelFont
+        src    : res.levelFontImage
+        width  : 26.2
+        height : 16
+        scale  : 1
+        margin : 0
+      level.x = 34
+      level.y = 39
+
+      item.addChild level
+      digits = if ~~(v.level / 10) > 0 then 2 else 1
+      level.init digits, v.level
       menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x

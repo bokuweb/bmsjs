@@ -18,10 +18,15 @@ resObjs =
   resultBgImage : "res/result-bg.png"
   menuBgImage : "res/menu-bg.jpg"
   itemBgImage : "res/item-bg.png"
+  levelFontImage : "res/level-font.png"  
 
 resList = []
 
 resList.push v for k, v of resObjs
+resList.push
+  type : "font"
+  name : "sapceage"
+  srcs : ["res/fonts/spaceage.ttf"]
 
 module.exports =
   resObjs : resObjs
