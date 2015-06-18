@@ -1,6 +1,7 @@
 res = require './resource'
   .resObjs
 
+
 GameOverLayer = cc.Layer.extend
   ctor : (@_stats) ->
     @_super()
@@ -19,11 +20,22 @@ GameOverLayer = cc.Layer.extend
         onKeyPressed : @_onKeyPressed.bind this
       , this
 
-    label = new cc.LabelTTF @_stats.score, "Arial", 24
+    @_stats.score ?= 0
+    label = new cc.LabelTTF "", "sapceage" , 32
     label.x = cc.director.getWinSize().width / 2
-    label.y = cc.director.getWinSize().height / 2
+    label.y = cc.director.getWinSize().height / 2 - 100
     @addChild label, 5
-    
+
+    label.setString """
+      SCORE : #{@_stats.score}
+      MAX COMBO : #{@_stats.combo}
+      PGREAT : #{@_stats.pgreat}
+      GREAT  : #{@_stats.great}
+      GOOD   : #{@_stats.good}
+      BAD    : #{@_stats.bad}
+      POOR   : #{@_stats.poor}
+    """
+
   onExit : ->
     @_super()
     @removeAllChildren on

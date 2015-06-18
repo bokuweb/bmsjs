@@ -242,7 +242,8 @@ AppLayer = cc.Layer.extend
 
     cc.log @_bms.animations.length
     if @_bms.animations.length is 0
-      soundonly = new cc.Sprite res.soundonlyImage
+      soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
+      #soundonly = new cc.Sprite res.soundonlyImage
       soundonly.x = 500
       soundonly.y = 400
       soundonly.setOpacity 200

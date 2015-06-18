@@ -59,6 +59,7 @@ MenuController = cc.Layer.extend
       label.y = 38
       item.addChild label
 
+      # TODO : to cson
       level = new LevelFont
         src    : res.levelFontImage
         width  : 26.2
@@ -67,7 +68,7 @@ MenuController = cc.Layer.extend
         margin : 0
       level.x = 34
       level.y = 39
-      
+
       item.addChild level
       digits = if ~~(v.level / 10) > 0 then 2 else 1
       level.init digits, v.level
