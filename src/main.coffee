@@ -28,8 +28,11 @@ cc.game.onStart = ->
     cc.view.setDesignResolutionSize 320, 480, cc.ResolutionPolicy.SHOW_ALL 
     cc.view.resizeWithBrowserSize on
   else
-    policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
-    cc.view.setDesignResolutionSize 800, 600, policy
+    screenSize = window.parent.screen
+    cc.view.setDesignResolutionSize screenSize.width, screenSize.height, cc.ResolutionPolicy.SHOW_ALL
+    #if window.innerWidth < 800 or window.innerHeight < 600
+    #  policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL
+    #  cc.view.setDesignResolutionSize 800, 600, cc.ContainerStrategy.ORIGINAL_CONTAINER
     cc.view.resizeWithBrowserSize off
   cc.director.setProjection cc.Director.PROJECTION_2D
   cc.director.setContentScaleFactor 2

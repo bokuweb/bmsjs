@@ -1,6 +1,5 @@
 resObjs =
-  bgImage : "res/bg.png"
-  buttonImage : "res/button.png"
+  bgImage : "res/bg.jpg"
   nodeImage   : "res/node.png"
   noteWhiteImage : "res/note-white.png"
   noteBlackImage : "res/note-black.png"
@@ -15,7 +14,7 @@ resObjs =
   numeralImage : "res/numeral-font.png"
   turntableImage : "res/turntable.png"
   soundonlyImage : "res/sound-only.png"
-  resultBgImage : "res/result-bg.png"
+  resultBgImage : "res/result-bg.jpg"
   menuBgImage : "res/menu-bg.jpg"
   itemBgImage : "res/item-bg.png"
   levelFontImage : "res/level-font.png"  

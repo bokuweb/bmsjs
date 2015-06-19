@@ -10,6 +10,9 @@ GameoverScene   = require './gameoverScene'
 res             = require './resource'
   .resObjs
 
+unless cc.sys.isNative
+  screenSize = window.parent.screen
+
 # TODO : move
 skin =
   body :
@@ -23,7 +26,7 @@ skin =
   notes :
     fallDist : 320
     keyNum   : 8
-    offsetX  : 134
+    offsetX  : screenSize.width / 2 - 100
     marginX  : 1.95
     z        : 4
     nodeImage :
@@ -45,8 +48,8 @@ skin =
       height : 6
     bgImage :
       src : res.noteBgImage
-      x   : 210
-      y   : 280
+      x   : screenSize.width / 2 - 200
+      y   : screenSize.height - 320
     greatEffect :
       src    : res.greatEffectImage
       width  : 80
