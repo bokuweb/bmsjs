@@ -106,7 +106,7 @@ skin =
       height : 38
       scale  : 0.2
       margin : 1
-      x : screenSize.width / 2 - 96
+      x : screenSize.width / 2 - 97
       y : screenSize.height - 427
     greatNum :
       src    : res.numeralImage
@@ -114,7 +114,7 @@ skin =
       height : 38
       scale  : 0.2
       margin : 1
-      x : screenSize.width / 2 - 96
+      x : screenSize.width / 2 - 97
       y : screenSize.height - 436
     goodNum :
       src    : res.numeralImage
@@ -122,7 +122,7 @@ skin =
       height : 38
       scale  : 0.2
       margin : 1
-      x : screenSize.width / 2 - 96
+      x : screenSize.width / 2 - 97
       y : screenSize.height - 445
     badNum :
       src    : res.numeralImage
@@ -130,7 +130,7 @@ skin =
       height : 38
       scale  : 0.2
       margin : 1
-      x : screenSize.width / 2 - 96
+      x : screenSize.width / 2 - 97
       y : screenSize.height - 454
     poorNum :
       src    : res.numeralImage
@@ -138,7 +138,7 @@ skin =
       height : 38
       scale  : 0.2
       margin : 1
-      x : screenSize.width / 2 - 96
+      x : screenSize.width / 2 - 97
       y : screenSize.height - 463
     comboNum :
       src    : res.numeralImage
@@ -155,7 +155,7 @@ skin =
     scale  : 0.35
     margin : 3
     x : screenSize.width / 2 + 44
-    y : screenSize.height - 440
+    y : screenSize.height - 444
     z : 10
   playtime :
     src    : res.numeralImage
@@ -165,11 +165,11 @@ skin =
     margin : 3
     z : 10
     minuite :
-      x : screenSize.width / 2 + 194
-      y : screenSize.height - 426
+      x : screenSize.width / 2 + 196
+      y : screenSize.height - 424
     second :
-      x : screenSize.width / 2 + 214
-      y : screenSize.height - 426
+      x : screenSize.width / 2 + 216
+      y : screenSize.height - 424
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

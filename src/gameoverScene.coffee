@@ -21,19 +21,19 @@ GameOverLayer = cc.Layer.extend
       , this
 
     @_stats.score ?= 0
-    label = new cc.LabelTTF "", "sapceage" , 32
+    label = new cc.LabelTTF "", "sapceage" , 48
     label.x = cc.director.getWinSize().width / 2
-    label.y = cc.director.getWinSize().height / 2 - 100
+    label.y = cc.director.getWinSize().height / 2
     @addChild label, 5
 
     label.setString """
       SCORE : #{@_stats.score}
       MAX COMBO : #{@_stats.combo}
       PGREAT : #{@_stats.pgreat}
-      GREAT  : #{@_stats.great}
-      GOOD   : #{@_stats.good}
-      BAD    : #{@_stats.bad}
-      POOR   : #{@_stats.poor}
+      GREAT : #{@_stats.great}
+      GOOD : #{@_stats.good}
+      BAD : #{@_stats.bad}
+      POOR : #{@_stats.poor}
     """
 
   onExit : ->
