@@ -20,20 +20,20 @@ skin =
       src : res.bgImage
     turntable :
       src : res.turntableImage
-      x : 125
-      y : 250
+      x : screenSize.width / 2 - 274
+      y : screenSize.height - 348
       z : 10
   notes :
     fallDist : 320
     keyNum   : 8
-    offsetX  : screenSize.width / 2 - 100
+    offsetX  : screenSize.width / 2 - 266
     marginX  : 1.95
     z        : 4
     nodeImage :
       src    : res.nodeImage
       width  : 194
       height : 1
-      x      : 210
+      x      : screenSize.width / 2 - 190
     noteTurntableImage :
       src    : res.noteTurntableImage
       width  : 41
@@ -48,7 +48,7 @@ skin =
       height : 6
     bgImage :
       src : res.noteBgImage
-      x   : screenSize.width / 2 - 200
+      x   : screenSize.width / 2 - 190
       y   : screenSize.height - 320
     greatEffect :
       src    : res.greatEffectImage
@@ -59,7 +59,7 @@ skin =
       delay  : 0.02
       z      : 5
     keyEffect :
-      y : 280
+      y : screenSize.height - 320
       turntableKeydownImage :
         src : res.turntableKeydownImage
       whiteKeydownImage :
@@ -73,8 +73,8 @@ skin =
       src    : res.meterImage
       width  : 4
       height : 12
-      x      : 122
-      y      : 207
+      x      : screenSize.width / 2 - 278
+      y      : screenSize.height - 394
       z      : 10
     label :
       src    : res.numeralImage
@@ -82,80 +82,80 @@ skin =
       height : 38
       scale  : 0.3
       margin : 3
-      x : 362
-      y : 210
+      x : screenSize.width / 2 - 44
+      y : screenSize.height - 392
   stats :
     z : 10
     judge :
       src    : './res/judge-image.png'
       width  : 153
       height : 38.8
-      x : 210
-      y : 340
+      x : screenSize.width / 2 - 188
+      y : screenSize.height - 260
     score :
       src    : res.numeralImage
       width  : 29.5
       height : 38
       scale  : 0.35
       margin : 3
-      x : 202
-      y : 175
+      x : screenSize.width / 2 - 196
+      y : screenSize.height - 426
     pgreatNum :
       src    : res.numeralImage
       width  : 29.5
       height : 38
       scale  : 0.2
       margin : 1
-      x : 302
-      y : 174
+      x : screenSize.width / 2 - 96
+      y : screenSize.height - 427
     greatNum :
       src    : res.numeralImage
       width  : 29.5
       height : 38
       scale  : 0.2
       margin : 1
-      x : 302
-      y : 165
+      x : screenSize.width / 2 - 96
+      y : screenSize.height - 436
     goodNum :
       src    : res.numeralImage
       width  : 29.5
       height : 38
       scale  : 0.2
       margin : 1
-      x : 302
-      y : 156
+      x : screenSize.width / 2 - 96
+      y : screenSize.height - 445
     badNum :
       src    : res.numeralImage
       width  : 29.5
       height : 38
       scale  : 0.2
       margin : 1
-      x : 302
-      y : 147
+      x : screenSize.width / 2 - 96
+      y : screenSize.height - 454
     poorNum :
       src    : res.numeralImage
       width  : 29.5
       height : 38
       scale  : 0.2
       margin : 1
-      x : 302
-      y : 138
+      x : screenSize.width / 2 - 96
+      y : screenSize.height - 463
     comboNum :
       src    : res.numeralImage
       width  : 29.5
       height : 37
       scale  : 0.35
-      margin : 1
-      x : 211
-      y : 156
+      margin : 3
+      x : screenSize.width / 2 - 186
+      y : screenSize.height - 443
   bpm :
     src    : res.numeralImage
     width  : 29.5
     height : 37
     scale  : 0.35
     margin : 3
-    x : 443
-    y : 160
+    x : screenSize.width / 2 + 44
+    y : screenSize.height - 440
     z : 10
   playtime :
     src    : res.numeralImage
@@ -165,11 +165,11 @@ skin =
     margin : 3
     z : 10
     minuite :
-      x : 602
-      y : 174
+      x : screenSize.width / 2 + 194
+      y : screenSize.height - 426
     second :
-      x : 622
-      y : 174
+      x : screenSize.width / 2 + 214
+      y : screenSize.height - 426
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -247,8 +247,8 @@ AppLayer = cc.Layer.extend
     if @_bms.animations.length is 0
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
       #soundonly = new cc.Sprite res.soundonlyImage
-      soundonly.x = 500
-      soundonly.y = 400
+      soundonly.x = screenSize.width / 2 + 100
+      soundonly.y = screenSize.height - 200
       soundonly.setOpacity 200
       @addChild soundonly, 100
 
@@ -303,29 +303,6 @@ AppLayer = cc.Layer.extend
     turntable.setOpacity 200
     @addChild turntable, skin.body.turntable.z
     turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
-
-
-  _addKey : ->
-    toucheventListener = cc.EventListener.create
-      event: cc.EventListener.TOUCH_ONE_BY_ONE
-      swallowTouches: true
-      onTouchBegan: @_onTouch.bind this
-
-    for i in [0...8]
-      key = new cc.Sprite res.buttonImage
-      if i is 7
-        key.attr
-          x  : 33
-          y  : 32
-          id : 7
-      else
-        key.attr
-          x  : i * 32 + 97
-          y  : i % 2 * 64 + 32
-          id : i
-      @addChild key
-      cc.eventManager.addListener toucheventListener.clone(), key
-    return
 
   _onTouch : (touch, event)->
     time = @_timer.get()
