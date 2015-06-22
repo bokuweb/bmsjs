@@ -73,8 +73,8 @@ skin =
       src    : res.meterImage
       width  : 4
       height : 12
-      x      : screenSize.width / 2 - 278
-      y      : screenSize.height - 394
+      x      : screenSize.width / 2 - 292
+      y      : screenSize.height - 386
       z      : 10
     label :
       src    : res.numeralImage

@@ -1,5 +1,5 @@
 resObjs =
-  bgImage : "res/bg.jpg"
+  bgImage : "res/bg.png"
   nodeImage   : "res/node.png"
   noteWhiteImage : "res/note-white.png"
   noteBlackImage : "res/note-black.png"
