@@ -19,12 +19,25 @@ menuList = [
   {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
   {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
   {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
+  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
+  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
+  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
+  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
+  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}  
 ]
-
 
 MenuBaseLayer = cc.Layer.extend
   ctor : ->
     @_super()
+    if window?
+      window.addEventListener 'resize', ->
+        screenSize = window.parent.screen
+        cc.view.setDesignResolutionSize screenSize.width, screenSize.height, cc.ResolutionPolicy.SHOW_ALL
 
   start : ->
     @_addBackground()
@@ -81,10 +94,7 @@ MenuController = cc.Layer.extend
     @_itemMenu.width = size.width
     @_itemMenu.height = (list.length + 1) * @_linespace
     @_itemMenu.x = 0
-    if @_itemMenu.height < size.height
-      @_itemMenu.y = (@_itemMenu.height - size.height) / 2
-    else
-      @_itemMenu.y = 0
+    @_itemMenu.y = (@_itemMenu.height - size.height) / 2
     @addChild @_itemMenu
 
     search = new SearchLayer()
@@ -186,11 +196,7 @@ MenuController = cc.Layer.extend
       )
 
     @_itemMenu.height = (visibleItems.length + 1) * @_linespace
-    if @_itemMenu.height < size.height
-      @_itemMenu.y = (@_itemMenu.height - size.height) / 2
-    else
-      @_itemMenu.y = 0
-
+    @_itemMenu.y = (@_itemMenu.height - size.height) / 2
 
 MenuScene = cc.Scene.extend
   ctor : ->
@@ -201,6 +207,7 @@ MenuScene = cc.Scene.extend
 
   onExit : ->
     @_super()
+
     @removeAllChildren on
 
 module.exports = MenuScene

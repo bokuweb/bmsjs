@@ -10,6 +10,9 @@ GameoverScene   = require './gameoverScene'
 res             = require './resource'
   .resObjs
 
+unless cc.sys.isNative
+  screenSize = window.parent.screen
+
 # TODO : move
 skin =
   body :
@@ -17,20 +20,20 @@ skin =
       src : res.bgImage
     turntable :
       src : res.turntableImage
-      x : 125
-      y : 250
+      x : screenSize.width / 2 - 274
+      y : screenSize.height - 348
       z : 10
   notes :
     fallDist : 320
     keyNum   : 8
-    offsetX  : 134
+    offsetX  : screenSize.width / 2 - 266
     marginX  : 1.95
     z        : 4
     nodeImage :
       src    : res.nodeImage
       width  : 194
       height : 1
-      x      : 210
+      x      : screenSize.width / 2 - 190
     noteTurntableImage :
       src    : res.noteTurntableImage
       width  : 41
@@ -45,8 +48,8 @@ skin =
       height : 6
     bgImage :
       src : res.noteBgImage
-      x   : 210
-      y   : 280
+      x   : screenSize.width / 2 - 190
+      y   : screenSize.height - 320
     greatEffect :
       src    : res.greatEffectImage
       width  : 80
@@ -56,7 +59,7 @@ skin =
       delay  : 0.02
       z      : 5
     keyEffect :
-      y : 280
+      y : screenSize.height - 320
       turntableKeydownImage :
         src : res.turntableKeydownImage
       whiteKeydownImage :
@@ -70,103 +73,103 @@ skin =
       src    : res.meterImage
       width  : 4
       height : 12
-      x      : 122
-      y      : 207
+      x      : screenSize.width / 2 - 292
+      y      : screenSize.height - 386
       z      : 10
     label :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.3
-      margin : 3
-      x : 362
-      y : 210
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 - 68
+      y : screenSize.height - 384
   stats :
     z : 10
     judge :
       src    : './res/judge-image.png'
       width  : 153
       height : 38.8
-      x : 210
-      y : 340
+      x : screenSize.width / 2 - 188
+      y : screenSize.height - 260
     score :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.35
-      margin : 3
-      x : 202
-      y : 175
+      width  : 26.2
+      height : 16
+      scale  : 0.8
+      margin : 0
+      x : screenSize.width / 2 - 122
+      y : screenSize.height - 429
     pgreatNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : 302
-      y : 174
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 415
     greatNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : 302
-      y : 165
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 428
     goodNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : 302
-      y : 156
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 439
     badNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : 302
-      y : 147
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 451
     poorNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : 302
-      y : 138
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 462
     comboNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 37
-      scale  : 0.35
-      margin : 1
-      x : 211
-      y : 156
+      width  : 26.2
+      height : 16
+      scale  : 0.8
+      margin : 0
+      x : screenSize.width / 2 - 102
+      y : screenSize.height - 451
   bpm :
     src    : res.numeralImage
-    width  : 29.5
-    height : 37
-    scale  : 0.35
-    margin : 3
-    x : 443
-    y : 160
+    width  : 26.2
+    height : 16
+    scale  : 0.7
+    margin : 0
+    x : screenSize.width / 2 + 74
+    y : screenSize.height - 450
     z : 10
   playtime :
     src    : res.numeralImage
-    width  : 29.5
-    height : 37
-    scale  : 0.2
-    margin : 3
+    width  : 26.2
+    height : 16
+    scale  : 0.6
+    margin : 0
     z : 10
     minuite :
-      x : 602
-      y : 174
+      x : screenSize.width / 2 + 39
+      y : screenSize.height - 393
     second :
-      x : 622
-      y : 174
+      x : screenSize.width / 2 + 73
+      y : screenSize.height - 393
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -244,8 +247,8 @@ AppLayer = cc.Layer.extend
     if @_bms.animations.length is 0
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
       #soundonly = new cc.Sprite res.soundonlyImage
-      soundonly.x = 500
-      soundonly.y = 400
+      soundonly.x = screenSize.width / 2 + 100
+      soundonly.y = screenSize.height - 200
       soundonly.setOpacity 200
       @addChild soundonly, 100
 
@@ -300,29 +303,6 @@ AppLayer = cc.Layer.extend
     turntable.setOpacity 200
     @addChild turntable, skin.body.turntable.z
     turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
-
-
-  _addKey : ->
-    toucheventListener = cc.EventListener.create
-      event: cc.EventListener.TOUCH_ONE_BY_ONE
-      swallowTouches: true
-      onTouchBegan: @_onTouch.bind this
-
-    for i in [0...8]
-      key = new cc.Sprite res.buttonImage
-      if i is 7
-        key.attr
-          x  : 33
-          y  : 32
-          id : 7
-      else
-        key.attr
-          x  : i * 32 + 97
-          y  : i % 2 * 64 + 32
-          id : i
-      @addChild key
-      cc.eventManager.addListener toucheventListener.clone(), key
-    return
 
   _onTouch : (touch, event)->
     time = @_timer.get()
