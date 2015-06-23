@@ -78,12 +78,12 @@ skin =
       z      : 10
     label :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.3
-      margin : 3
-      x : screenSize.width / 2 - 44
-      y : screenSize.height - 392
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 - 68
+      y : screenSize.height - 384
   stats :
     z : 10
     judge :
@@ -94,82 +94,82 @@ skin =
       y : screenSize.height - 260
     score :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.35
-      margin : 3
-      x : screenSize.width / 2 - 196
-      y : screenSize.height - 426
+      width  : 26.2
+      height : 16
+      scale  : 0.8
+      margin : 0
+      x : screenSize.width / 2 - 122
+      y : screenSize.height - 429
     pgreatNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : screenSize.width / 2 - 97
-      y : screenSize.height - 427
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 415
     greatNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : screenSize.width / 2 - 97
-      y : screenSize.height - 436
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 428
     goodNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : screenSize.width / 2 - 97
-      y : screenSize.height - 445
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 439
     badNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : screenSize.width / 2 - 97
-      y : screenSize.height - 454
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 451
     poorNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 38
-      scale  : 0.2
-      margin : 1
-      x : screenSize.width / 2 - 97
-      y : screenSize.height - 463
+      width  : 26.2
+      height : 16
+      scale  : 0.5
+      margin : 0
+      x : screenSize.width / 2 + 18
+      y : screenSize.height - 462
     comboNum :
       src    : res.numeralImage
-      width  : 29.5
-      height : 37
-      scale  : 0.35
-      margin : 3
-      x : screenSize.width / 2 - 186
-      y : screenSize.height - 443
+      width  : 26.2
+      height : 16
+      scale  : 0.8
+      margin : 0
+      x : screenSize.width / 2 - 102
+      y : screenSize.height - 451
   bpm :
     src    : res.numeralImage
-    width  : 29.5
-    height : 37
-    scale  : 0.35
-    margin : 3
-    x : screenSize.width / 2 + 44
-    y : screenSize.height - 444
+    width  : 26.2
+    height : 16
+    scale  : 0.7
+    margin : 0
+    x : screenSize.width / 2 + 74
+    y : screenSize.height - 450
     z : 10
   playtime :
     src    : res.numeralImage
-    width  : 29.5
-    height : 37
-    scale  : 0.2
-    margin : 3
+    width  : 26.2
+    height : 16
+    scale  : 0.6
+    margin : 0
     z : 10
     minuite :
-      x : screenSize.width / 2 + 196
-      y : screenSize.height - 424
+      x : screenSize.width / 2 + 39
+      y : screenSize.height - 393
     second :
-      x : screenSize.width / 2 + 216
-      y : screenSize.height - 424
+      x : screenSize.width / 2 + 73
+      y : screenSize.height - 393
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->

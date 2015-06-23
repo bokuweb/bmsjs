@@ -11,7 +11,7 @@ resObjs =
   blackKeydownImage : "res/black-keydown.png"
   testImage : "res/test.png"
   meterImage : "res/gauge.png"
-  numeralImage : "res/numeral-font.png"
+  numeralImage : "res/number.png"
   turntableImage : "res/turntable.png"
   soundonlyImage : "res/sound-only.png"
   resultBgImage : "res/result-bg.jpg"
