@@ -154,7 +154,7 @@ skin =
     height : 16
     scale  : 0.7
     margin : 0
-    x : screenSize.width / 2 + 74
+    x : screenSize.width / 2 + 78
     y : screenSize.height - 450
     z : 10
   playtime :
