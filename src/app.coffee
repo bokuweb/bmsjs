@@ -152,7 +152,7 @@ skin =
     src    : res.numeralImage
     width  : 26.2
     height : 16
-    scale  : 0.7
+    scale  : 0.6
     margin : 0
     x : screenSize.width / 2 + 78
     y : screenSize.height - 450
