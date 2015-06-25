@@ -205,9 +205,9 @@ AppLayer = cc.Layer.extend
       reactionTime : 200
       removeTime : 200
       judge :
-        pgreat : 10
-        great  : 50
-        good   : 100
+        pgreat : 20
+        great  : 40
+        good   : 105
         bad    : 150
         poor   : 200
 
