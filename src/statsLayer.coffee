@@ -21,7 +21,7 @@ StatsLayer = cc.Layer.extend
     @addChild @_comboLabel
     @addChild @_judgement
 
-  init : (noteNum, maxScore) ->
+  init : (@_noteNum, maxScore) ->
     @_score = 0
     @_dispScore = 0
     @_maxCombo = 0
@@ -31,9 +31,11 @@ StatsLayer = cc.Layer.extend
     @_goodNum = 0
     @_badNum = 0
     @_poorNum = 0
-    @_pgreatIncVal = maxScore / noteNum
-    @_greatIncVal = maxScore / noteNum * 0.7
-    @_goodIncVal = maxScore / noteNum * 0.5
+    @_comboPoint = 0
+    @_pgreatIncVal = maxScore.pgreat / @_noteNum
+    @_greatIncVal = maxScore.great / @_noteNum
+    @_goodIncVal = maxScore.good / @_noteNum
+    @_comboBonusFactor = maxScore.combo / (10 * @_noteNum - 55)
 
     @_judgement.init()
 
@@ -110,18 +112,32 @@ StatsLayer = cc.Layer.extend
         @_judgement.show 2, 0, 0.5
 
       when "bad"
+        @_score += @_comboBonusFactor * @_comboPoint
         @_combo = 0
+        @_comboPoint = 0
         @_badNum++
         #@_badLabel.setString "   #{@_badNum}"
         @_badLabel.reflect @_badNum
         @_judgement.show 3, 0, 0.5
 
-      else
+      else # poor or epoor
+        @_score += @_comboBonusFactor * @_comboPoint
         @_combo = 0
+        @_comboPoint = 0
         @_poorNum++
         #@_poorLabel.setString "   #{@_poorNum}"
         @_poorLabel.reflect @_poorNum
         @_judgement.show 4, 0, 0.5
+
+    # full combo
+    if @_combo is @_noteNum
+        @_score += @_comboBonusFactor * @_comboPoint
+        @_comboPoint = 0
+
+    if 0 < @_combo < 10
+        @_comboPoint += @_combo - 1
+    else if @_combo > 10
+        @_combppoint += 10
 
     if @_combo > @_maxCombo
       @_maxCombo = @_combo
