@@ -35,12 +35,14 @@ StatsLayer = cc.Layer.extend
     @_pgreatIncVal = maxScore.pgreat / @_noteNum
     @_greatIncVal = maxScore.great / @_noteNum
     @_goodIncVal = maxScore.good / @_noteNum
-    @_comboBonusFactor = maxScore.combo / (10 * @_noteNum - 55)
+    @_comboBonusFactor = maxScore.combo / (10 * (@_noteNum - 1) - 55)
+    cc.log @_noteNum
+    
 
     @_judgement.init()
 
 
-    @_scoreLabel.init @_getDigits(maxScore), 0
+    @_scoreLabel.init @_getDigits(maxScore.pgreat + maxScore.combo), 0
     @_scoreLabel.x = @_skin.score.x
     @_scoreLabel.y = @_skin.score.y
     #@_pgreatLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
@@ -131,13 +133,13 @@ StatsLayer = cc.Layer.extend
 
     # full combo
     if @_combo is @_noteNum
-        @_score += @_comboBonusFactor * @_comboPoint
-        @_comboPoint = 0
+      @_score += @_comboBonusFactor * @_comboPoint
+      @_comboPoint = 0
 
-    if 0 < @_combo < 10
-        @_comboPoint += @_combo - 1
+    if 0 < @_combo <= 10
+      @_comboPoint += @_combo - 1
     else if @_combo > 10
-        @_combppoint += 10
+      @_comboPoint += 10
 
     if @_combo > @_maxCombo
       @_maxCombo = @_combo
@@ -145,6 +147,7 @@ StatsLayer = cc.Layer.extend
 
     @_dispScore = ~~(@_score.toFixed())
     @_scoreLabel.reflect @_dispScore
+
 
   _getDigits : (num)-> Math.log(num) / Math.log(10) + 1 | 0
 
