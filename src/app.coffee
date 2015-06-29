@@ -152,9 +152,9 @@ skin =
     src    : res.numeralImage
     width  : 26.2
     height : 16
-    scale  : 0.7
+    scale  : 0.6
     margin : 0
-    x : screenSize.width / 2 + 74
+    x : screenSize.width / 2 + 78
     y : screenSize.height - 450
     z : 10
   playtime :
@@ -205,9 +205,9 @@ AppLayer = cc.Layer.extend
       reactionTime : 200
       removeTime : 200
       judge :
-        pgreat : 10
-        great  : 50
-        good   : 100
+        pgreat : 20
+        great  : 40
+        good   : 105
         bad    : 150
         poor   : 200
 
@@ -233,7 +233,12 @@ AppLayer = cc.Layer.extend
     @addChild @_rate, skin.rate.z
 
     @_stats = new StatsLayer skin.stats
-    @_stats.init @_bms.totalNote, 200000
+    @_stats.init @_bms.totalNote, 
+      pgreat : 150000
+      great  : 100000
+      good   : 20000
+      combo  : 50000
+
     @addChild @_stats, skin.stats.z
 
     @_bpm = new BpmLayer skin.bpm, @_timer, @_bms.bpms
@@ -246,14 +251,13 @@ AppLayer = cc.Layer.extend
     cc.log @_bms.animations.length
     if @_bms.animations.length is 0
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
-      #soundonly = new cc.Sprite res.soundonlyImage
       soundonly.x = screenSize.width / 2 + 100
       soundonly.y = screenSize.height - 200
       soundonly.setOpacity 200
       @addChild soundonly, 100
 
   start : ->
-    @_notesLayer.start off
+    @_notesLayer.start on
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()
