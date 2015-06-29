@@ -36,11 +36,8 @@ StatsLayer = cc.Layer.extend
     @_greatIncVal = maxScore.great / @_noteNum
     @_goodIncVal = maxScore.good / @_noteNum
     @_comboBonusFactor = maxScore.combo / (10 * (@_noteNum - 1) - 55)
-    cc.log @_noteNum
-    
 
     @_judgement.init()
-
 
     @_scoreLabel.init @_getDigits(maxScore.pgreat + maxScore.combo), 0
     @_scoreLabel.x = @_skin.score.x
@@ -53,30 +50,21 @@ StatsLayer = cc.Layer.extend
     @_greatLabel.init 4, 0
     @_greatLabel.x = @_skin.greatNum.x
     @_greatLabel.y = @_skin.greatNum.y
-
-
     #@_goodLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_goodLabel.init 4, 0
     @_goodLabel.x = @_skin.goodNum.x
     @_goodLabel.y = @_skin.goodNum.y
-
-
     #@_badLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_badLabel.init 4, 0
     @_badLabel.x = @_skin.badNum.x
     @_badLabel.y = @_skin.badNum.y
-
-
     #@_poorLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_poorLabel.init 4, 0
     @_poorLabel.x = @_skin.poorNum.x
     @_poorLabel.y = @_skin.poorNum.y
-
-
     @_comboLabel.init 4, 0
     @_comboLabel.x = @_skin.comboNum.x
     @_comboLabel.y = @_skin.comboNum.y
-
 
   get : ->
     score  : @_dispScore
