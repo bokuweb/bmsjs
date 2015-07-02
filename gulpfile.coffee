@@ -5,6 +5,7 @@ rename         = require 'gulp-rename'
 mochaPhantomJS = require 'gulp-mocha-phantomjs'
 webserver      = require 'gulp-webserver'
 #shell          = require 'gulp-shell'
+cson           = require 'gulp-cson'
 
 watching = off
 
@@ -33,6 +34,11 @@ gulp.task 'build:test', watchify (watchify)->
       extname: ".js"
     .pipe gulp.dest 'test'
 
+gulp.task 'cson', ->
+  gulp.src 'bms.cson'
+    .pipe cson()
+    .pipe gulp.dest './'
+    
 #gulp.task 'run', ['build:app'], ->
 #  shell.task [
 #    'cocos run -p web'
