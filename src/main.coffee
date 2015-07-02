@@ -1,4 +1,4 @@
-# TODO : add arg path to bms etc.
+
 unless cc.sys.isNative
   cc.screenSize = window.parent.screen
 cc.game.run()
@@ -23,8 +23,6 @@ cc.game.onStart = ->
       searchPaths.push "bms"
 
     jsb.fileUtils.setSearchPaths searchPaths
-
-
 
   if cc.sys.isMobile or cc.sys.isNative
     #height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320

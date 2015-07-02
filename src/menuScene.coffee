@@ -16,8 +16,7 @@ MenuBaseLayer = cc.Layer.extend
   start : ->
     @_addBackground()
     cc.loader.loadJson 'bms.json', (error, data) =>
-      cc.log "load json"
-      menu = new MenuController()
+      menu = new MenuController data
       menu.init data, cc.director.getWinSize().width / 2 + 150, 70
       @addChild menu
 
@@ -32,9 +31,10 @@ MenuBaseLayer = cc.Layer.extend
     @addChild bg, 0
 
 MenuController = cc.Layer.extend
-  ctor : ->
+  ctor : (data) ->
     @_super()
     @_offsetY = 0
+    @_menuList = data
 
   init : (list, x, @_linespace) ->
     director = cc.director
@@ -127,7 +127,7 @@ MenuController = cc.Layer.extend
   _onMenuCallback : (sender) ->
     @_offsetY = @_itemMenu.y
     id = sender.getLocalZOrder() - 10000
-    url = menuList[id].url
+    url = @_menuList[id].url
     prefix = @_getPrefix url
     cc.log url
 
