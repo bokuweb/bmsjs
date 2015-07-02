@@ -1,3 +1,5 @@
+# jsbで読む場合ファイルはutf-8の*.txtである必要がある
+# txtはresディレクトリの下に配置する必要あり
 [
   {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
   {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
