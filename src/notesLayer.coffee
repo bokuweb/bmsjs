@@ -28,7 +28,7 @@ NotesLayer = cc.Layer.extend
 
     for v, i in bms.data
       node = new MeasureNode @_skin.nodeImage.src, @_timer
-      node.x = @_skin.nodeImage.x
+      node.x = cc.screenSize.width / 2 + @_skin.nodeImage.x
       node.y = -node.height
       node.timing = v.timing
       node.appendFallParams bms.bpms, time, @_skin.fallDist
@@ -41,8 +41,8 @@ NotesLayer = cc.Layer.extend
 
     bg = new cc.Sprite @_skin.bgImage.src
     bg.setAnchorPoint cc.p(0.5, 0)
-    bg.x = @_skin.bgImage.x
-    bg.y = @_skin.bgImage.y
+    bg.x = cc.screenSize.width / 2 + @_skin.bgImage.x
+    bg.y = cc.screenSize.height - @_skin.bgImage.y
     bg.setOpacity 180
     @addChild bg, 0
     @_greatEffectsLayer.init bms.totalNote
@@ -104,7 +104,7 @@ NotesLayer = cc.Layer.extend
     turntable = @_skin.noteTurntableImage
     white = @_skin.noteWhiteImage
     black = @_skin.noteBlackImage
-    offset = @_skin.offsetX
+    offset = cc.screenSize.width / 2 + @_skin.offsetX
     margin = (id + 1) * @_skin.marginX
     switch id
       when 0, 2, 4, 6

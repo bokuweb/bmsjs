@@ -4,8 +4,8 @@ JudgementLayer = cc.Layer.extend
 
   init : ->
     @_judgement = new cc.Sprite @_skin.src, cc.rect 0, 0, @_skin.width, @_skin.height
-    @_judgement.x = @_skin.x
-    @_judgement.y = @_skin.y
+    @_judgement.x = cc.screenSize.width / 2  + @_skin.x
+    @_judgement.y = cc.screenSize.height - @_skin.y
     @_judgement.setOpacity 0
     @addChild @_judgement
 

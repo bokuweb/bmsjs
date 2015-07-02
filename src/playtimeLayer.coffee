@@ -9,13 +9,13 @@ PlaytimeLayer = cc.Layer.extend
 
   init :  ->
     @_minuite.init 2, 0
-    @_minuite.x = @_skin.minuite.x
-    @_minuite.y = @_skin.minuite.y
+    @_minuite.x = cc.screenSize.width / 2 + @_skin.minuite.x
+    @_minuite.y = cc.screenSize.height - @_skin.minuite.y
     @addChild @_minuite
 
     @_second.init 2, 0
-    @_second.x = @_skin.second.x
-    @_second.y = @_skin.second.y
+    @_second.x = cc.screenSize.width / 2 + @_skin.second.x
+    @_second.y = cc.screenSize.height - @_skin.second.y
     @addChild @_second
 
   start : -> @scheduleUpdate()

@@ -8,8 +8,8 @@ BpmLayer = cc.Layer.extend
   init : ->
     @_index = 0
     @_bpm.init 3, @_bpms[0].val
-    @_bpm.x = @_skin.x
-    @_bpm.y = @_skin.y
+    @_bpm.x = cc.screenSize.width / 2 + @_skin.x
+    @_bpm.y = cc.screenSize.height - @_skin.y
     @addChild @_bpm
 
   start : -> @scheduleUpdate()

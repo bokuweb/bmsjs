@@ -40,31 +40,31 @@ StatsLayer = cc.Layer.extend
     @_judgement.init()
 
     @_scoreLabel.init @_getDigits(maxScore.pgreat + maxScore.combo), 0
-    @_scoreLabel.x = @_skin.score.x
-    @_scoreLabel.y = @_skin.score.y
+    @_scoreLabel.x = cc.screenSize.width / 2 + @_skin.score.x
+    @_scoreLabel.y = cc.screenSize.height - @_skin.score.y
     #@_pgreatLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_pgreatLabel.init 4, 0
-    @_pgreatLabel.x = @_skin.pgreatNum.x
-    @_pgreatLabel.y = @_skin.pgreatNum.y
+    @_pgreatLabel.x = cc.screenSize.width / 2 + @_skin.pgreatNum.x
+    @_pgreatLabel.y = cc.screenSize.height - @_skin.pgreatNum.y
     #@_greatLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_greatLabel.init 4, 0
-    @_greatLabel.x = @_skin.greatNum.x
-    @_greatLabel.y = @_skin.greatNum.y
+    @_greatLabel.x = cc.screenSize.width / 2 + @_skin.greatNum.x
+    @_greatLabel.y = cc.screenSize.height - @_skin.greatNum.y
     #@_goodLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_goodLabel.init 4, 0
-    @_goodLabel.x = @_skin.goodNum.x
-    @_goodLabel.y = @_skin.goodNum.y
+    @_goodLabel.x = cc.screenSize.width / 2 + @_skin.goodNum.x
+    @_goodLabel.y = cc.screenSize.height - @_skin.goodNum.y
     #@_badLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_badLabel.init 4, 0
-    @_badLabel.x = @_skin.badNum.x
-    @_badLabel.y = @_skin.badNum.y
+    @_badLabel.x = cc.screenSize.width / 2 + @_skin.badNum.x
+    @_badLabel.y = cc.screenSize.height - @_skin.badNum.y
     #@_poorLabel = new cc.LabelTTF '   0', "Arial", 6, cc.size(40, 0), cc.TEXT_ALIGNMENT_LEFT
     @_poorLabel.init 4, 0
-    @_poorLabel.x = @_skin.poorNum.x
-    @_poorLabel.y = @_skin.poorNum.y
+    @_poorLabel.x = cc.screenSize.width / 2 + @_skin.poorNum.x
+    @_poorLabel.y = cc.screenSize.height - @_skin.poorNum.y
     @_comboLabel.init 4, 0
-    @_comboLabel.x = @_skin.comboNum.x
-    @_comboLabel.y = @_skin.comboNum.y
+    @_comboLabel.x = cc.screenSize.width / 2 + @_skin.comboNum.x
+    @_comboLabel.y = cc.screenSize.height - @_skin.comboNum.y
 
   get : ->
     score  : @_dispScore
