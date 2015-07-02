@@ -16,14 +16,14 @@ RateLayer = cc.Layer.extend
     for i in [0...@_config.num]
       @_sprites[i] = new cc.Sprite()
       @_sprites[i].setSpriteFrame @_frames[0]
-      @_sprites[i].x = @_skin.meter.x + i * @_skin.meter.width
-      @_sprites[i].y = @_skin.meter.y
+      @_sprites[i].x = cc.screenSize.width / 2 + @_skin.meter.x + i * @_skin.meter.width
+      @_sprites[i].y = cc.screenSize.height - @_skin.meter.y
       @_batchNode.addChild @_sprites[i]
     @_rate = @_config.initRate
 
     @_label.init 3, 0
-    @_label.x = @_skin.label.x
-    @_label.y = @_skin.label.y
+    @_label.x = cc.screenSize.width / 2 + @_skin.label.x
+    @_label.y = cc.screenSize.height - @_skin.label.y
     @addChild @_label
     @_label.reflect ~~(@_rate.toFixed())
 

@@ -10,8 +10,7 @@ GameoverScene   = require './gameoverScene'
 res             = require './resource'
   .resObjs
 
-unless cc.sys.isNative
-  screenSize = window.parent.screen
+
 
 # TODO : move
 skin =
@@ -20,20 +19,20 @@ skin =
       src : res.bgImage
     turntable :
       src : res.turntableImage
-      x : screenSize.width / 2 - 274
-      y : screenSize.height - 348
+      x : -274
+      y : 348
       z : 10
   notes :
     fallDist : 320
     keyNum   : 8
-    offsetX  : screenSize.width / 2 - 266
+    offsetX  : -266
     marginX  : 1.95
     z        : 4
     nodeImage :
       src    : res.nodeImage
       width  : 194
       height : 1
-      x      : screenSize.width / 2 - 190
+      x      : -190
     noteTurntableImage :
       src    : res.noteTurntableImage
       width  : 41
@@ -48,8 +47,8 @@ skin =
       height : 6
     bgImage :
       src : res.noteBgImage
-      x   : screenSize.width / 2 - 190
-      y   : screenSize.height - 320
+      x   : -190
+      y   : 320
     greatEffect :
       src    : res.greatEffectImage
       width  : 80
@@ -59,7 +58,7 @@ skin =
       delay  : 0.02
       z      : 5
     keyEffect :
-      y : screenSize.height - 320
+      y : 162
       turntableKeydownImage :
         src : res.turntableKeydownImage
       whiteKeydownImage :
@@ -73,8 +72,8 @@ skin =
       src    : res.meterImage
       width  : 4
       height : 12
-      x      : screenSize.width / 2 - 292
-      y      : screenSize.height - 386
+      x      : -292
+      y      : 386
       z      : 10
     label :
       src    : res.numeralImage
@@ -82,80 +81,80 @@ skin =
       height : 16
       scale  : 0.5
       margin : 0
-      x : screenSize.width / 2 - 68
-      y : screenSize.height - 384
+      x : -68
+      y : 384
   stats :
     z : 10
     judge :
       src    : './res/judge-image.png'
       width  : 153
       height : 38.8
-      x : screenSize.width / 2 - 188
-      y : screenSize.height - 260
+      x : -188
+      y : 260
     score :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.8
       margin : 0
-      x : screenSize.width / 2 - 122
-      y : screenSize.height - 429
+      x : -122
+      y : 429
     pgreatNum :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.5
       margin : 0
-      x : screenSize.width / 2 + 18
-      y : screenSize.height - 415
+      x : 18
+      y : 415
     greatNum :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.5
       margin : 0
-      x : screenSize.width / 2 + 18
-      y : screenSize.height - 428
+      x : 18
+      y : 428
     goodNum :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.5
       margin : 0
-      x : screenSize.width / 2 + 18
-      y : screenSize.height - 439
+      x : 18
+      y : 439
     badNum :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.5
       margin : 0
-      x : screenSize.width / 2 + 18
-      y : screenSize.height - 451
+      x : 18
+      y : 451
     poorNum :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.5
       margin : 0
-      x : screenSize.width / 2 + 18
-      y : screenSize.height - 462
+      x : 18
+      y : 462
     comboNum :
       src    : res.numeralImage
       width  : 26.2
       height : 16
       scale  : 0.8
       margin : 0
-      x : screenSize.width / 2 - 102
-      y : screenSize.height - 451
+      x : -102
+      y : 451
   bpm :
     src    : res.numeralImage
     width  : 26.2
     height : 16
     scale  : 0.6
     margin : 0
-    x : screenSize.width / 2 + 78
-    y : screenSize.height - 450
+    x : 78
+    y : 450
     z : 10
   playtime :
     src    : res.numeralImage
@@ -165,11 +164,11 @@ skin =
     margin : 0
     z : 10
     minuite :
-      x : screenSize.width / 2 + 39
-      y : screenSize.height - 393
+      x : 39
+      y : 393
     second :
-      x : screenSize.width / 2 + 73
-      y : screenSize.height - 393
+      x : 73
+      y : 393
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -251,8 +250,8 @@ AppLayer = cc.Layer.extend
     cc.log @_bms.animations.length
     if @_bms.animations.length is 0
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
-      soundonly.x = screenSize.width / 2 + 100
-      soundonly.y = screenSize.height - 200
+      soundonly.x = cc.screenSize.width / 2 + 100
+      soundonly.y = cc.screenSize.height - 200
       soundonly.setOpacity 200
       @addChild soundonly, 100
 
@@ -302,8 +301,8 @@ AppLayer = cc.Layer.extend
     @addChild bg, 1
 
     turntable = new cc.Sprite res.turntableImage
-    turntable.x = skin.body.turntable.x
-    turntable.y = skin.body.turntable.y
+    turntable.x = cc.screenSize.width / 2 + skin.body.turntable.x
+    turntable.y = cc.screenSize.height - skin.body.turntable.y
     turntable.setOpacity 200
     @addChild turntable, skin.body.turntable.z
     turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
