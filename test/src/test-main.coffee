@@ -14,6 +14,9 @@ RateLayerTest      = require './test-rateLayer'
 
 window.onload = ->
   cc.game.onStart = ->
+
+    cc.screenSize = window.parent.screen
+
     cc.view.enableRetina off
     cc.view.adjustViewPort on
     policy = new cc.ResolutionPolicy cc.ContainerStrategy.ORIGINAL_CONTAINER, cc.ContentStrategy.SHOW_ALL

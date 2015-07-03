@@ -19,7 +19,8 @@
     "gulp-rename": "~1.2.2",
     "gulp-mocha-phantomjs": "~0.6.1",
     "gulp-webserver": "~0.9.1",
-    "gulp-shell": "~0.4.2"
+    "gulp-shell": "~0.4.2",
+    "gulp-cson": "~0.3.0"
   },
   "browser": {
     "jquery": "./bower_components/jquery/dist/jquery.js",

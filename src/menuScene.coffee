@@ -5,32 +5,6 @@ LevelFont     = require './numeralLayer'
 res           = require './resource'
   .resObjs
 
-# TODO : cson化
-# jsbで読む場合ファイルはutf-8の*.txtである必要がある
-# txtはresディレクトリの下に配置する必要あり
-menuList = [
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}
-  {url : "bms/dq.bms", title : 'DRAGON QUEST V', artist : 'mattaku', level : 7}
-  {url : 'bms/7_n_ka08_lt.bms', title : '日溜りの街−あ！−[Light]', level : 2}  
-  {url : 'bms/7_n_ka08_bt7god.bms', title : '日溜りの街−あ！−(GOD)', level : 19}
-  {url : 'bms/7_n_ka08_bt8master.bms', title : '日溜りの街−あ！−(BMS MASTER)', level : 20}
-  {url : 'bms/va.bms', title : 'V(SOFT LANDING PARADISE)', level : 0}  
-]
-
 MenuBaseLayer = cc.Layer.extend
   ctor : ->
     @_super()
@@ -41,9 +15,10 @@ MenuBaseLayer = cc.Layer.extend
 
   start : ->
     @_addBackground()
-    menu = new MenuController()
-    menu.init menuList, cc.director.getWinSize().width / 2 + 150, 70
-    @addChild menu
+    cc.loader.loadJson 'bms.json', (error, data) =>
+      menu = new MenuController data
+      menu.init data, cc.director.getWinSize().width / 2 + 150, 70
+      @addChild menu
 
   onExit : ->
     @_super()
@@ -56,9 +31,10 @@ MenuBaseLayer = cc.Layer.extend
     @addChild bg, 0
 
 MenuController = cc.Layer.extend
-  ctor : ->
+  ctor : (data) ->
     @_super()
     @_offsetY = 0
+    @_menuList = data
 
   init : (list, x, @_linespace) ->
     director = cc.director
@@ -151,7 +127,7 @@ MenuController = cc.Layer.extend
   _onMenuCallback : (sender) ->
     @_offsetY = @_itemMenu.y
     id = sender.getLocalZOrder() - 10000
-    url = menuList[id].url
+    url = @_menuList[id].url
     prefix = @_getPrefix url
     cc.log url
 
