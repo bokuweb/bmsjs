@@ -1,5 +1,4 @@
-window.bmsStart = (test) ->
-   console.log test
+window.bmsStart = (pathToBmsDir) ->
 
   unless cc.sys.isNative
     cc.screenSize = window.parent.screen
@@ -42,7 +41,7 @@ window.bmsStart = (test) ->
     cc.director.setContentScaleFactor 2
 
     cc.LoaderScene.preload resList, ->
-      cc.director.runScene new MenuScene()
+      cc.director.runScene new MenuScene pathToBmsDir
     , this
 
 
