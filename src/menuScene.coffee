@@ -13,9 +13,9 @@ MenuBaseLayer = cc.Layer.extend
         screenSize = window.parent.screen
         cc.view.setDesignResolutionSize screenSize.width, screenSize.height, cc.ResolutionPolicy.SHOW_ALL
 
-  start : (pathToBmsDir) ->
+  start : ->
     @_addBackground()
-    cc.loader.loadJson pathToBmsDir + 'bms.json', (error, data) =>
+    cc.loader.loadJson cc.pathToBmsDir + 'bms.json', (error, data) =>
       menu = new MenuController data
       menu.init data, cc.director.getWinSize().width / 2 + 150, 70
       @addChild menu
@@ -175,11 +175,11 @@ MenuController = cc.Layer.extend
     @_itemMenu.y = (@_itemMenu.height - size.height) / 2
 
 MenuScene = cc.Scene.extend
-  ctor : (pathToBmsDir) ->
+  ctor :  ->
     @_super()
     layer = new MenuBaseLayer()
     @addChild layer
-    layer.start pathToBmsDir
+    layer.start()
 
   onExit : ->
     @_super()

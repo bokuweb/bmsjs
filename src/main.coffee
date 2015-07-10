@@ -1,5 +1,7 @@
 window.bmsStart = (pathToBmsDir) ->
 
+  cc.pathToBmsDir = pathToBmsDir
+  
   unless cc.sys.isNative
     cc.screenSize = window.parent.screen
   cc.game.run()
@@ -41,7 +43,7 @@ window.bmsStart = (pathToBmsDir) ->
     cc.director.setContentScaleFactor 2
 
     cc.LoaderScene.preload resList, ->
-      cc.director.runScene new MenuScene pathToBmsDir
+      cc.director.runScene new MenuScene()
     , this
 
 
