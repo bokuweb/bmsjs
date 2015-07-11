@@ -1,9 +1,8 @@
 window.bmsStart = (pathToBmsDir) ->
 
   cc.pathToBmsDir = pathToBmsDir
-  
-  unless cc.sys.isNative
-    cc.screenSize = window.parent.screen
+  cc.screenSize = window.parent.screen
+
   cc.game.run()
 
   cc.game.onStart = ->
@@ -17,17 +16,7 @@ window.bmsStart = (pathToBmsDir) ->
     cc.view.enableRetina off
     cc.view.adjustViewPort on
 
-    if cc.sys.isNative
-      searchPaths = jsb.fileUtils.getSearchPaths()
-      searchPaths.push 'script'
-      if cc.sys.os is cc.sys.OS_IOS or  cc.sys.os == cc.sys.OS_OSX
-        searchPaths.push "res"
-        searchPaths.push "src"
-        searchPaths.push "bms"
-
-      jsb.fileUtils.setSearchPaths searchPaths
-
-    if cc.sys.isMobile or cc.sys.isNative
+    if cc.sys.isMobile
       #height =  cc.view.getFrameSize().height / cc.view.getFrameSize().width * 320
       #cc.view.setDesignResolutionSize 320, height, cc.ResolutionPolicy.SHOW_ALL
       cc.view.setDesignResolutionSize 320, 480, cc.ResolutionPolicy.SHOW_ALL 
