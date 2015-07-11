@@ -127,9 +127,10 @@ MenuController = cc.Layer.extend
   _onMenuCallback : (sender) ->
     @_offsetY = @_itemMenu.y
     id = sender.getLocalZOrder() - 10000
+    #console.log "url=#{url}"
     url = @_menuList[id].url
     prefix = @_getPrefix url
-    cc.log url
+    #cc.log url
 
     if cc.sys.isNative
       text = jsb.fileUtils.getStringFromFile url
@@ -139,17 +140,18 @@ MenuController = cc.Layer.extend
       bms = parser.parse text
       resources = []
       for k, v of bms.wav
-        resources.push prefix + v 
+        resources.push cc.pathToBmsDir + prefix + v 
       cc.LoaderScene.preload resources, ->
-        cc.director.runScene new AppScene bms, prefix
+        cc.director.runScene new AppScene bms, cc.pathToBmsDir + prefix
       , this
     else
-      cc.loader.loadTxt url, (err, text) =>
+      cc.loader.loadTxt cc.pathToBmsDir + url, (err, text) =>
         parser = new Parser()
         bms = parser.parse text
         resources = []
         for k, v of bms.wav
-          resources.push prefix + v 
+          resources.push prefix + v
+        console.log cc.pathToBmsDir + prefix
         cc.LoaderScene.preload resources, ->
           cc.director.runScene new AppScene bms, prefix
         , this
