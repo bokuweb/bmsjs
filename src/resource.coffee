@@ -22,12 +22,13 @@ resObjs =
 resList = []
 
 resList.push v for k, v of resObjs
-###
+
+# fontのみ絶対pathにしないとディレクトリ構造とURLの差異でロードに失敗する
 resList.push
   type : "font"
   name : "sapceage"
-  srcs : ["res/fonts/spaceage.ttf"]
-###
+  srcs : [cc.pathToBmsDir + "res/fonts/spaceage.ttf"]
+
 module.exports =
   resObjs : resObjs
   resList : resList
