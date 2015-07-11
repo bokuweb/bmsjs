@@ -174,6 +174,8 @@ AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
+
+    console.log "app"
     #@_addKey()
 
     @_addBackground()

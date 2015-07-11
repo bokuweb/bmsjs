@@ -22,11 +22,12 @@ resObjs =
 resList = []
 
 resList.push v for k, v of resObjs
+###
 resList.push
   type : "font"
   name : "sapceage"
   srcs : ["res/fonts/spaceage.ttf"]
-
+###
 module.exports =
   resObjs : resObjs
   resList : resList
