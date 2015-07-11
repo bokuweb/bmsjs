@@ -15,7 +15,7 @@ MenuBaseLayer = cc.Layer.extend
 
   start : ->
     @_addBackground()
-    cc.loader.loadJson 'bms.json', (error, data) =>
+    cc.loader.loadJson cc.pathToBmsDir + 'bms.json', (error, data) =>
       menu = new MenuController data
       menu.init data, cc.director.getWinSize().width / 2 + 150, 70
       @addChild menu
@@ -175,7 +175,7 @@ MenuController = cc.Layer.extend
     @_itemMenu.y = (@_itemMenu.height - size.height) / 2
 
 MenuScene = cc.Scene.extend
-  ctor : ->
+  ctor :  ->
     @_super()
     layer = new MenuBaseLayer()
     @addChild layer

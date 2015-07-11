@@ -1,6 +1,7 @@
-window.bmsStart = (test) ->
-   console.log test
+window.bmsStart = (pathToBmsDir) ->
 
+  cc.pathToBmsDir = pathToBmsDir
+  
   unless cc.sys.isNative
     cc.screenSize = window.parent.screen
   cc.game.run()
