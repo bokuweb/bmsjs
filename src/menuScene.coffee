@@ -134,8 +134,9 @@ MenuController = cc.Layer.extend
       parser = new Parser()
       bms = parser.parse text
       resources = []
-      for k, v of bms.wav
-        resources.push prefix + v
+      for k, v of bms.wav then resources.push prefix + v
+      for k, v of bms.bmp then resources.push prefix + v
+
       cc.LoaderScene.preload resources, ->
         cc.director.runScene new AppScene bms, prefix
       , this
