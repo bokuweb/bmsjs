@@ -27,6 +27,9 @@ RateLayer = cc.Layer.extend
     @addChild @_label
     @_label.reflect ~~(@_rate.toFixed())
 
+    console.log @_config.great
+    
+
   get : -> ~~(@_rate.toFixed())
 
   start : -> @scheduleUpdate()
@@ -47,21 +50,22 @@ RateLayer = cc.Layer.extend
         if @_rate - 6 <= i * 2 < @_rate - 2 then @_sprites[i].setSpriteFrame @_frames[~~(Math.random() * 2) * 2 + 1]
         else if @_rate - 2 >= i * 2 then @_sprites[i].setSpriteFrame @_frames[1]
         else @_sprites[i].setSpriteFrame @_frames[3]
+    console.log @_rate
     return
 
 
   reflect : (judge) ->
     switch judge
       when "pgreat", "great"
-        @_rate = if @_rate + @_config.great >= 100 then 100 else @_rate + @_config.great
+        if @_rate + @_config.great >= 100 then @_rate = 100 else @_rate += @_config.great
       when "good"
-        @_rate = if @_rate + @_config.good >= 100 then 100 else @_rate + @_config.good
+        if @_rate + @_config.good >= 100 then @_rate = 100 else @_rate += @_config.good
       when "bad"
-        @_rate = if @_rate + @_config.bad < 2 then 2 else @_rate + @_config.bad
+        if @_rate + @_config.bad < 2 then @_rate = 2 else @_rate += @_config.bad
       when "poor"
-        @_rate = if @_rate + @_config.poor < 2 then 2 else @_rate + @_config.poor
+        if @_rate + @_config.poor < 2 then @_rate = 2 else @_rate += @_config.poor
       when "epoor"
-        @_rate = if @_rate + @_config.epoor < 2 then 2 else @_rate + @_config.epoor
+        @_rate = if @_rate + @_config.epoor < 2 then @_rate = 2 else @_rate += @_config.epoor
       else
 
     @_label.reflect ~~(@_rate.toFixed())
