@@ -50,7 +50,6 @@ RateLayer = cc.Layer.extend
         if @_rate - 6 <= i * 2 < @_rate - 2 then @_sprites[i].setSpriteFrame @_frames[~~(Math.random() * 2) * 2 + 1]
         else if @_rate - 2 >= i * 2 then @_sprites[i].setSpriteFrame @_frames[1]
         else @_sprites[i].setSpriteFrame @_frames[3]
-    console.log @_rate
     return
 
 

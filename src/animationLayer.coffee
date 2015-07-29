@@ -20,8 +20,9 @@ AnimationLayer = cc.Layer.extend
   start : -> @scheduleUpdate()
 
   onPoor : ->
-    @_isPoor = true
-    @_bmp.setTexture @_srcs[0]
+    if @_srcs[0]?
+      @_isPoor = true
+      @_bmp.setTexture @_srcs[0]
     @scheduleOnce @_disablePoor, POOR_INDICATOR_TIME_MSEC / 1000
 
   update : ->
