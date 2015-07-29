@@ -19,10 +19,10 @@ skin =
 
 config =
   initRate    : 20
-  greatIncVal : 1
-  goodIncVal  : 0.5
-  badDecVal   : -0.4
-  poorDecVal  : -0.4
+  great       : 1
+  good        : 0.5
+  bad         : -0.4
+  poor        : -0.4
   num         : 50
   clearVal    : 40
   
@@ -62,7 +62,7 @@ RateLayerTest = cc.Class.extend
             rate.init config
             @addChild rate, skin.rate.z
             rate.start()
-            num = ~~(100 - config.initRate / config.greatIncVal) + 1
+            num = ~~(100 - config.initRate / config.great) + 1
             console.log num
             for i in [0...num]
               rate.reflect 'pgreat'
