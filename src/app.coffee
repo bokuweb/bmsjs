@@ -64,7 +64,6 @@ skin =
         src : res.whiteKeydownImage
       blackKeydownImage :
         src : res.blackKeydownImage
-
   rate :
     z : 10
     meter :
@@ -168,6 +167,9 @@ skin =
     second :
       x : 73
       y : 393
+  bmp :
+    x : 110
+    y : 190
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
@@ -244,11 +246,11 @@ AppLayer = cc.Layer.extend
     @_playtime.init()
     @addChild @_playtime, skin.playtime.z
 
-    @_animeLayer = new AnimeLayer {x : 100, y : 100}, @_timer
+    @_animeLayer = new AnimeLayer skin.bmp, @_timer
     console.dir @_bms.bmp
     console.dir @_bms.animations
     @_animeLayer.init @_bms.bmp, @_bms.animations, prefix
-    @addChild @_animeLayer, 9999
+    @addChild @_animeLayer
 
     if @_bms.animations.length is 0
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
@@ -258,7 +260,7 @@ AppLayer = cc.Layer.extend
       @addChild soundonly, 100
 
   start : ->
-    @_notesLayer.start on
+    @_notesLayer.start off
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()
@@ -289,6 +291,8 @@ AppLayer = cc.Layer.extend
   _onJudge : (event, judge) ->
     @_rate.reflect judge
     @_stats.reflect judge
+
+    @_animeLayer.onPoor() if judge is 'poor' or judge is 'epoor'
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage

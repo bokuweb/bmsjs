@@ -10,8 +10,8 @@ AnimationLayer = cc.Layer.extend
     @_isPoor = false
     @_srcs[k] = prefix + v for k, v of srcs
     @_bmp = new cc.Sprite @_srcs[0]
-    @_bmp.x = @_skin.x
-    @_bmp.y = @_skin.y
+    @_bmp.x = cc.screenSize.width / 2 + @_skin.x
+    @_bmp.y = cc.screenSize.height - @_skin.y
     #@_bmp.width = @_skin.width
     #@_bmp.height = @_skin.height
     @_bmp.scale = 2
@@ -27,7 +27,7 @@ AnimationLayer = cc.Layer.extend
   update : ->
     time = @_timer.get()
     if time > @_bmps[@_index]?.timing
-      @_bmp.setTexture @_srcs[@_bmps[@_index].id]# unless @_isPoor
+      @_bmp.setTexture @_srcs[@_bmps[@_index].id] unless @_isPoor
       @_index++
 
   _disablePoor : -> @_isPoor = false
