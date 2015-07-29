@@ -28,7 +28,6 @@ Audio = cc.Layer.extend
     @removeAllChildren on
     for wav in @_wav when wav?
       cc.audioEngine.unloadEffect wav 
-      console.log wav
     @_wav = []
     
 module.exports = Audio
