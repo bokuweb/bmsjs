@@ -4,13 +4,12 @@ RateLayer       = require './rateLayer'
 StatsLayer      = require './statsLayer'
 BpmLayer        = require './bpmLayer'
 PlaytimeLayer   = require './playtimeLayer'
+AnimeLayer      = require './animationLayer'
 Timer           = require './timer'
 Audio           = require './audio'
 GameoverScene   = require './gameoverScene'
 res             = require './resource'
   .resObjs
-
-
 
 # TODO : move
 skin =
@@ -65,7 +64,6 @@ skin =
         src : res.whiteKeydownImage
       blackKeydownImage :
         src : res.blackKeydownImage
-
   rate :
     z : 10
     meter :
@@ -169,14 +167,14 @@ skin =
     second :
       x : 73
       y : 393
+  bmp :
+    x : 110
+    y : 190
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
     @_super()
     @_timer = new Timer()
-
-    console.log "app"
-    #@_addKey()
 
     @_addBackground()
     @_audio = new Audio @_timer, @_bms.bgms
@@ -217,7 +215,6 @@ AppLayer = cc.Layer.extend
     @_notesLayer.addListener 'hit', @_onHit.bind this
     @_notesLayer.addListener 'judge', @_onJudge.bind this
     #@_notesLayer.addListener 'end', @_onEnd.bind this
-
     @addChild @_notesLayer, skin.notes.z
 
 
@@ -249,7 +246,12 @@ AppLayer = cc.Layer.extend
     @_playtime.init()
     @addChild @_playtime, skin.playtime.z
 
-    cc.log @_bms.animations.length
+    @_animeLayer = new AnimeLayer skin.bmp, @_timer
+    console.dir @_bms.bmp
+    console.dir @_bms.animations
+    @_animeLayer.init @_bms.bmp, @_bms.animations, prefix
+    @addChild @_animeLayer
+
     if @_bms.animations.length is 0
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
       soundonly.x = cc.screenSize.width / 2 + 100
@@ -258,11 +260,12 @@ AppLayer = cc.Layer.extend
       @addChild soundonly, 100
 
   start : ->
-    @_notesLayer.start on
+    @_notesLayer.start off
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()
     @_playtime.start()
+    @_animeLayer.start()
     @_timer.start()
     @scheduleUpdate()
 
@@ -286,9 +289,10 @@ AppLayer = cc.Layer.extend
     @scheduleOnce @_changeSceneToGameOver, 5
 
   _onJudge : (event, judge) ->
-    #cc.log judge
     @_rate.reflect judge
     @_stats.reflect judge
+
+    @_animeLayer.onPoor() if judge is 'poor' or judge is 'epoor'
 
   _addBackground : ->
     bg = new cc.Sprite res.bgImage
@@ -308,18 +312,6 @@ AppLayer = cc.Layer.extend
     turntable.setOpacity 200
     @addChild turntable, skin.body.turntable.z
     turntable.runAction new cc.RepeatForever new cc.RotateBy(5, 360)
-
-  _onTouch : (touch, event)->
-    time = @_timer.get()
-    target = event.getCurrentTarget()
-    locationInNode = target.convertToNodeSpace touch.getLocation()
-    s = target.getContentSize()
-    rect = cc.rect 0, 0, s.width, s.height
-    if cc.rectContainsPoint rect, locationInNode
-      cc.log "id = #{target.id} time = #{time}"
-      @_notesLayer.onTouch target.id, time
-      return true
-    return false
 
 #window.onblur = ->
 #  window.stop();
