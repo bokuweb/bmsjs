@@ -217,6 +217,8 @@ AppLayer = cc.Layer.extend
     #@_notesLayer.addListener 'end', @_onEnd.bind this
     @addChild @_notesLayer, skin.notes.z
 
+    console.log @_bms.total
+    console.log @_bms.totalNote
 
     @_rate = new RateLayer skin.rate
     @_rate.init
@@ -239,7 +241,7 @@ AppLayer = cc.Layer.extend
       good        : @_bms.total / @_bms.totalNote * 0.6
       bad         : -3.2
       poor        : -4.8
-      eppoor      : -1.6
+      epoor       : -1.6
       num         : 50
       clearVal    : 40
     @addChild @_rate, skin.rate.z
