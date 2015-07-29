@@ -31,7 +31,7 @@ window.bmsStart = (pathToBmsDir) ->
     cc.director.setProjection cc.Director.PROJECTION_2D
     cc.director.setContentScaleFactor 2
 
-    cc.LoaderScene.preload resList, ->
+    require('./loaderScene').preload resList, ->
       cc.director.runScene new MenuScene()
     , this
 
