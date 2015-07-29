@@ -222,16 +222,17 @@ AppLayer = cc.Layer.extend
     @_rate.init
       # FIXME : move to argument
       ###
+      http://2nd.geocities.jp/yoshi_65c816/bms/LR2.html
       t=#TOTAL n=total notes
-      ゲージの種類  PGERAT  GREAT GOOD POOR  BAD  空POOR
-      GROOVE  t/n  t/n  (t/n)/2  -6  -4  -2
-      EASY  t/n*1.2  t/n*1.2  (t/n*1.2)/2  -4.8  -3.2  -1.6
-      HARD  0.1※2  0.1※2  0.05※2  -10※  -6※  -2※
-      段位  0.1  0.1  0.05？  -3  -2  -2
-      本家GROOVE  a  a  a/2  -6  -2  -2
-      本家EASY  a  a  a/2  -4.8  -1.6  -1.6
-      本家HARD  0.16  0.16  0  -9  -5  5
-      本家段位  0.16  0.16  0.04  -2.5  -1.5  -1.5
+      ゲージの種類  PGERAT    GREAT        GOOD   POOR    BAD   空POOR
+      GROOVE          t/n      t/n      (t/n)/2     -6     -4       -2
+      EASY        t/n*1.2  t/n*1.2  (t/n*1.2)/2   -4.8   -3.2     -1.6
+      HARD         0.1※2   0.1※2      0.05※2   -10※  -6※     -2※
+      段位            0.1      0.1       0.05？     -3     -2       -2
+      本家GROOVE        a        a          a/2     -6     -2       -2
+      本家EASY          a        a          a/2   -4.8   -1.6     -1.6
+      本家HARD       0.16     0.16            0     -9     -5        5
+      本家段位       0.16     0.16         0.04   -2.5   -1.5     -1.5
       ###
       initRate    : 20
       great       : @_bms.total / @_bms.totalNote * 1.2
