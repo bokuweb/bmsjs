@@ -31,6 +31,11 @@ AnimationLayer = cc.Layer.extend
       @_bmp.setTexture @_srcs[@_bmps[@_index].id] unless @_isPoor
       @_index++
 
+  onExit : ->
+    @_super()
+    @removeAllChildren on
+    @_srcs = []
+
   _disablePoor : -> @_isPoor = false
 
 module.exports = AnimationLayer

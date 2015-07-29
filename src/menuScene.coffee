@@ -135,7 +135,7 @@ MenuController = cc.Layer.extend
       bms = parser.parse text
       resources = []
       for k, v of bms.wav then resources.push prefix + v
-      for k, v of bms.bmp then resources.push prefix + v
+      #for k, v of bms.bmp then resources.push prefix + v
 
       require('./loaderScene').preload resources, ->
         cc.director.runScene new AppScene bms, prefix
@@ -170,7 +170,6 @@ MenuScene = cc.Scene.extend
 
   onExit : ->
     @_super()
-
     @removeAllChildren on
 
 module.exports = MenuScene

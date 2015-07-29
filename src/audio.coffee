@@ -17,15 +17,18 @@ Audio = cc.Layer.extend
 
   stopBgm : ->
 
-  hasAllBgmPlayEnd : ->
-    #for k, v of @_wav when v.currentTime < v.duration
-    #  return false
-    #return true
-
   update : ->
     time = @_timer.get()
     while time >= @_bgms[@_index]?.timing
       @play @_bgms[@_index].id
       @_index++
 
+  onExit : ->
+    @_super()
+    @removeAllChildren on
+    for wav in @_wav when wav?
+      cc.audioEngine.unloadEffect wav 
+      console.log wav
+    @_wav = []
+    
 module.exports = Audio
