@@ -7,8 +7,7 @@ NumeralLayerTest   = require './test-numeralLayer'
 StatsLayerTest     = require './test-statsLayer'
 PlaytimeLayerTest  = require './test-playtimeLayer'
 JudgementLayerTest = require './test-judgementLayer'
-#cocos2d-JS Lite can't execute initWithSpriteFrameName
-#AnimationLayerTest = require './test-animationLayer'
+AnimationLayerTest = require './test-animationLayer'
 BpmLayerTest       = require './test-bpmLayer'
 RateLayerTest      = require './test-rateLayer'
 
@@ -25,8 +24,7 @@ window.onload = ->
 
     rateLayerTest = new RateLayerTest()
     bpmLayerTest = new BpmLayerTest()
-    # cocos2d-JS Lite can't execute initWithSpriteFrameName
-    #animationLayerTest = new AnimationLayerTest()
+    animationLayerTest = new AnimationLayerTest()
     judgmentLayerTest = new JudgementLayerTest()
     playtimeLayerTest = new PlaytimeLayerTest()
     statsLayerTest = new StatsLayerTest()
@@ -39,7 +37,7 @@ window.onload = ->
 
     rateLayerTest.start()
     bpmLayerTest.start()
-    #animationLayerTest.start()
+    animationLayerTest.start()
     judgmentLayerTest.start()
     playtimeLayerTest.start()
     statsLayerTest.start()
