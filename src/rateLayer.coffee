@@ -49,18 +49,21 @@ RateLayer = cc.Layer.extend
         else @_sprites[i].setSpriteFrame @_frames[3]
     return
 
+
   reflect : (judge) ->
     switch judge
       when "pgreat", "great"
-        @_rate = if @_rate + @_config.greatIncVal >= 100 then 100 else @_rate + @_config.greatIncVal
+        @_rate = if @_rate + @_config.great >= 100 then 100 else @_rate + @_config.great
       when "good"
-        @_rate = if @_rate + @_config.goodIncVal >= 100 then 100 else @_rate + @_config.goodIncVal
+        @_rate = if @_rate + @_config.good >= 100 then 100 else @_rate + @_config.good
       when "bad"
-        @_rate = if @_rate + @_config.badDecVal < 2 then 2 else @_rate + @_config.badDecVal
+        @_rate = if @_rate + @_config.bad < 2 then 2 else @_rate + @_config.bad
       when "poor"
-        @_rate = if @_rate + @_config.poorDecVal < 2 then 2 else @_rate + @_config.poorDecVal
+        @_rate = if @_rate + @_config.poor < 2 then 2 else @_rate + @_config.poor
+      when "epoor"
+        @_rate = if @_rate + @_config.epoor < 2 then 2 else @_rate + @_config.epoor
       else
-        @_rate = if @_rate + @_config.poorDecVal < 2 then 2 else @_rate + @_config.poorDecVal
+
     @_label.reflect ~~(@_rate.toFixed())
 
 module.exports = RateLayer
