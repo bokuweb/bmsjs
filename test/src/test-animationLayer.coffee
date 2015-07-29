@@ -16,8 +16,6 @@ AnimationLayerTest = cc.Class.extend
             size = cc.director.getWinSize()
             timer = new Timer()
             skin =
-              width  : 128
-              height : 128
               x : size.width / 2
               y : size.height / 2
             bmp = new AnimationLayer skin, timer
@@ -32,7 +30,7 @@ AnimationLayerTest = cc.Class.extend
               {timing : 1000, id : 2}
             ]
 
-            bmp.init srcs, bmps
+            bmp.init srcs, bmps, ''
             @addChild bmp
             bmp.start()
             timer.start()
