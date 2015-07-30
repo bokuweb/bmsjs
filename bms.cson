@@ -3,5 +3,6 @@
 [
   {url : "bms/Lapis - SHIKI/lapis7key.bme" , title : 'Lapis'           , artist : ' SHIKI', level : 8}
   {url : "bms/Lapis - SHIKI/lapis7keya.bme", title : 'Lapis [Another]' , artist : ' SHIKI', level : 10}
-  {url : "bms/Lapis - SHIKI/lapis7keyb.bme", title : 'Lapis [beginner]', artist : ' SHIKI', level : 2}  
+  {url : "bms/Lapis - SHIKI/lapis7keyb.bme", title : 'Lapis [beginner]', artist : ' SHIKI', level : 2}
+  {url : "bms/Lapis - SHIKI/lapis7keyl.bme", title : 'Lapis [Light]'   , artist : ' SHIKI', level : 5}  
 ] 

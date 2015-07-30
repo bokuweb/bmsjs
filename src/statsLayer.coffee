@@ -36,7 +36,7 @@ StatsLayer = cc.Layer.extend
     @_greatIncVal = maxScore.great / @_noteNum
     @_goodIncVal = maxScore.good / @_noteNum
     @_comboBonusFactor = maxScore.combo / (10 * (@_noteNum - 1) - 55)
-    @_incValonUpdate = maxScore.pgreat / @_noteNum / 3
+    @_incValonUpdate = maxScore.pgreat / @_noteNum / 2
     @_judgement.init()
 
     @_scoreLabel.init @_getDigits(maxScore.pgreat + maxScore.combo), 0
