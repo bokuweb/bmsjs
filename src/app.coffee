@@ -217,9 +217,6 @@ AppLayer = cc.Layer.extend
     #@_notesLayer.addListener 'end', @_onEnd.bind this
     @addChild @_notesLayer, skin.notes.z
 
-    console.log @_bms.total
-    console.log @_bms.totalNote
-
     @_rate = new RateLayer skin.rate
     @_rate.init
       # FIXME : move to argument
@@ -282,6 +279,7 @@ AppLayer = cc.Layer.extend
     @_bpm.start()
     @_playtime.start()
     @_animeLayer.start()
+    @_stats.start()
     @_timer.start()
     @scheduleUpdate()
 
