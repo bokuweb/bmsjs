@@ -10,7 +10,8 @@ Audio = cc.Layer.extend
     @_wav[k] = prefix + v for k, v of res
 
   play : (id)->
-    @_audio.playEffect @_wav[id], false
+    @_audio.playEffect @_wav[id], false if @_wav[id]?
+
 
   startBgm : ->
     @scheduleUpdate()

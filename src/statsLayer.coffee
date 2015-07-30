@@ -125,6 +125,7 @@ StatsLayer = cc.Layer.extend
     if @_combo is @_noteNum
       @_score += @_comboBonusFactor * @_comboPoint
       @_comboPoint = 0
+      @_incValonUpdate = @_incValonUpdate * 5
 
     if 0 < @_combo <= 10
       @_comboPoint += @_combo - 1
