@@ -36,7 +36,7 @@ StatsLayer = cc.Layer.extend
     @_greatIncVal = maxScore.great / @_noteNum
     @_goodIncVal = maxScore.good / @_noteNum
     @_comboBonusFactor = maxScore.combo / (10 * (@_noteNum - 1) - 55)
-
+    @_incValonUpdate = maxScore.pgreat / @_noteNum / 3
     @_judgement.init()
 
     @_scoreLabel.init @_getDigits(maxScore.pgreat + maxScore.combo), 0
@@ -67,13 +67,15 @@ StatsLayer = cc.Layer.extend
     @_comboLabel.y = cc.screenSize.height - @_skin.comboNum.y
 
   get : ->
-    score  : @_dispScore
+    score  : ~~(@_score.toFixed())
     combo  : @_maxCombo
     pgreat : @_pgreatNum
     great  : @_greatNum
     good   : @_goodNum
     bad    : @_badNum
     poor   : @_poorNum
+
+  start : -> @scheduleUpdate()
 
   reflect : (judge) ->
     switch judge
@@ -133,9 +135,14 @@ StatsLayer = cc.Layer.extend
       @_maxCombo = @_combo
       @_comboLabel.reflect @_maxCombo
 
-    @_dispScore = ~~(@_score.toFixed())
-    @_scoreLabel.reflect @_dispScore
+    #@_dispScore = ~~(@_score.toFixed())
+    #@_scoreLabel.reflect @_dispScore
 
+  update : ->
+    if @_dispScore < ~~(@_score.toFixed())
+      @_dispScore += @_incValonUpdate
+      @_dispScore = if @_dispScore > ~~(@_score.toFixed()) then ~~(@_score.toFixed()) else @_dispScore
+      @_scoreLabel.reflect @_dispScore    
 
   _getDigits : (num)-> Math.log(num) / Math.log(10) + 1 | 0
 
