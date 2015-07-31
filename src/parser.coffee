@@ -41,17 +41,6 @@ Parser = cc.Class.extend
     _serialize @bms.bgms, "wav", @bms.data
 
     @bms.totalNote = _calcTotalNote.call @
-
-    # OPTIMIZE :
-    #@bms.lastTime.bgm = if @bms.bgms.length is 0 then 0 else _.max(@bms.bgms, 'timing').timing
-    #cc.log _.last(@bms.data)
-    #@bms.lastTime.note = _.max(_.map(_.last(@bms.data)?.note?.key, (key) =>
-    #  if key.timing.length isnt 0
-    #    _.max(key.timing)
-    #  else 0
-    #))
-
-    cc.log "@bms.endTime = #{@bms.endTime}"
     @bms
 
   _parse : (row) ->
@@ -60,7 +49,7 @@ Parser = cc.Class.extend
 
     wav = /^#WAV(\w{2}) +(.*)/.exec(row)
     if wav?
-      _parseWAV.call @, wav
+      @_parseWAV wav
       return
 
     bmp = /^#BMP(\w{2}) +(.*)/.exec(row)
@@ -78,7 +67,7 @@ Parser = cc.Class.extend
       _parseProperty.call @, property
       return
 
-  _parseWAV = (wav) ->
+  _parseWAV : (wav) ->
     index = parseInt(wav[1], 36)
     @bms.wav[index] = wav[2]
 
