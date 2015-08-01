@@ -176,6 +176,9 @@ AppLayer = cc.Layer.extend
     @_super()
     @_timer = new Timer()
 
+    # TODO :
+    @_stopIndex = 0
+
     @_addBackground()
     @_audio = new Audio @_timer, @_bms.bgms
     @_audio.init @_bms.wav, prefix
@@ -284,7 +287,23 @@ AppLayer = cc.Layer.extend
     @scheduleUpdate()
 
   update : ->
-    if @_timer.get() > @_bms.endTime + 5000
+    time = @_timer.get()
+
+    # TODO : to class
+    if @_bms.stopTiming[@_stopIndex]?
+      if time >= @_bms.stopTiming[@_stopIndex].timing
+        #console.log "stop id=#{@_bms.stopTiming[@_stopIndex].id}, val =#{@_bms.stop[@_bms.stopTiming[@_stopIndex].id]}"
+        measureTime = 240000 / @_bpm.get()
+        stopTime = @_bms.stop[@_bms.stopTiming[@_stopIndex].id] / 192 * measureTime
+        console.log "stop time = #{stopTime}, bpm = #{@_bpm.get()}"
+        @_timer.pause()
+        @scheduleOnce ->
+          @_timer.start()
+        , stopTime / 1000
+        @_stopIndex++
+
+
+    if time > @_bms.endTime + 5000
       @unscheduleUpdate()
       @_timer.stop()
       cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
