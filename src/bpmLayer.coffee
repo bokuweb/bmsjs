@@ -14,6 +14,10 @@ BpmLayer = cc.Layer.extend
 
   start : -> @scheduleUpdate()
 
+  get : ->
+    i = if @_index >= 1 then @_index - 1 else 0
+    @_bpms[i].val
+
   update : ->
     time = @_timer.get()
     if @_bpms[@_index]?
