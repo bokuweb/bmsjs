@@ -204,7 +204,7 @@ Parser = cc.Class.extend
     time = 0
     for bar, i in @bms.data
       if not bar?
-        @bms.data[i] = _createBar()
+        @bms.data[i] = @_createBar()
         @bms.data[i].timing = time
         time += (240000 / bpm)
         continue
