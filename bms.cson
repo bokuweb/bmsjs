@@ -2,22 +2,21 @@
 # txtはresディレクトリの下に配置する必要あり
 [
   # if sequence {url : "bms/Declinin/declinin.bms"            , title : "Declinin'"                                , artist : ' '                       , level : 4}
-
-  {url : "bms/evangelize/_blurryimages.bms"     , title : 'evangelize (blurry images)'               , artist : ' stereoberry (original:syatten BGA:ƒÎ=72)'      , level : 5}
-      
-  {url : "bms/AVALON/01_avalon[light7].bme"     , title : 'AVALON [light]'                           , artist : ' Team:SASAKURATION'                             , level : 5}
-  {url : "bms/AVALON/02_avalon[7key].bme"       , title : 'AVALON [Normal]'                          , artist : ' Team:SASAKURATION'                             , level : 10}
-  {url : "bms/AVALON/03_avalon[Another].bme"    , title : 'AVALON [Another]'                         , artist : ' Team:SASAKURATION'                             , level : 12}
-  {url : "bms/AVALON/04_avalon_[IIDX].bme"      , title : 'AVALON [IIDX]'                            , artist : ' Team:SASAKURATION'                             , level : 0}
-  {url : "bms/bellydance/a_bga_bmssp_e.bms"     , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                                 , level : 2}
-  {url : "bms/bellydance/a_bga.bms"             , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                                 , level : 4}
-  {url : "bms/atonement/ayy2.bms"               , title : 'atonement you you'                        , artist : ' '                                              , level : 6}
-  {url : "bms/AbsurdGaff/_abs07_00_bmssp7e.bme" , title : 'Absurd Gaff [7keys Easy]'                 , artist : ' siromaru / BMSSP'                              , level : 3}
-  {url : "bms/AbsurdGaff/_ms_abs07_01.bme"      , title : 'Absurd Gaff [Normal]'                     , artist : ' siromaru / Mentalstock'                        , level : 8}
-  {url : "bms/AbsurdGaff/_ms_abs07_02.bme"      , title : 'Absurd Gaff [Hyper]'                      , artist : ' siromaru / Mentalstock'                        , level : 10}
-  {url : "bms/AbsurdGaff/_ms_abs07_03.bme"      , title : 'Absurd Gaff [Another]'                    , artist : ' siromaru / Mentalstock'                        , level : 21}
-  {url : "bms/Lapis - SHIKI/lapis7key.bme"      , title : 'Lapis'                                    , artist : ' SHIKI'                                         , level : 8}
-  {url : "bms/Lapis - SHIKI/lapis7keya.bme"     , title : 'Lapis [Another]'                          , artist : ' SHIKI'                                         , level : 10}
-  {url : "bms/Lapis - SHIKI/lapis7keyb.bme"     , title : 'Lapis [beginner]'                         , artist : ' SHIKI'                                         , level : 2}
-  {url : "bms/Lapis - SHIKI/lapis7keyl.bme"     , title : 'Lapis [Light]'                            , artist : ' SHIKI'                                         , level : 5}
+  {url : "bms/evangelize_radio edit/evangelize_spn.bme" , title : 'Evangelize (Radio Edit) (SP NORMAL)'      , artist : ' syatten + 140'                                 , level : 5}
+  {url : "bms/evangelize/_blurryimages.bms"             , title : 'evangelize (blurry images)'               , artist : ' stereoberry (original:syatten BGA:ƒÎ=72)'      , level : 5}
+  {url : "bms/AVALON/01_avalon[light7].bme"             , title : 'AVALON [light]'                           , artist : ' Team:SASAKURATION'                             , level : 5}
+  {url : "bms/AVALON/02_avalon[7key].bme"               , title : 'AVALON [Normal]'                          , artist : ' Team:SASAKURATION'                             , level : 10}
+  {url : "bms/AVALON/03_avalon[Another].bme"            , title : 'AVALON [Another]'                         , artist : ' Team:SASAKURATION'                             , level : 12}
+  {url : "bms/AVALON/04_avalon_[IIDX].bme"              , title : 'AVALON [IIDX]'                            , artist : ' Team:SASAKURATION'                             , level : 0}
+  {url : "bms/bellydance/a_bga_bmssp_e.bms"             , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                                 , level : 2}
+  {url : "bms/bellydance/a_bga.bms"                     , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                                 , level : 4}
+  {url : "bms/atonement/ayy2.bms"                       , title : 'atonement you you'                        , artist : ' '                                              , level : 6}
+  {url : "bms/AbsurdGaff/_abs07_00_bmssp7e.bme"         , title : 'Absurd Gaff [7keys Easy]'                 , artist : ' siromaru / BMSSP'                              , level : 3}
+  {url : "bms/AbsurdGaff/_ms_abs07_01.bme"              , title : 'Absurd Gaff [Normal]'                     , artist : ' siromaru / Mentalstock'                        , level : 8}
+  {url : "bms/AbsurdGaff/_ms_abs07_02.bme"              , title : 'Absurd Gaff [Hyper]'                      , artist : ' siromaru / Mentalstock'                        , level : 10}
+  {url : "bms/AbsurdGaff/_ms_abs07_03.bme"              , title : 'Absurd Gaff [Another]'                    , artist : ' siromaru / Mentalstock'                        , level : 21}
+  {url : "bms/Lapis - SHIKI/lapis7key.bme"              , title : 'Lapis'                                    , artist : ' SHIKI'                                         , level : 8}
+  {url : "bms/Lapis - SHIKI/lapis7keya.bme"             , title : 'Lapis [Another]'                          , artist : ' SHIKI'                                         , level : 10}
+  {url : "bms/Lapis - SHIKI/lapis7keyb.bme"             , title : 'Lapis [beginner]'                         , artist : ' SHIKI'                                         , level : 2}
+  {url : "bms/Lapis - SHIKI/lapis7keyl.bme"             , title : 'Lapis [Light]'                            , artist : ' SHIKI'                                         , level : 5}
 ] 
