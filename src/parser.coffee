@@ -46,6 +46,10 @@ Parser = cc.Class.extend
     console.dir @bms.stopTiming
 
     @bms.totalNote = @_calcTotalNote()
+
+    # total 省略時
+    unless @bms.total?
+      @bms.total = 200 + @bms.totalNote
     @bms
 
   _parse : (row) ->

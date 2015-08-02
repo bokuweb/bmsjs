@@ -8,8 +8,11 @@ AnimationLayer = cc.Layer.extend
   init : (srcs, @_bmps, prefix) ->
     @_index = 0
     @_isPoor = false
-    @_srcs[k] = prefix + v for k, v of srcs
-    @_bmp = new cc.Sprite @_srcs[0]
+    for k, v of srcs
+      @_srcs[k] = prefix + v
+      @_firstImage ?= prefix + v
+
+    @_bmp = new cc.Sprite @_firstImage
     @_bmp.x = cc.screenSize.width / 2 + @_skin.x
     @_bmp.y = cc.screenSize.height - @_skin.y
     #@_bmp.width = @_skin.width
