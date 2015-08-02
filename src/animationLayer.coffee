@@ -17,7 +17,8 @@ AnimationLayer = cc.Layer.extend
     @_bmp.y = cc.screenSize.height - @_skin.y
     #@_bmp.width = @_skin.width
     #@_bmp.height = @_skin.height
-    @_bmp.scale = 2
+    @_bmp.scale = 3.06
+    @_bmp.setOpacity 0
     @addChild @_bmp
 
   start : -> @scheduleUpdate()
@@ -31,6 +32,7 @@ AnimationLayer = cc.Layer.extend
   update : ->
     time = @_timer.get()
     if time > @_bmps[@_index]?.timing
+      @_bmp.setOpacity 255
       @_bmp.setTexture @_srcs[@_bmps[@_index].id] unless @_isPoor
       @_index++
 
