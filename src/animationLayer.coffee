@@ -17,7 +17,8 @@ AnimationLayer = cc.Layer.extend
     @_bmp.y = cc.screenSize.height - @_skin.y
     #@_bmp.width = @_skin.width
     #@_bmp.height = @_skin.height
-    @_bmp.scale = 3.06
+    #@_bmp.scale = 3.06
+    @_bmp.scale = 2.5
     @_bmp.setOpacity 0
     @addChild @_bmp
 

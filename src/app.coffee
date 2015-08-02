@@ -168,8 +168,8 @@ skin =
       x : 73
       y : 393
   bmp :
-    x : 110
-    y : 170
+    x : 106
+    y : 186
 
 AppLayer = cc.Layer.extend
   ctor : (@_bms, prefix)->
