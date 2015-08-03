@@ -57,7 +57,6 @@ Parser = cc.Class.extend
 
     wav = /^#WAV(\w{2}) +(.*)/.exec(row)
     if wav?
-      console.log wav
       @_parseWAV wav
       return
 
