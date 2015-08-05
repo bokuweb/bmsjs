@@ -12,7 +12,6 @@ Audio = cc.Layer.extend
   play : (id)->
     @_audio.playEffect @_wav[id], false if @_wav[id]?
 
-
   startBgm : ->
     @scheduleUpdate()
 
@@ -27,8 +26,9 @@ Audio = cc.Layer.extend
   onExit : ->
     @_super()
     @removeAllChildren on
+    cc.audioEngine.stopAllEffects()
     for wav in @_wav when wav?
       cc.audioEngine.unloadEffect wav 
     @_wav = []
-    
+
 module.exports = Audio

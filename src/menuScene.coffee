@@ -43,7 +43,7 @@ MenuController = cc.Layer.extend
     for v, i in list
 
       item = new cc.Sprite res.itemBgImage
-      title = if v.title.length > 30 then v.title.substr(0, 30)+'...' else v.title
+      title = if v.title.length > 26 then v.title.substr(0, 26)+'...' else v.title
       label = new cc.LabelTTF title, "Arial", 22, cc.size(item.width, 0), cc.TEXT_ALIGNMENT_LEFT
       label.x = 320
       label.y = 38

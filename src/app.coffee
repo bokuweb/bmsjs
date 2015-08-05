@@ -276,7 +276,7 @@ AppLayer = cc.Layer.extend
       @addChild soundonly, 100
 
   start : ->
-    @_notesLayer.start on
+    @_notesLayer.start off
     @_audio.startBgm()
     @_rate.start()
     @_bpm.start()

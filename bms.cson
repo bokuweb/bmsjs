@@ -2,6 +2,16 @@
 # txtはresディレクトリの下に配置する必要あり
 [
   # if sequence {url : "bms/Declinin/declinin.bms"            , title : "Declinin'"                                , artist : ' '                       , level : 4}
+  {url : "bms/sweez/niraikanai7_n_short_bmssp7b.bme"              , title : "ニライカナイ(short ver.) [7keys Beginner]", artist : ' sweez & Meine Meinung / BMSSP'            , level : 2}
+  {url : "bms/sweez/niraikanai7_n.bme"                            , title : "ニライカナイ"                             , artist : ' sweez & Meine Meinung'                    , level : 8} 
+  {url : "bms/under_the_moonlight/under_the_moonlight_7n.bme"     , title : "under the moonlight [7keys Normal]"       , artist : ' Yamajet'                                  , level : 4}
+  {url : "bms/under_the_moonlight/under_the_moonlight_7h.bme"     , title : "under the moonlight [7keys Hyper]"        , artist : ' Yamajet'                                  , level : 8}
+  {url : "bms/under_the_moonlight/under_the_moonlight_7a.bme"     , title : "under the moonlight [7keys Another]"      , artist : ' Yamajet'                                  , level : 8}
+  {url : "bms/SAMBISTA/sambista.bms"                              , title : "SAMBISTA"                                 , artist : ' DOT96'                                    , level : 6}
+  {url : "bms/SAMBISTA/sambista_bmssp5e.bms"                      , title : "SAMBISTA[Easy]"                           , artist : ' DOT96'                                    , level : 2} 
+  {url : "bms/RadioOrganico/01_radio_organico[light7].bme"        , title : "Radio Organico[LIGHT7]"                   , artist : ' Team:SASAKURATION'                        , level : 2}
+  {url : "bms/RadioOrganico/02_radio_organico[7keys].bme"         , title : "Radio Organico[7KEYS]"                    , artist : ' Team:SASAKURATION'                        , level : 4}
+  {url : "bms/RadioOrganico/03_radio_organico[Another].bme"       , title : "Radio Organico[ANOTHER]"                  , artist : ' Team:SASAKURATION'                        , level : 6}
   {url : "bms/Quark/quark01.bme"                                  , title : "Quark"                                    , artist : ' Hate vs Brilliance'                       , level : 6}
   {url : "bms/Quark/quark02.bme"                                  , title : "Quark [Hyper]"                            , artist : ' Hate vs Brilliance'                       , level : 10}
   {url : "bms/Quark/quark03.bme"                                  , title : "Quark [Another]"                          , artist : ' Hate vs Brilliance'                       , level : 12}
