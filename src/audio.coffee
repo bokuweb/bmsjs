@@ -7,11 +7,10 @@ Audio = cc.Layer.extend
     @_audio = cc.audioEngine
 
   init : (res, prefix)->
-    @_wav[k] = prefix + v for k, v of res
+    @_wav[k] = encodeURIComponent(prefix + v) for k, v of res
 
   play : (id)->
     @_audio.playEffect @_wav[id], false if @_wav[id]?
-
 
   startBgm : ->
     @scheduleUpdate()
@@ -27,8 +26,9 @@ Audio = cc.Layer.extend
   onExit : ->
     @_super()
     @removeAllChildren on
+    cc.audioEngine.stopAllEffects()
     for wav in @_wav when wav?
       cc.audioEngine.unloadEffect wav 
     @_wav = []
-    
+
 module.exports = Audio

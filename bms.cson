@@ -2,21 +2,56 @@
 # txtはresディレクトリの下に配置する必要あり
 [
   # if sequence {url : "bms/Declinin/declinin.bms"            , title : "Declinin'"                                , artist : ' '                       , level : 4}
-  {url : "bms/evangelize_radio edit/evangelize_spn.bme" , title : 'Evangelize (Radio Edit) (SP NORMAL)'      , artist : ' syatten + 140'                                 , level : 5}
-  {url : "bms/evangelize/_blurryimages.bms"             , title : 'evangelize (blurry images)'               , artist : ' stereoberry (original:syatten BGA:ƒÎ=72)'      , level : 5}
-  {url : "bms/AVALON/01_avalon[light7].bme"             , title : 'AVALON [light]'                           , artist : ' Team:SASAKURATION'                             , level : 5}
-  {url : "bms/AVALON/02_avalon[7key].bme"               , title : 'AVALON [Normal]'                          , artist : ' Team:SASAKURATION'                             , level : 10}
-  {url : "bms/AVALON/03_avalon[Another].bme"            , title : 'AVALON [Another]'                         , artist : ' Team:SASAKURATION'                             , level : 12}
-  {url : "bms/AVALON/04_avalon_[IIDX].bme"              , title : 'AVALON [IIDX]'                            , artist : ' Team:SASAKURATION'                             , level : 0}
-  {url : "bms/bellydance/a_bga_bmssp_e.bms"             , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                                 , level : 2}
-  {url : "bms/bellydance/a_bga.bms"                     , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                                 , level : 4}
-  {url : "bms/atonement/ayy2.bms"                       , title : 'atonement you you'                        , artist : ' '                                              , level : 6}
-  {url : "bms/AbsurdGaff/_abs07_00_bmssp7e.bme"         , title : 'Absurd Gaff [7keys Easy]'                 , artist : ' siromaru / BMSSP'                              , level : 3}
-  {url : "bms/AbsurdGaff/_ms_abs07_01.bme"              , title : 'Absurd Gaff [Normal]'                     , artist : ' siromaru / Mentalstock'                        , level : 8}
-  {url : "bms/AbsurdGaff/_ms_abs07_02.bme"              , title : 'Absurd Gaff [Hyper]'                      , artist : ' siromaru / Mentalstock'                        , level : 10}
-  {url : "bms/AbsurdGaff/_ms_abs07_03.bme"              , title : 'Absurd Gaff [Another]'                    , artist : ' siromaru / Mentalstock'                        , level : 21}
-  {url : "bms/Lapis - SHIKI/lapis7key.bme"              , title : 'Lapis'                                    , artist : ' SHIKI'                                         , level : 8}
-  {url : "bms/Lapis - SHIKI/lapis7keya.bme"             , title : 'Lapis [Another]'                          , artist : ' SHIKI'                                         , level : 10}
-  {url : "bms/Lapis - SHIKI/lapis7keyb.bme"             , title : 'Lapis [beginner]'                         , artist : ' SHIKI'                                         , level : 2}
-  {url : "bms/Lapis - SHIKI/lapis7keyl.bme"             , title : 'Lapis [Light]'                            , artist : ' SHIKI'                                         , level : 5}
+  {url : "bms/sweez/niraikanai7_n_short_bmssp7b.bme"              , title : "ニライカナイ(short ver.) [7keys Beginner]", artist : ' sweez & Meine Meinung / BMSSP'            , level : 2}
+  {url : "bms/sweez/niraikanai7_n.bme"                            , title : "ニライカナイ"                             , artist : ' sweez & Meine Meinung'                    , level : 8} 
+  {url : "bms/under_the_moonlight/under_the_moonlight_7n.bme"     , title : "under the moonlight [7keys Normal]"       , artist : ' Yamajet'                                  , level : 4}
+  {url : "bms/under_the_moonlight/under_the_moonlight_7h.bme"     , title : "under the moonlight [7keys Hyper]"        , artist : ' Yamajet'                                  , level : 8}
+  {url : "bms/under_the_moonlight/under_the_moonlight_7a.bme"     , title : "under the moonlight [7keys Another]"      , artist : ' Yamajet'                                  , level : 8}
+  {url : "bms/SAMBISTA/sambista.bms"                              , title : "SAMBISTA"                                 , artist : ' DOT96'                                    , level : 6}
+  {url : "bms/SAMBISTA/sambista_bmssp5e.bms"                      , title : "SAMBISTA[Easy]"                           , artist : ' DOT96'                                    , level : 2} 
+  {url : "bms/RadioOrganico/01_radio_organico[light7].bme"        , title : "Radio Organico[LIGHT7]"                   , artist : ' Team:SASAKURATION'                        , level : 2}
+  {url : "bms/RadioOrganico/02_radio_organico[7keys].bme"         , title : "Radio Organico[7KEYS]"                    , artist : ' Team:SASAKURATION'                        , level : 4}
+  {url : "bms/RadioOrganico/03_radio_organico[Another].bme"       , title : "Radio Organico[ANOTHER]"                  , artist : ' Team:SASAKURATION'                        , level : 6}
+  {url : "bms/Quark/quark01.bme"                                  , title : "Quark"                                    , artist : ' Hate vs Brilliance'                       , level : 6}
+  {url : "bms/Quark/quark02.bme"                                  , title : "Quark [Hyper]"                            , artist : ' Hate vs Brilliance'                       , level : 10}
+  {url : "bms/Quark/quark03.bme"                                  , title : "Quark [Another]"                          , artist : ' Hate vs Brilliance'                       , level : 12}
+  {url : "bms/oceanbird/oceanbird_7_normal.bms"                   , title : "oceanbird"                                , artist : ' sXacla / TOHRU MiTSUHASHi'                , level : 3}
+  {url : "bms/oceanbird/oceanbird_7_hyper.bms"                    , title : "oceanbird [Hyper]"                        , artist : ' sXacla / TOHRU MiTSUHASHi'                , level : 6}
+  {url : "bms/oceanbird/oceanbird_7_another.bms"                  , title : "oceanbird [Another]"                      , artist : ' sXacla / TOHRU MiTSUHASHi'                , level : 9} 
+  {url : "bms/moonscape/ms_bmssp7n.bme"                           , title : "Moonscape [7keys Normal]"                 , artist : ' syatten / BMSSP'                          , level : 3}
+  {url : "bms/moonscape/ms_sph.bme"                               , title : "Moonscape (SP HYPER)"                     , artist : ' syatten / BMSSP'                          , level : 8}
+  {url : "bms/moonscape/ms_spa.bme"                               , title : "Moonscape (SP ANOTHER)"                   , artist : ' syatten / BMSSP'                          , level : 10}
+  {url : "bms/Lightstep/lightstep_5e.bms"                         , title : "Lightstep [5keys Easy]"                   , artist : ' Kaede a.k.a. fen / BMSSP'                 , level : 4}
+  {url : "bms/Lightstep/lightstep_5.bms"                          , title : "Lightstep"                                , artist : ' Kaede a.k.a. fen / BMSSP'                 , level : 6} 
+  {url : "bms/mommy/I'll_forget_you_you'll_never_forget_me_7N.bme", title : "I'll forget you, you'll never forget me.[7key,Normal]" , artist : ' mommy'                       , level : 6}
+  {url : "bms/mommy/I'll_forget_you_you'll_never_forget_me_7H.bme", title : "I'll forget you, you'll never forget me.[7key,Hyper]" , artist : ' mommy'                        , level : 8}
+  {url : "bms/mommy/I'll_forget_you_you'll_never_forget_me_7A.bme", title : "I'll forget you, you'll never forget me.[7key,Another]" , artist : ' mommy'                      , level : 11}
+  {url : "bms/HEisanEnergizer/heiseng7l.bme"                      , title : 'HE is an Energizer(7keys EASY)'           , artist : ' Mr.ABC'                                   , level : 5}
+  {url : "bms/HEisanEnergizer/heiseng7.bme"                       , title : 'HE is an Energizer(7keys)'                , artist : ' Mr.ABC'                                   , level : 7}
+  {url : "bms/gy_greens/grsl_7.bme"                               , title : 'Greensleeves[7key]'                       , artist : ' BMS:G-Y / MIDI:Haven'                     , level : 1}
+  {url : "bms/gy_greens/grsl_7h.bme"                              , title : 'Greensleeves[7key Hyper]'                 , artist : ' BMS:G-Y / MIDI:Haven'                     , level : 5}
+  {url : "bms/gy_greens/grsl_7a.bme"                              , title : 'Greensleeves[7key Another]'               , artist : ' BMS:G-Y / MIDI:Haven'                     , level : 8}
+  {url : "bms/gi_MTM/MTM_7e.bme"                                  , title : 'Maple Town Memories[7key-Easy]'           , artist : ' BMS/GYAON 作曲/井上'                      , level : 4}
+  {url : "bms/gi_MTM/MTM_7n.bme"                                  , title : 'Maple Town Memories[7key]       '         , artist : ' BMS/GYAON 作曲/井上'                      , level : 6} 
+  {url : "bms/gi_MTM/MTM_7a.bme"                                  , title : 'Maple Town Memories[7key-Another]'        , artist : ' BMS/GYAON 作曲/井上'                      , level : 6} 
+  {url : "bms/evangelize_radio edit/evangelize_spn.bme"           , title : 'Evangelize (Radio Edit) (SP NORMAL)'      , artist : ' syatten + 140'                            , level : 5}
+  {url : "bms/evangelize_radio edit/evangelize_sph.bme"           , title : 'Evangelize (Radio Edit) (SP HYPER)'       , artist : ' syatten + 140'                            , level : 7}
+  {url : "bms/evangelize_radio edit/evangelize_spb.bme"           , title : 'Evangelize (Radio Edit) (SP BEGINNER)'    , artist : ' syatten + 140'                            , level : 1}
+  {url : "bms/evangelize_radio edit/evangelize_spa.bme"           , title : 'Evangelize (Radio Edit) (SP ANOTHER)'     , artist : ' syatten + 140'                            , level : 11}
+  {url : "bms/evangelize/_blurryimages.bms"                       , title : 'evangelize (blurry images)'               , artist : ' stereoberry (original:syatten BGA:ƒÎ=72)' , level : 5}
+  {url : "bms/AVALON/01_avalon[light7].bme"                       , title : 'AVALON [light]'                           , artist : ' Team:SASAKURATION'                        , level : 5}
+  {url : "bms/AVALON/02_avalon[7key].bme"                         , title : 'AVALON [Normal]'                          , artist : ' Team:SASAKURATION'                        , level : 10}
+  {url : "bms/AVALON/03_avalon[Another].bme"                      , title : 'AVALON [Another]'                         , artist : ' Team:SASAKURATION'                        , level : 12}
+  {url : "bms/AVALON/04_avalon_[IIDX].bme"                        , title : 'AVALON [IIDX]'                            , artist : ' Team:SASAKURATION'                        , level : 0}
+  {url : "bms/bellydance/a_bga_bmssp_e.bms"                       , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                            , level : 2}
+  {url : "bms/bellydance/a_bga.bms"                               , title : 'belly dance (Consistently_Drinkin_remix)' , artist : ' Kotira Sample'                            , level : 4}
+  {url : "bms/atonement/ayy2.bms"                                 , title : 'atonement you you'                        , artist : ' '                                         , level : 6}
+  {url : "bms/AbsurdGaff/_abs07_00_bmssp7e.bme"                   , title : 'Absurd Gaff [7keys Easy]'                 , artist : ' siromaru / BMSSP'                         , level : 3}
+  {url : "bms/AbsurdGaff/_ms_abs07_01.bme"                        , title : 'Absurd Gaff [Normal]'                     , artist : ' siromaru / Mentalstock'                   , level : 8}
+  {url : "bms/AbsurdGaff/_ms_abs07_02.bme"                        , title : 'Absurd Gaff [Hyper]'                      , artist : ' siromaru / Mentalstock'                   , level : 10}
+  {url : "bms/AbsurdGaff/_ms_abs07_03.bme"                        , title : 'Absurd Gaff [Another]'                    , artist : ' siromaru / Mentalstock'                   , level : 21}
+  {url : "bms/Lapis - SHIKI/lapis7key.bme"                        , title : 'Lapis'                                    , artist : ' SHIKI'                                    , level : 8}
+  {url : "bms/Lapis - SHIKI/lapis7keya.bme"                       , title : 'Lapis [Another]'                          , artist : ' SHIKI'                                    , level : 10}
+  {url : "bms/Lapis - SHIKI/lapis7keyb.bme"                       , title : 'Lapis [beginner]'                         , artist : ' SHIKI'                                    , level : 2}
+  {url : "bms/Lapis - SHIKI/lapis7keyl.bme"                       , title : 'Lapis [Light]'                            , artist : ' SHIKI'                                    , level : 5}
 ] 
