@@ -267,8 +267,8 @@ AppLayer = cc.Layer.extend
     console.dir @_bms.animations
     @_animeLayer.init @_bms.bmp, @_bms.animations, prefix
     @addChild @_animeLayer
-
-    if @_bms.animations.length is 0 or @_bms.bmp[1].match(/mpg$/)?
+    # FIXME
+    if @_bms.animations.length is 0 or @_bms.bmp[1]?.match(/mpg$/)?
       soundonly = new cc.LabelTTF "Sound Only", "sapceage" , 32
       soundonly.x = cc.screenSize.width / 2 + 100
       soundonly.y = cc.screenSize.height - 200

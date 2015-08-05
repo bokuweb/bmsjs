@@ -39,6 +39,9 @@ SearchLayer = cc.Layer.extend
       @_oldTxt = txt
       @_notifier.trigger 'change', @_searchController.search(txt)
 
+    #if txt is ""
+    #  @_textField.setPlaceHolder "search"
+
   # CCTextFieldDelegate
   onTextFieldAttachWithIME : (sender) ->
 
@@ -55,6 +58,7 @@ SearchLayer = cc.Layer.extend
     r
 
   _onClickTrackNode : (clicked) ->
+    @_textField.setPlaceHolder ""
     if clicked
       @_textField.attachWithIME()
     else
@@ -66,5 +70,10 @@ SearchLayer = cc.Layer.extend
     point = event.getLocation()
     rect = target._textInputGetRect target._textField
     target._onClickTrackNode cc.rectContainsPoint(rect, point)
+
+  onExit : ->
+    @_super()
+    @unscheduleUpdate()
+    @removeAllChildren on
 
 module.exports = SearchLayer
