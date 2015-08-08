@@ -14,10 +14,21 @@ MenuBaseLayer = cc.Layer.extend
         cc.view.setDesignResolutionSize screenSize.width, screenSize.height, cc.ResolutionPolicy.SHOW_ALL
 
   start : ->
+    if cc.sys.isMobile
+      message = """
+          申し訳ありません
+          現在PCにのみ対応しております
+
+      """
+      pconly = new cc.LabelTTF message , "Arial" , 16
+      pconly.x = cc.screenSize.width / 2
+      pconly.y = cc.screenSize.height / 2
+      @addChild pconly, 100
+      return
     @_addBackground()
     cc.loader.loadJson cc.pathToBmsDir + 'bms.json', (error, data) =>
       menu = new MenuController data
-      menu.init data, cc.director.getWinSize().width / 2 + 150, 70
+      menu.init data, cc.director.getWinSize().width / 2 + 200, 70
       @addChild menu
 
   onExit : ->
@@ -155,7 +166,7 @@ MenuController = cc.Layer.extend
         cc.spawn(
           cc.fadeIn 0.2
           cc.scaleTo 0.2, 1
-          cc.moveTo 0.2, cc.p(size.width / 2 + 150, destY)
+          cc.moveTo 0.2, cc.p(size.width / 2 + 200, destY)
         )
       )
 

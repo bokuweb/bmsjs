@@ -58,7 +58,7 @@ SearchLayer = cc.Layer.extend
     r
 
   _onClickTrackNode : (clicked) ->
-    @_textField.setPlaceHolder ""
+    #@_textField.setPlaceHolder ""
     if clicked
       @_textField.attachWithIME()
     else
