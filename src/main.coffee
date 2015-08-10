@@ -1,15 +1,11 @@
 window.bmsStart = (pathToBmsDir) ->
-
   cc.pathToBmsDir = pathToBmsDir
   cc.screenSize = window.parent.screen
-
   cc.game.run()
-
   cc.game.onStart = ->
     MenuScene   = require './menuScene'
     resList     = require './resource'
       .resList
-
     if not cc.sys.isNative and document.getElementById "cocosLoading"
       document.body.removeChild(document.getElementById "cocosLoading")
 

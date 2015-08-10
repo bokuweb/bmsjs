@@ -200,6 +200,7 @@ AppLayer = cc.Layer.extend
 
     @_keyboard.init()
     @_keyboard.addListener v, @_onKeydown.bind this, id for v, id in keyConfig
+    @_keyboard.addListener 27, @_onEscKeydown.bind this
     @addChild @_keyboard
 
     # FIXME : move to argument
@@ -302,18 +303,26 @@ AppLayer = cc.Layer.extend
         , stopTime / 1000
         @_stopIndex++
 
-
-    if time > @_bms.endTime + 5000
-      @unscheduleUpdate()
-      @_timer.stop()
-      cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
+    @_exitGame() if time > @_bms.endTime + 5000
 
   onExit : ->
     @_super()
     @removeAllChildren on
 
+  _eixtGame : ->
+    @unscheduleUpdate()
+    @_timer.stop()
+    cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
+
   _onKeydown : (id, key, time) ->
     @_notesLayer.onTouch id, time
+
+  _onEscKeydown : (id, key, time) ->
+    # FIXME :先頭でrequireするとerror
+    MenuScene =  require './menuScene'
+    @unscheduleUpdate()
+    @_timer.stop()
+    cc.director.runScene new cc.TransitionFade(1.2, new MenuScene())
 
   _onHit : (event, wavId) ->
     @_audio.play wavId

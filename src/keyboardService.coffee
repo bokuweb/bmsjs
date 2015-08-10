@@ -17,7 +17,6 @@ KeyboardService = cc.Layer.extend
     @_notifier.on key, listener, id
 
   _onKeyPressed : (key, event)->
-    cc.log @_timer.get()
     @_notifier.trigger key, @_timer.get()
 
 module.exports = KeyboardService
