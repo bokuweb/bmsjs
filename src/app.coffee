@@ -309,7 +309,7 @@ AppLayer = cc.Layer.extend
     @_super()
     @removeAllChildren on
 
-  _eixtGame : ->
+  _exitGame : ->
     @unscheduleUpdate()
     @_timer.stop()
     cc.director.runScene new cc.TransitionFade(1.2, new GameoverScene(@_stats.get()))
