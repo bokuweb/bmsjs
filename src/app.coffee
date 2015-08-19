@@ -340,6 +340,7 @@ AppLayer = cc.Layer.extend
     bg = new cc.Sprite res.bgImage
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height / 2
+    bg.scale = window.parent.screen.height / bg.height
     @addChild bg, 0
 
     # test image
