@@ -39,6 +39,9 @@ MenuBaseLayer = cc.Layer.extend
     bg = new cc.Sprite res.menuBgImage
     bg.x = cc.director.getWinSize().width / 2
     bg.y = cc.director.getWinSize().height / 2
+    console.log "scree height #{window.parent.screen.height} bg.height = #{bg.height}"
+    #if bg.height < window.parent.screen.height
+    bg.scale = window.parent.screen.height / bg.height
     @addChild bg, 0
 
 MenuController = cc.Layer.extend
