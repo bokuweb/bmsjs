@@ -1,9 +1,14 @@
 # jsbで読む場合ファイルはutf-8の*.txtである必要がある
 # txtはresディレクトリの下に配置する必要あり
 [
+  {url : "bms/sq_07-01/sq_07-01.bms"                              , title : "千年女王[Normal]"                         , artist : ' しらいし'                                 , level : 11}
+  {url : "bms/sq_07-01/sq_07-02.bms"                              , title : "千年女王[Hyper]"                          , artist : ' しらいし'                                 , level : 12}
   # if sequence {url : "bms/Declinin/declinin.bms"            , title : "Declinin'"                                , artist : ' '                       , level : 4}
   {url : "bms/Odin/_Odin_07-1.bms"                                , title : "Odin[Normal]"                             , artist : ' しらいし'                                 , level : 6}
-  
+  {url : "bms/Odin/_Odin_07-2.bms"                                , title : "Odin[Hyper]"                              , artist : ' しらいし'                                 , level : 9}
+  {url : "bms/Odin/_Odin_07-3.bms"                                , title : "Odin[Another]"                            , artist : ' しらいし'                                 , level : 11}
+  {url : "bms/Odin/_Odin_07-4.bms"                                , title : "Odin[Black Another]"                      , artist : ' しらいし'                                 , level : 12}
+
   {url : "bms/sweez/niraikanai7_n_short_bmssp7b.bme"              , title : "ニライカナイ(short ver.) [7keys Beginner]", artist : ' sweez & Meine Meinung / BMSSP'            , level : 2}
   {url : "bms/sweez/niraikanai7_n.bme"                            , title : "ニライカナイ"                             , artist : ' sweez & Meine Meinung'                    , level : 8} 
   {url : "bms/under_the_moonlight/under_the_moonlight_7n.bme"     , title : "under the moonlight [7keys Normal]"       , artist : ' Yamajet'                                  , level : 4}
