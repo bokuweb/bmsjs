@@ -54,10 +54,10 @@ MenuController = cc.Layer.extend
     director = cc.director
     size = director.getWinSize()
     @_itemMenu = new cc.Menu()
-    for v, i in list
+    for v, i in list when v.TITLE?
 
       item = new cc.Sprite res.itemBgImage
-      title = if v.title.length > 26 then v.title.substr(0, 26)+'...' else v.title
+      title = if v.TITLE.length > 26 then v.TITLE.substr(0, 26)+'...' else v.TITLE
       label = new cc.LabelTTF title, "Arial", 22, cc.size(item.width, 0), cc.TEXT_ALIGNMENT_LEFT
       label.x = 320
       label.y = 38
@@ -75,12 +75,12 @@ MenuController = cc.Layer.extend
 
       item.addChild level
       digits = if ~~(v.level / 10) > 0 then 2 else 1
-      level.init digits, v.level
+      level.init digits, v.PLAYLEVEL
       menuItem = new cc.MenuItemSprite item, null, null, @_onMenuCallback, this
       @_itemMenu.addChild menuItem, i + 10000
       menuItem.x = x
       menuItem.y = size.height - (i + 1) * @_linespace
-      menuItem.title = v.title
+      menuItem.title = v.TITLE
 
     @_itemMenu.width = size.width
     @_itemMenu.height = (list.length + 1) * @_linespace
