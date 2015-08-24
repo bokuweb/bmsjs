@@ -1,6 +1,21 @@
 # jsbで読む場合ファイルはutf-8の*.txtである必要がある
 # txtはresディレクトリの下に配置する必要あり
 [
+  {url : "bms/SHK_new04_Reality/Reality_5_Easy.bms"               , title : "Reality [5key Easy]"                      , artist : ''                                          , level : 2}
+  {url : "bms/SHK_new04_Reality/Reality_5_Hard2.bms"              , title : "Reality [5key Hard2]"                     , artist : ''                                          , level : 7}
+  {url : "bms/SHK_new04_Reality/Reality_5_Normal.bms"             , title : "Reality [5key Normal]"                    , artist : ''                                          , level : 4}
+  {url : "bms/SHK_new04_Reality/Reality_5_SuperHard.bms"          , title : "Reality [5key Super Hard]"                , artist : ''                                          , level : 11}
+  {url : "bms/SHK_new04_Reality/Reality_5_veryHard.bms"           , title : "Reality [5Key very Hard]"                 , artist : ''                                          , level : 7}
+
+  {url : "bms/SHK_new04_Reality/Reality_7_Easy1.bms"              , title : "Reality [7keys Easy1]"                    , artist : ''                                          , level : 3}
+  {url : "bms/SHK_new04_Reality/Reality_7_Easy2.bms"              , title : "Reality [7keys Easy2]"                    , artist : ''                                          , level : 2}
+  {url : "bms/SHK_new04_Reality/Reality_7_Hard.bms"               , title : "Reality [7keys Hard]"                     , artist : ''                                          , level : 8}
+  {url : "bms/SHK_new04_Reality/Reality_7_Normal.bms"             , title : "Reality [7keys Normal]"                   , artist : ''                                          , level : 3}
+  {url : "bms/SHK_new04_Reality/Reality_7_SuperHard.bms"          , title : "Reality [7keys Super Hard]"               , artist : ''                                          , level : 11}
+
+        
+  {url : "bms/ninth/386.bms"                                      , title : "ninth"                                    , artist : ' sta'                                      , level : 6}
+  {url : "bms/ninth/6502.bme"                                     , title : "ninth"                                    , artist : ' sta'                                      , level : 7}
   {url : "bms/sq_07-01/sq_07-01.bms"                              , title : "千年女王[Normal]"                         , artist : ' しらいし'                                 , level : 11}
   {url : "bms/sq_07-01/sq_07-02.bms"                              , title : "千年女王[Hyper]"                          , artist : ' しらいし'                                 , level : 12}
   # if sequence {url : "bms/Declinin/declinin.bms"            , title : "Declinin'"                                , artist : ' '                       , level : 4}
